@@ -16,7 +16,53 @@
     "landing": {
         "hero_title": "Intelligent tailoring. Your perfect outfit in 30 seconds.",
         "hero_subtitle": "SARTORIA analyzes your wardrobe, weather, and schedule to dress you impeccably every day. Without thinking.",
-        "cta": "Try 15 days free"
+        "cta": "Try 15 days free",
+        "how_it_works": {
+            "title": "How it works",
+            "step1_title": "Catalog your wardrobe",
+            "step1_desc": "Photograph each garment. SARTORIA's AI identifies brand, size, and style instantly.",
+            "step2_title": "Receive your selection",
+            "step2_desc": "Each morning, set the occasion and SARTORIA presents 2 perfect options adapted to the weather.",
+            "step3_title": "Dress without thinking",
+            "step3_desc": "Choose your outfit, visualize it with the AI-generated image, and step out sharp."
+        },
+        "features": {
+            "title": "Everything you need to dress well",
+            "ai_style": "AI that learns your style",
+            "weather": "Adapted to real weather",
+            "no_repeat": "Never repeats a combination",
+            "wardrobe_analysis": "Wardrobe analysis",
+            "shopping": "Purchase recommendations",
+            "mobile": "Works from your phone",
+            "ai_image": "Image of you wearing the outfit",
+            "planning": "Weekly planning",
+            "travel": "Travel packing planner"
+        },
+        "faq": {
+            "title": "Frequently Asked Questions",
+            "q1": "How does the free trial work?",
+            "a1": "You get 15 days to try SARTORIA with up to 5 garments per category and access to Today's Outfit. If you like it, subscribe to unlock all features and unlimited wardrobe. If not, cancel before it ends and you won't be charged.",
+            "q2": "Can I cancel anytime?",
+            "a2": "Yes, no commitments. Cancel from your profile. Your subscription stays active until the end of the paid period.",
+            "q3": "What happens to my data if I cancel?",
+            "a3": "Your data is kept. If you resubscribe, everything will be as you left it.",
+            "q4": "Does it work with women's clothing?",
+            "a4": "Currently optimized for men's fashion. We're working on the women's version.",
+            "q5": "Do I need to upload my entire wardrobe?",
+            "a5": "It's not mandatory, but the more items you upload, the better and more varied the combinations."
+        },
+        "footer": {
+            "links": {
+                "terms": "Terms of Service",
+                "privacy": "Privacy Policy",
+                "contact": "Contact"
+            },
+            "made_with": "Made with precision and AI"
+        },
+        "sticky_cta": {
+            "text": "Try SARTORIA free for 15 days",
+            "button": "Start"
+        }
     },
     "auth": {
         "login": "Sign in",

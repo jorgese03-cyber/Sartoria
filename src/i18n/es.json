@@ -16,7 +16,53 @@
     "landing": {
         "hero_title": "Sastrería inteligente. Tu outfit perfecto en 30 segundos.",
         "hero_subtitle": "SARTORIA analiza tu armario, el clima y tu agenda para vestirte impecable cada día. Sin pensar.",
-        "cta": "Prueba 15 días gratis"
+        "cta": "Prueba 15 días gratis",
+        "how_it_works": {
+            "title": "Cómo funciona",
+            "step1_title": "Cataloga tu armario",
+            "step1_desc": "Fotografía cada prenda. La IA de SARTORIA identifica marca, talla y estilo al instante.",
+            "step2_title": "Recibe tu selección",
+            "step2_desc": "Cada mañana, indica la ocasión y SARTORIA te presenta 2 opciones perfectas adaptadas al clima.",
+            "step3_title": "Viste sin pensar",
+            "step3_desc": "Elige tu outfit, visualízalo con la imagen generada, y sal impecable."
+        },
+        "features": {
+            "title": "Todo lo que necesitas para vestir bien",
+            "ai_style": "IA que aprende tu estilo",
+            "weather": "Adaptado al clima real",
+            "no_repeat": "Nunca repite combinación",
+            "wardrobe_analysis": "Análisis de tu armario",
+            "shopping": "Recomendaciones de compra",
+            "mobile": "Funciona desde el móvil",
+            "ai_image": "Imagen de ti con el outfit",
+            "planning": "Planificación semanal",
+            "travel": "Planificador de maleta"
+        },
+        "faq": {
+            "title": "Preguntas Frecuentes",
+            "q1": "¿Cómo funciona la prueba gratuita?",
+            "a1": "Tienes 15 días para probar SARTORIA con hasta 5 prendas por categoría y acceso al Outfit del Día. Si te convence, suscríbete para desbloquear todas las funciones y armario ilimitado. Si no, cancela antes de que termine y no se te cobrará nada.",
+            "q2": "¿Puedo cancelar en cualquier momento?",
+            "a2": "Sí, sin compromisos. Puedes cancelar desde tu perfil. Tu suscripción seguirá activa hasta el final del periodo pagado.",
+            "q3": "¿Qué pasa con mis datos si cancelo?",
+            "a3": "Tus datos se mantienen. Si vuelves a suscribirte, todo estará como lo dejaste.",
+            "q4": "¿Funciona con ropa de mujer?",
+            "a4": "Actualmente está optimizado para moda masculina. Estamos trabajando en la versión para mujer.",
+            "q5": "¿Necesito subir todo mi armario?",
+            "a5": "No es obligatorio, pero cuantas más prendas subas, mejores y más variadas serán las combinaciones."
+        },
+        "footer": {
+            "links": {
+                "terms": "Términos de servicio",
+                "privacy": "Política de privacidad",
+                "contact": "Contacto"
+            },
+            "made_with": "Made with precision and AI"
+        },
+        "sticky_cta": {
+            "text": "Prueba SARTORIA gratis durante 15 días",
+            "button": "Empezar"
+        }
     },
     "auth": {
         "login": "Iniciar sesión",

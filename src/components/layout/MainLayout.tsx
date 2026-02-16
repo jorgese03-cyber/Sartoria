@@ -8,11 +8,11 @@ export default function MainLayout() {
     const location = useLocation();
 
     const tabs = [
-        { id: 'outfit', path: '/', icon: Shirt, label: t('outfit'), locked: false },
-        { id: 'planning', path: '/planning', icon: Calendar, label: t('planning'), locked: true },
-        { id: 'wardrobe', path: '/wardrobe', icon: Package, label: t('wardrobe'), locked: false },
-        { id: 'history', path: '/history', icon: Clock, label: t('history'), locked: true },
-        { id: 'analysis', path: '/analysis', icon: BarChart2, label: t('analysis'), locked: true },
+        { id: 'outfit', path: '/app', icon: Shirt, label: t('outfit'), locked: false },
+        { id: 'planning', path: '/app/planning', icon: Calendar, label: t('planning'), locked: true },
+        { id: 'wardrobe', path: '/app/wardrobe', icon: Package, label: t('wardrobe'), locked: false },
+        { id: 'history', path: '/app/history', icon: Clock, label: t('history'), locked: true },
+        { id: 'analysis', path: '/app/analysis', icon: BarChart2, label: t('analysis'), locked: true },
     ];
 
     return (
