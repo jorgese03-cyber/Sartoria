@@ -134,6 +134,35 @@
             "shoes": "Shoes",
             "sneakers": "Sneakers",
             "accessories": "Accessories"
+        },
+        "add_garment_title": "Add new garment",
+        "category": "Category",
+        "brand": "Brand",
+        "size": "Size",
+        "color": "Main Color",
+        "style": "Style",
+        "season": "Season",
+        "description": "Description",
+        "upload_photo": "Upload a photo",
+        "or_drag_drop": "or drag and drop",
+        "analyzing": "SARTORIA is analyzing your garment...",
+        "select_option": "Select...",
+        "no_items": "No items in this category.",
+        "confirm_delete": "Are you sure you want to delete this garment?",
+        "inactive": "Retired",
+        "actions": {
+            "edit": "Edit",
+            "delete": "Delete"
+        },
+        "upsell": {
+            "title": "You've reached the trial limit",
+            "description": "During the free trial you can have up to 5 {{category}} in your wardrobe. Subscribe to unlock unlimited wardrobe and all features.",
+            "unlock_button": "Unlock everything — from €3.75/month",
+            "cancel_button": "Maybe later"
+        },
+        "errors": {
+            "required": "Required",
+            "image_required": "Photo is required"
         }
     },
     "history": {

@@ -118,9 +118,17 @@ export const useSubscription = () => {
         return false;
     };
 
+    const getMaxItemsPerCategory = (): number => {
+        if (subscription.loading) return 0;
+        if (subscription.isPaid) return Infinity;
+        if (subscription.isTrial) return 5;
+        return 0; // No access if expired/none
+    };
+
     return {
         ...subscription,
         canAccessFeature,
+        getMaxItemsPerCategory,
         checkSubscription: fetchSubscription,
     };
 };

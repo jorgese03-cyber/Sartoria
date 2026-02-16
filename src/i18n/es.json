@@ -134,6 +134,35 @@
             "shoes": "Zapatos",
             "sneakers": "Zapatillas",
             "accessories": "Accesorios"
+        },
+        "add_garment_title": "Añadir nueva prenda",
+        "category": "Categoría",
+        "brand": "Marca",
+        "size": "Talla",
+        "color": "Color principal",
+        "style": "Estilo",
+        "season": "Temporada",
+        "description": "Descripción",
+        "upload_photo": "Sube una foto",
+        "or_drag_drop": "o arrastra y suelta",
+        "analyzing": "SARTORIA está analizando tu prenda...",
+        "select_option": "Selecciona...",
+        "no_items": "No hay prendas en esta categoría.",
+        "confirm_delete": "¿Seguro que quieres eliminar esta prenda?",
+        "inactive": "Retirada",
+        "actions": {
+            "edit": "Editar",
+            "delete": "Eliminar"
+        },
+        "upsell": {
+            "title": "Has alcanzado el límite de prueba",
+            "description": "En la prueba gratuita puedes tener hasta 5 {{category}} en tu armario. Suscríbete para desbloquear armario ilimitado y todas las funciones.",
+            "unlock_button": "Desbloquear todo — desde €3,75/mes",
+            "cancel_button": "Quizás más tarde"
+        },
+        "errors": {
+            "required": "Requerido",
+            "image_required": "Foto requerida"
         }
     },
     "history": {
