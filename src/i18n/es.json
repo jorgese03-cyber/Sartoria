@@ -1,0 +1,136 @@
+{
+    "common": {
+        "appName": "SARTORIA",
+        "tagline": "Sastrería inteligente",
+        "save": "Guardar",
+        "cancel": "Cancelar",
+        "delete": "Eliminar",
+        "edit": "Editar",
+        "loading": "Cargando...",
+        "retry": "Reintentar",
+        "close": "Cerrar",
+        "back": "Volver",
+        "next": "Siguiente",
+        "confirm": "Confirmar"
+    },
+    "landing": {
+        "hero_title": "Sastrería inteligente. Tu outfit perfecto en 30 segundos.",
+        "hero_subtitle": "SARTORIA analiza tu armario, el clima y tu agenda para vestirte impecable cada día. Sin pensar.",
+        "cta": "Prueba 15 días gratis"
+    },
+    "auth": {
+        "login": "Iniciar sesión",
+        "signup": "Crear cuenta",
+        "email": "Email",
+        "password": "Contraseña"
+    },
+    "nav": {
+        "outfit": "Outfit",
+        "planning": "Planificar",
+        "wardrobe": "Armario",
+        "history": "Historial",
+        "analysis": "Análisis"
+    },
+    "outfit": {
+        "title": "¿Cómo es el plan de hoy?",
+        "casual": "Casual",
+        "smart_casual": "Smart Casual",
+        "business_casual": "Business Casual",
+        "formal": "Formal / Elegante",
+        "special_event": "Evento especial",
+        "generate_button": "👔 Dame mi outfit",
+        "choose_button": "👔 Me pongo esta",
+        "success": "✅ ¡Perfecto! Hoy vas impecable.",
+        "weather_banner": "🌤️ {{city}} hoy: {{temp}}°C — {{condition}}",
+        "why_it_works": "💡 Por qué funciona:",
+        "color_harmony": "🎨 Armonía:",
+        "few_combinations": "⚠️ Quedan pocas combinaciones. ¿Ver recomendaciones de compra?"
+    },
+    "planning": {
+        "title": "Planifica tu semana",
+        "same_style": "Mismo estilo para todos",
+        "per_day_style": "Estilo por día",
+        "generate_button": "🗓️ Generar planificación",
+        "generating": "Planificando tu semana...",
+        "approve_day": "✅ Aprobar",
+        "change_day": "🔄 Cambiar",
+        "approve_all": "✅ Aprobar toda la semana",
+        "regenerate_all": "🔄 Regenerar todo",
+        "success": "✅ ¡Semana planificada! Ya puedes olvidarte de pensar qué ponerte.",
+        "new_plan": "🗓️ Nueva planificación",
+        "status_approved": "Aprobada",
+        "status_today": "Hoy",
+        "status_completed": "Completado",
+        "few_garments_warning": "⚠️ Con tu armario actual, algunos días podrían repetir prendas individuales. Considera añadir más prendas.",
+        "monday": "Lunes",
+        "tuesday": "Martes",
+        "wednesday": "Miércoles",
+        "thursday": "Jueves",
+        "friday": "Viernes",
+        "saturday": "Sábado",
+        "sunday": "Domingo"
+    },
+    "wardrobe": {
+        "title": "Mi Armario",
+        "empty": "Tu armario está vacío. ¡Empieza subiendo tu primera prenda!",
+        "add_garment": "Añadir prenda",
+        "import_csv": "Importar desde CSV",
+        "categories": {
+            "shirt": "Camisas",
+            "polo": "Polos",
+            "tshirt": "Camisetas",
+            "pants": "Pantalones",
+            "sweater": "Jerséis",
+            "hoodie": "Sudaderas",
+            "jacket": "Abrigos/Chaquetas",
+            "belt": "Cinturones",
+            "socks": "Calcetines",
+            "shoes": "Zapatos",
+            "sneakers": "Zapatillas",
+            "accessories": "Accesorios"
+        }
+    },
+    "history": {
+        "title": "Historial",
+        "empty": "Aún no has elegido ningún outfit. ¡Ve a Outfit del Día!"
+    },
+    "analysis": {
+        "title": "Análisis",
+        "analyze_button": "🔍 Analizar mi armario",
+        "empty": "Sube al menos 10 prendas para obtener un análisis completo."
+    },
+    "pricing": {
+        "title": "Empieza gratis. Viste impecable siempre.",
+        "monthly": "Mensual",
+        "yearly": "Anual",
+        "monthly_price": "€4,99/mes",
+        "yearly_price": "€44,99/año",
+        "yearly_equivalent": "Equivale a €3,75/mes",
+        "save_badge": "Ahorra 25%",
+        "trial": "15 días de prueba gratis",
+        "start_trial": "Empezar prueba gratuita",
+        "feature_unlimited_wardrobe": "Armario ilimitado",
+        "feature_daily_outfits": "2 outfits diarios",
+        "feature_weekly_planning": "Planificación semanal",
+        "feature_ai_image": "Imagen con IA",
+        "feature_wardrobe_analysis": "Análisis de armario",
+        "feature_purchase_recommendations": "Recomendaciones de compra",
+        "feature_travel_planner": "Planificador de maleta"
+    },
+    "subscription": {
+        "trialing": "Prueba gratuita",
+        "trial_days_remaining": "Prueba gratuita: {{days}} días restantes",
+        "trial_wardrobe_limited": "Armario limitado a 5 prendas/categoría",
+        "trial_limit_title": "Has alcanzado el límite de prueba",
+        "trial_limit_wardrobe": "En la prueba gratuita puedes tener hasta 5 {{category}} en tu armario. Suscríbete para desbloquear armario ilimitado y todas las funciones.",
+        "trial_limit_feature": "Esta función está disponible con la suscripción",
+        "trial_unlock_all": "Desbloquear todo — desde €3,75/mes",
+        "trial_maybe_later": "Quizás más tarde",
+        "trial_counter": "{{count}}/5",
+        "active": "Activa",
+        "expired": "Expirada",
+        "days_remaining": "{{days}} días restantes",
+        "manage": "Gestionar suscripción",
+        "reactivate": "Reactivar"
+    }
+}

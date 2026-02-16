@@ -1,0 +1,136 @@
+{
+    "common": {
+        "appName": "SARTORIA",
+        "tagline": "Intelligent tailoring",
+        "save": "Save",
+        "cancel": "Cancel",
+        "delete": "Delete",
+        "edit": "Edit",
+        "loading": "Loading...",
+        "retry": "Retry",
+        "close": "Close",
+        "back": "Back",
+        "next": "Next",
+        "confirm": "Confirm"
+    },
+    "landing": {
+        "hero_title": "Intelligent tailoring. Your perfect outfit in 30 seconds.",
+        "hero_subtitle": "SARTORIA analyzes your wardrobe, weather, and schedule to dress you impeccably every day. Without thinking.",
+        "cta": "Try 15 days free"
+    },
+    "auth": {
+        "login": "Sign in",
+        "signup": "Create account",
+        "email": "Email",
+        "password": "Password"
+    },
+    "nav": {
+        "outfit": "Outfit",
+        "planning": "Planning",
+        "wardrobe": "Wardrobe",
+        "history": "History",
+        "analysis": "Analysis"
+    },
+    "outfit": {
+        "title": "What's today's plan?",
+        "casual": "Casual",
+        "smart_casual": "Smart Casual",
+        "business_casual": "Business Casual",
+        "formal": "Formal / Elegant",
+        "special_event": "Special event",
+        "generate_button": "👔 Give me my outfit",
+        "choose_button": "👔 I'll wear this",
+        "success": "✅ Perfect! You look sharp today.",
+        "weather_banner": "🌤️ {{city}} today: {{temp}}°C — {{condition}}",
+        "why_it_works": "💡 Why it works:",
+        "color_harmony": "🎨 Harmony:",
+        "few_combinations": "⚠️ Few combinations left. See purchase recommendations?"
+    },
+    "planning": {
+        "title": "Plan your week",
+        "same_style": "Same style for all",
+        "per_day_style": "Style per day",
+        "generate_button": "🗓️ Generate plan",
+        "generating": "Planning your week...",
+        "approve_day": "✅ Approve",
+        "change_day": "🔄 Change",
+        "approve_all": "✅ Approve entire week",
+        "regenerate_all": "🔄 Regenerate all",
+        "success": "✅ Week planned! You can stop thinking about what to wear.",
+        "new_plan": "🗓️ New plan",
+        "status_approved": "Approved",
+        "status_today": "Today",
+        "status_completed": "Completed",
+        "few_garments_warning": "⚠️ With your current wardrobe, some days might repeat individual items. Consider adding more items.",
+        "monday": "Monday",
+        "tuesday": "Tuesday",
+        "wednesday": "Wednesday",
+        "thursday": "Thursday",
+        "friday": "Friday",
+        "saturday": "Saturday",
+        "sunday": "Sunday"
+    },
+    "wardrobe": {
+        "title": "My Wardrobe",
+        "empty": "Your wardrobe is empty. Start by uploading your first garment!",
+        "add_garment": "Add garment",
+        "import_csv": "Import from CSV",
+        "categories": {
+            "shirt": "Shirts",
+            "polo": "Polos",
+            "tshirt": "T-Shirts",
+            "pants": "Pants",
+            "sweater": "Sweaters",
+            "hoodie": "Hoodies",
+            "jacket": "Coats/Jackets",
+            "belt": "Belts",
+            "socks": "Socks",
+            "shoes": "Shoes",
+            "sneakers": "Sneakers",
+            "accessories": "Accessories"
+        }
+    },
+    "history": {
+        "title": "History",
+        "empty": "You haven't chosen any outfit yet. Go to Today's Outfit!"
+    },
+    "analysis": {
+        "title": "Analysis",
+        "analyze_button": "🔍 Analyze my wardrobe",
+        "empty": "Upload at least 10 garments for a complete analysis."
+    },
+    "pricing": {
+        "title": "Start free. Dress impeccably always.",
+        "monthly": "Monthly",
+        "yearly": "Yearly",
+        "monthly_price": "€4.99/month",
+        "yearly_price": "€44.99/year",
+        "yearly_equivalent": "Just €3.75/month",
+        "save_badge": "Save 25%",
+        "trial": "15-day free trial",
+        "start_trial": "Start free trial",
+        "feature_unlimited_wardrobe": "Unlimited wardrobe",
+        "feature_daily_outfits": "2 daily outfits",
+        "feature_weekly_planning": "Weekly planning",
+        "feature_ai_image": "AI-generated image",
+        "feature_wardrobe_analysis": "Wardrobe analysis",
+        "feature_purchase_recommendations": "Purchase recommendations",
+        "feature_travel_planner": "Travel packing planner"
+    },
+    "subscription": {
+        "trialing": "Free trial",
+        "trial_days_remaining": "Free trial: {{days}} days remaining",
+        "trial_wardrobe_limited": "Wardrobe limited to 5 items/category",
+        "trial_limit_title": "You've reached the trial limit",
+        "trial_limit_wardrobe": "During the free trial you can have up to 5 {{category}} in your wardrobe. Subscribe to unlock unlimited wardrobe and all features.",
+        "trial_limit_feature": "This feature is available with a subscription",
+        "trial_unlock_all": "Unlock everything — from €3.75/month",
+        "trial_maybe_later": "Maybe later",
+        "trial_counter": "{{count}}/5",
+        "active": "Active",
+        "expired": "Expired",
+        "days_remaining": "{{days}} days remaining",
+        "manage": "Manage subscription",
+        "reactivate": "Reactivate"
+    }
+}
