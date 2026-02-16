@@ -1,4 +1,5 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
 import MainLayout from './components/layout/MainLayout';
 import OutfitPage from './pages/OutfitPage';
 import PlanningPage from './pages/PlanningPage';
@@ -6,6 +7,9 @@ import WardrobePage from './pages/WardrobePage';
 import HistoryPage from './pages/HistoryPage';
 import AnalysisPage from './pages/AnalysisPage';
 import LandingPage from './pages/LandingPage';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import ProfilePage from './pages/ProfilePage';
 import { useEffect } from 'react';
 import { supabase } from './lib/supabase';
 
@@ -17,23 +21,25 @@ function App() {
   }, []);
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
 
-        {/* App Routes - Protected (conceptually) */}
-        <Route path="/app" element={<MainLayout />}>
-          <Route index element={<OutfitPage />} />
-          <Route path="planning" element={<PlanningPage />} />
-          <Route path="wardrobe" element={<WardrobePage />} />
-          <Route path="history" element={<HistoryPage />} />
-          <Route path="analysis" element={<AnalysisPage />} />
-        </Route>
-
-        {/* Fallback/Register routes */}
-        <Route path="/register" element={<Navigate to="/" replace />} /> {/* Placeholder */}
-      </Routes>
-    </BrowserRouter>
+          {/* App Routes - Protected (conceptually) */}
+          <Route path="/app" element={<MainLayout />}>
+            <Route index element={<OutfitPage />} />
+            <Route path="planning" element={<PlanningPage />} />
+            <Route path="wardrobe" element={<WardrobePage />} />
+            <Route path="history" element={<HistoryPage />} />
+            <Route path="analysis" element={<AnalysisPage />} />
+            <Route path="profile" element={<ProfilePage />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   );
 }
 
