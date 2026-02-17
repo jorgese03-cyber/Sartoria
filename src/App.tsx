@@ -10,6 +10,9 @@ import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import ProfilePage from './pages/ProfilePage';
+import OnboardingPage from './pages/OnboardingPage';
+import PaywallPage from './pages/PaywallPage';
+import TravelPage from './pages/TravelPage';
 import { useEffect } from 'react';
 import { supabase } from './lib/supabase';
 
@@ -27,8 +30,10 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/onboarding" element={<OnboardingPage />} />
+          <Route path="/paywall" element={<PaywallPage />} />
 
-          {/* App Routes - Protected (conceptually) */}
+          {/* App Routes - Protected */}
           <Route path="/app" element={<MainLayout />}>
             <Route index element={<OutfitPage />} />
             <Route path="planning" element={<PlanningPage />} />
@@ -36,6 +41,7 @@ function App() {
             <Route path="history" element={<HistoryPage />} />
             <Route path="analysis" element={<AnalysisPage />} />
             <Route path="profile" element={<ProfilePage />} />
+            <Route path="travel" element={<TravelPage />} />
           </Route>
         </Routes>
       </BrowserRouter>

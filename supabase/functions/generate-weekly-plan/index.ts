@@ -12,7 +12,8 @@ serve(async (req) => {
     }
 
     try {
-        const { user_id, start_date, preferences } = await req.json()
+        const reqJson = await req.json()
+        const { user_id, start_date, preferences } = reqJson
 
         // Initialize Supabase Client
         const supabaseClient = createClient(
@@ -32,7 +33,8 @@ serve(async (req) => {
             throw new Error('User profile not found')
         }
 
-        const city = profile.ciudad || 'Alicante,ES';
+        // Use provided city for Travel mode, otherwise fall back to profile city
+        const city = reqJson.city || profile.ciudad || 'Alicante,ES';
         const lang = profile.idioma || 'es';
 
         // 2. Get Weather Forecast (5 days / 3 hour steps)

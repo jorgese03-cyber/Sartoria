@@ -64,6 +64,19 @@
             "button": "Start"
         }
     },
+    "onboarding": {
+        "welcome_title": "Welcome to SARTORIA",
+        "welcome_subtitle": "Let's set up your profile so you look sharp.",
+        "step_city_title": "Where do you live?",
+        "step_city_desc": "We need your location to recommend clothes based on the weather.",
+        "city_placeholder": "Ex: New York, USA",
+        "step_clothes_title": "Upload your first garments",
+        "step_clothes_desc": "Add at least one item to start. The more you upload, the better the combinations.",
+        "upload_button": "Upload garment",
+        "finish_button": "Finish and see my first outfit",
+        "skip": "Skip for now",
+        "next": "Next"
+    },
     "auth": {
         "login": "Sign in",
         "signup": "Create account",
@@ -191,6 +204,17 @@
         "feature_wardrobe_analysis": "Wardrobe analysis",
         "feature_purchase_recommendations": "Purchase recommendations",
         "feature_travel_planner": "Travel packing planner"
+    },
+    "travel": {
+        "title": "Travel Suitcase",
+        "destination_label": "Destination",
+        "destination_placeholder": "Ex: Paris, London, New York...",
+        "start_date_label": "Start Date",
+        "generate_button": "🧳 Pack my suitcase",
+        "generating": "Planning your trip...",
+        "trip_plan": "Your Trip Plan",
+        "packing_list": "Packing List",
+        "weather_forecast": "Weather forecast in {{city}}"
     },
     "subscription": {
         "trialing": "Free trial",

@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSubscription } from '../hooks/useSubscription';
 import UpsellModal from '../components/wardrobe/UpsellModal';
 import { OccasionSelector } from '../components/outfit/OccasionSelector';
 import { supabase } from '../lib/supabase';
 import { Loader2, Calendar, Check, RefreshCw, Lock } from 'lucide-react';
-import { Link } from 'react-router-dom';
 
 // Types
 interface DailyPlan {
@@ -28,13 +27,12 @@ interface DailyPlan {
 
 export default function PlanningPage() {
     const { t } = useTranslation(['planning', 'common', 'outfit']);
-    const { canAccessFeature, isTrial } = useSubscription();
+    const { canAccessFeature } = useSubscription();
 
     // State
-    const [loading, setLoading] = useState(false);
     const [generating, setGenerating] = useState(false);
     const [showUpsell, setShowUpsell] = useState(false);
-    const [activeWeekStart, setActiveWeekStart] = useState<Date>(new Date()); // Monday of current week
+    const [activeWeekStart] = useState<Date>(new Date()); // Monday of current week
     const [selectedDays, setSelectedDays] = useState<string[]>([]);
     const [occasions, setOccasions] = useState<Record<string, string>>({});
     const [generatedPlan, setGeneratedPlan] = useState<DailyPlan[]>([]);
@@ -67,7 +65,7 @@ export default function PlanningPage() {
         }
 
         // Default: Select all days from today onwards (or all if next week)
-        const today = new Date().toISOString().split('T')[0];
+
         const defaultSelected = weekDays
             .map(d => d.toISOString().split('T')[0])
         // .filter(d => d >= today); // Allow planning for past days? Maybe not.
