@@ -100,35 +100,34 @@ export default function WardrobePage() {
                     </div>
                 </div>
 
-                {/* Categories Tabs */}
-                <div className="flex overflow-x-auto px-4 pb-2 gap-2 no-scrollbar hide-scrollbar">
-                    {CATEGORIES.map(cat => {
-                        const count = getCountByCategory(cat);
-                        const limit = getMaxItemsPerCategory();
-                        // const isLimitReached = isTrial && cat !== 'Todos' && count >= limit;
+                {/* Categories Tabs - Grid Layout */}
+                <div className="px-4 pb-2">
+                    <div className="flex flex-wrap gap-2">
+                        {CATEGORIES.map(cat => {
+                            const count = getCountByCategory(cat);
+                            const limit = getMaxItemsPerCategory();
 
-                        return (
-                            <button
-                                key={cat}
-                                onClick={() => setSelectedCategory(cat)}
-                                className={clsx(
-                                    "whitespace-nowrap px-4 py-2 rounded-full text-sm font-medium transition-colors flex items-center gap-2",
-                                    selectedCategory === cat
-                                        ? "bg-indigo-600 text-white shadow-md"
-                                        : "bg-white text-gray-600 border border-gray-200 hover:bg-gray-50"
-                                )}
-                            >
-                                {cat}
-                                {cat !== 'Todos' && (
-                                    <span className={clsx("text-xs px-1.5 py-0.5 rounded-full ml-1",
+                            return (
+                                <button
+                                    key={cat}
+                                    onClick={() => setSelectedCategory(cat)}
+                                    className={clsx(
+                                        "px-3 py-2 rounded-lg text-sm font-medium transition-all flex items-center justify-between gap-2 border w-[calc(33.333%-0.5rem)] sm:w-[calc(20%-0.6rem)] lg:w-[calc(16.666%-0.6rem)]",
+                                        selectedCategory === cat
+                                            ? "bg-indigo-600 text-white border-indigo-600 shadow-md transform scale-[1.02]"
+                                            : "bg-white text-gray-700 border-gray-200 hover:border-indigo-300 hover:bg-indigo-50"
+                                    )}
+                                >
+                                    <span className="truncate">{cat}</span>
+                                    <span className={clsx("text-xs px-1.5 py-0.5 rounded-full ml-auto",
                                         selectedCategory === cat ? "bg-indigo-500 text-white" : "bg-gray-100 text-gray-500"
                                     )}>
-                                        {count}{isTrial ? `/${limit}` : ''}
+                                        {count}{isTrial && cat !== 'Todos' ? `/${limit}` : ''}
                                     </span>
-                                )}
-                            </button>
-                        );
-                    })}
+                                </button>
+                            );
+                        })}
+                    </div>
                 </div>
             </div>
 

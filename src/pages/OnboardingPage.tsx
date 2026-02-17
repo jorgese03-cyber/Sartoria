@@ -2,18 +2,21 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { supabase } from '../lib/supabase';
 import { useAuth } from '../context/AuthContext';
-import { Loader2, MapPin, Upload, ArrowRight } from 'lucide-react';
+import { Loader2, MapPin, Upload, ArrowRight, User, Camera } from 'lucide-react';
 
 export default function OnboardingPage() {
     const { t } = useTranslation(['onboarding', 'common', 'wardrobe']);
     const { user } = useAuth();
 
-    // Steps: 1 = City, 2 = Clothes
+    // Steps: 1 = City, 2 = Model Photo, 3 = Clothes
     const [step, setStep] = useState(1);
     const [city, setCity] = useState('');
     const [loading, setLoading] = useState(false);
 
     // Step 2 state
+    const [modelUploading, setModelUploading] = useState(false);
+
+    // Step 3 state (Clothes)
     const [uploadedCount, setUploadedCount] = useState(0);
     const [uploading, setUploading] = useState(false);
 
@@ -35,12 +38,75 @@ export default function OnboardingPage() {
         }
     };
 
-    // Reusing logic from typical file upload but simplified
+    // Step 2: Model Photo
+    const handleModelPhotoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (!e.target.files || e.target.files.length === 0 || !user) return;
+        setModelUploading(true);
+
+        const file = e.target.files[0];
+        const fileExt = file.name.split('.').pop();
+        // Path: userId/model.<ext> to always overwrite or keep one per user
+        const filePath = `${user.id}/model.${fileExt}`;
+
+        try {
+            // Check if bucket exists? No, assumed created by migration/hook. 
+            // Just try upload.
+            const { error: uploadError, data } = await supabase.storage
+                .from('user-models')
+                .upload(filePath, file, { upsert: true });
+
+            if (uploadError) throw uploadError;
+
+            // Get Public URL
+            const { data: { publicUrl } } = supabase.storage
+                .from('user-models')
+                .getPublicUrl(filePath);
+
+            // Update profile
+            const { error: updateError } = await supabase
+                .from('profiles')
+                .update({
+                    model_photo_url: publicUrl + '?t=' + Date.now(), // Cache bust 
+                    use_default_model: false
+                })
+                .eq('id', user.id);
+
+            if (updateError) throw updateError;
+
+            // Go to next step
+            setStep(3);
+
+        } catch (err) {
+            console.error('Error uploading model photo:', err);
+            alert('Error uploading photo. Please try again.');
+        } finally {
+            setModelUploading(false);
+        }
+    };
+
+    const handleUseDefaultModel = async () => {
+        if (!user) return;
+        setLoading(true);
+        try {
+            const { error } = await supabase
+                .from('profiles')
+                .update({ use_default_model: true })
+                .eq('id', user.id);
+
+            if (error) throw error;
+            setStep(3);
+        } catch (err) {
+            console.error('Error setting default model:', err);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    // Step 3: Clothes Upload
     const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
         if (!e.target.files || e.target.files.length === 0 || !user) return;
         setUploading(true);
 
-        // Loop through files if multiple
         const files = Array.from(e.target.files);
 
         try {
@@ -49,30 +115,22 @@ export default function OnboardingPage() {
                 const fileName = `${user.id}/${Date.now()}_${Math.random().toString(36).substring(7)}.${fileExt}`;
                 const filePath = `${fileName}`;
 
-                // Upload to Storage
                 const { error: uploadError } = await supabase.storage
                     .from('garments')
                     .upload(filePath, file);
 
                 if (uploadError) throw uploadError;
 
-                // Get Public URL
                 const { data: { publicUrl } } = supabase.storage
                     .from('garments')
                     .getPublicUrl(filePath);
 
-                // Insert into garments table (minimal info, analyze later?)
-                // Actually we should probably call analyze-garment here or just insert defaults
                 const { error: dbError } = await supabase
                     .from('garments')
                     .insert({
                         user_id: user.id,
                         imagen_url: publicUrl,
-                        categoria: 'shirt', // Default, user should ideally edit later or AI detect
-                        // In a real app, we'd have a UI to tag it, or use the Edge Function to auto-tag.
-                        // I'll assume auto-tagging or just default for speed.
-                        // PRD says "sube fotos -> IA identifica". 
-                        // I will just insert row.
+                        categoria: 'Camiseta', // Default
                     });
 
                 if (dbError) throw dbError;
@@ -87,9 +145,6 @@ export default function OnboardingPage() {
     };
 
     const handleFinish = async () => {
-        // Mark onboarding as done if we had a flag, or just redirect
-        // PRD doesn't mention a specific flag, but usually we check if profile exists/completed.
-        // We'll just redirect to /app (Outfit page)
         window.location.href = '/app';
     };
 
@@ -98,7 +153,7 @@ export default function OnboardingPage() {
             <div className="max-w-md w-full bg-white rounded-2xl shadow-xl overflow-hidden">
                 {/* Progress Bar */}
                 <div className="flex w-full h-1.5 bg-gray-100">
-                    <div className={`h-full bg-indigo-600 transition-all duration-300 ${step === 1 ? 'w-1/2' : 'w-full'}`} />
+                    <div className={`h-full bg-indigo-600 transition-all duration-300 ${step === 1 ? 'w-1/3' : step === 2 ? 'w-2/3' : 'w-full'}`} />
                 </div>
 
                 <div className="p-8">
@@ -146,6 +201,42 @@ export default function OnboardingPage() {
                     {step === 2 && (
                         <div className="space-y-6">
                             <div className="bg-indigo-50 p-4 rounded-xl flex justify-center">
+                                <User className="w-12 h-12 text-indigo-600" />
+                            </div>
+                            <div className="text-center">
+                                <h2 className="text-xl font-bold mb-2">Sube tu foto</h2>
+                                <p className="text-sm text-gray-500">
+                                    Sube una foto de cuerpo entero para que puedas verte con los outfits que te sugerimos.
+                                </p>
+                            </div>
+
+                            <label className="block w-full border-2 border-dashed border-gray-300 rounded-xl p-8 text-center hover:border-indigo-500 hover:bg-indigo-50 transition-colors cursor-pointer group">
+                                <input type="file" accept="image/*" onChange={handleModelPhotoUpload} className="hidden" disabled={modelUploading} />
+                                {modelUploading ? (
+                                    <Loader2 className="w-8 h-8 mx-auto text-indigo-500 animate-spin" />
+                                ) : (
+                                    <div className="space-y-2">
+                                        <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mx-auto group-hover:bg-white">
+                                            <Camera className="w-6 h-6 text-gray-600" />
+                                        </div>
+                                        <p className="text-sm font-medium text-gray-700">Subir mi foto</p>
+                                    </div>
+                                )}
+                            </label>
+
+                            <button
+                                onClick={handleUseDefaultModel}
+                                disabled={loading || modelUploading}
+                                className="w-full text-indigo-600 font-medium text-sm hover:text-indigo-800"
+                            >
+                                Usar modelo genérico
+                            </button>
+                        </div>
+                    )}
+
+                    {step === 3 && (
+                        <div className="space-y-6">
+                            <div className="bg-indigo-50 p-4 rounded-xl flex justify-center">
                                 <Upload className="w-12 h-12 text-indigo-600" />
                             </div>
                             <div className="text-center">
@@ -181,7 +272,7 @@ export default function OnboardingPage() {
                                     {t('onboarding:finish_button')}
                                 </button>
                                 <button
-                                    onClick={handleFinish} // Skip does same as finish for now
+                                    onClick={handleFinish}
                                     className="w-full text-gray-500 font-medium text-sm hover:text-gray-900"
                                 >
                                     {t('onboarding:skip')}

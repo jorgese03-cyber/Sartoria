@@ -45,11 +45,11 @@ export default function LandingPage() {
                     </button>
                     {user ? (
                         <Link to="/app" className="text-sm font-medium text-indigo-600 hover:text-indigo-500">
-                            Dashboard
+                            Ir a la app
                         </Link>
                     ) : (
                         <Link to="/login" className="text-sm font-medium text-indigo-600 hover:text-indigo-500">
-                            Login
+                            Acceso
                         </Link>
                     )}
                 </div>

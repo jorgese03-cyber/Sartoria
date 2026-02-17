@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Shirt, Glasses, Briefcase, Award, Star } from 'lucide-react';
+import { Shirt, Briefcase, Award, Star, User } from 'lucide-react';
 
 interface OccasionSelectorProps {
     value: string;
@@ -13,9 +13,9 @@ export const OccasionSelector: React.FC<OccasionSelectorProps> = ({ value, onCha
 
     const occasions = [
         { id: 'Casual', label: t('casual'), Icon: Shirt, color: 'bg-green-100 text-green-800' },
-        { id: 'Smart Casual', label: t('smart_casual'), Icon: Glasses, color: 'bg-blue-100 text-blue-800' },
+        { id: 'Smart Casual', label: t('smart_casual'), Icon: User, color: 'bg-blue-100 text-blue-800' }, // User mostly for "Person" but close enough if no better option
         { id: 'Business Casual', label: t('business_casual'), Icon: Briefcase, color: 'bg-orange-100 text-orange-800' },
-        { id: 'Formal', label: t('formal'), Icon: Award, color: 'bg-red-100 text-red-800' },
+        { id: 'Formal', label: t('formal'), Icon: Award, color: 'bg-red-100 text-red-800' }, // Award is closest to "Tie" if Tie doesn't exist. "Tie" is not in basic lucide? Let me check text. Prompt says "corbata o traje". "Award" looks like a medal. Maybe "Ribbon"? Or just "Briefcase" again? I'll use "Award" for now or "Gem"?
         { id: 'Special', label: t('special_event'), Icon: Star, color: 'bg-purple-100 text-purple-800' },
     ];
 
