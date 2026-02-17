@@ -32,7 +32,7 @@ export default function LandingPage() {
         <header className="bg-white border-b border-gray-100">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                    <span className="text-xl font-serif font-bold tracking-tight">
+                    <span className="text-xl font-serif font-bold tracking-tight whitespace-nowrap">
                         SARTORIA<span className="text-indigo-600">.IA</span>
                     </span>
                 </div>

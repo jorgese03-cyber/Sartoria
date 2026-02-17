@@ -3,9 +3,10 @@ import { supabase } from '../lib/supabase';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Mail, Lock, Loader2, ArrowRight } from 'lucide-react';
+import LanguageSwitcher from '../components/common/LanguageSwitcher';
 
 export default function RegisterPage() {
-    const { t } = useTranslation(['auth', 'landing']);
+    const { t } = useTranslation(['auth', 'landing', 'common']);
     const navigate = useNavigate();
 
     const [email, setEmail] = useState('');
@@ -23,7 +24,7 @@ export default function RegisterPage() {
             });
             if (error) throw error;
         } catch (err: any) {
-            setError(err.message || 'Error executing Google login');
+            setError(t('auth.errors.google_login', 'Error executing Google login') + ': ' + (err.message || ''));
         }
     };
 
@@ -46,14 +47,28 @@ export default function RegisterPage() {
                 navigate('/onboarding');
             }
         } catch (err: any) {
-            setError(err.message || 'Error creating account');
+            // Translate common error messages
+            let errorMessage = err.message;
+            if (errorMessage === 'Anonymous sign-ins are disabled') {
+                errorMessage = t('auth.errors.anonymous_disabled', 'Registration is currently disabled. Please contact support.');
+            } else if (errorMessage.includes('weak_password')) {
+                errorMessage = t('auth.errors.weak_password', 'Password should be at least 6 characters.');
+            } else if (errorMessage.includes('valid email')) {
+                errorMessage = t('auth.errors.invalid_email', 'Please enter a valid email address.');
+            }
+
+            setError(errorMessage);
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4 py-12 sm:px-6 lg:px-8">
+        <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4 py-12 sm:px-6 lg:px-8 relative">
+            <div className="absolute top-4 right-4">
+                <LanguageSwitcher />
+            </div>
+
             <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-xl shadow-lg border border-gray-100">
                 <div className="text-center">
                     <h2 className="mt-2 text-3xl font-extrabold text-gray-900">
@@ -97,7 +112,7 @@ export default function RegisterPage() {
                         </div>
                         <div className="relative flex justify-center text-sm">
                             <span className="px-2 bg-white text-gray-500">
-                                {t('login.or', '— or —')}
+                                {t('auth.or', '— or —')}
                             </span>
                         </div>
                     </div>
@@ -107,7 +122,7 @@ export default function RegisterPage() {
                     <div className="rounded-md shadow-sm space-y-4">
                         <div>
                             <label htmlFor="email-address" className="sr-only">
-                                {t('email', 'Email address')}
+                                {t('auth.email', 'Email address')}
                             </label>
                             <div className="relative">
                                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -120,7 +135,7 @@ export default function RegisterPage() {
                                     autoComplete="email"
                                     required
                                     className="appearance-none rounded-lg relative block w-full pl-10 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                    placeholder={t('email_placeholder', 'Email address')}
+                                    placeholder={t('auth.email_placeholder', 'Email address')}
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                 />
@@ -128,7 +143,7 @@ export default function RegisterPage() {
                         </div>
                         <div>
                             <label htmlFor="password" className="sr-only">
-                                {t('password', 'Password')}
+                                {t('auth.password', 'Password')}
                             </label>
                             <div className="relative">
                                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -142,7 +157,7 @@ export default function RegisterPage() {
                                     required
                                     minLength={8}
                                     className="appearance-none rounded-lg relative block w-full pl-10 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                    placeholder={t('password_placeholder', 'Password (min. 8 chars)')}
+                                    placeholder={t('auth.password_placeholder', 'Password (min. 8 chars)')}
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
@@ -176,9 +191,9 @@ export default function RegisterPage() {
 
                 <div className="text-center mt-4">
                     <p className="text-sm text-gray-600">
-                        {t('has_account', 'Already have an account?')}{' '}
+                        {t('signup.has_account', 'Already have an account?')}{' '}
                         <Link to="/login" className="font-medium text-indigo-600 hover:text-indigo-500">
-                            {t('login_link', 'Sign in')}
+                            {t('auth.login_link', 'Sign in')}
                         </Link>
                     </p>
                 </div>

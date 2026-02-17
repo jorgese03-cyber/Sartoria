@@ -17,6 +17,7 @@
         "hero_title": "Intelligent tailoring. Your perfect outfit in 30 seconds.",
         "hero_subtitle": "SARTORIA analyzes your wardrobe, weather, and schedule to dress you impeccably every day. Without thinking.",
         "cta": "Try 15 days free",
+        "hero_image_mockup": "Hero Image (Mockup)",
         "how_it_works": {
             "title": "How it works",
             "step1_title": "Catalog your wardrobe",
@@ -81,7 +82,35 @@
         "login": "Sign in",
         "signup": "Create account",
         "email": "Email",
-        "password": "Password"
+        "password": "Password",
+        "email_placeholder": "Email address",
+        "password_placeholder": "Password",
+        "or": "— or —",
+        "login_link": "Sign in",
+        "login": {
+            "title": "Welcome back",
+            "subtitle": "Sign in to your account",
+            "google": "Continue with Google",
+            "button": "Sign in",
+            "forgot_password": "Forgot your password?",
+            "no_account": "Don't have an account?",
+            "signup_link": "Sign up"
+        },
+        "signup": {
+            "title": "Create your account",
+            "subtitle": "Start your journey with SARTORIA",
+            "google": "Continue with Google",
+            "button": "Create Account",
+            "has_account": "Already have an account?"
+        },
+        "errors": {
+            "google_login": "Error executing Google login",
+            "anonymous_disabled": "Registration is currently disabled. Please contact support.",
+            "weak_password": "Password should be at least 6 characters.",
+            "invalid_email": "Please enter a valid email address.",
+            "invalid_credentials": "Invalid email or password.",
+            "login_error": "Error executing login"
+        }
     },
     "nav": {
         "outfit": "Outfit",

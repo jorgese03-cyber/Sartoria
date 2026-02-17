@@ -13,6 +13,7 @@ import ProfilePage from './pages/ProfilePage';
 import OnboardingPage from './pages/OnboardingPage';
 import PaywallPage from './pages/PaywallPage';
 import TravelPage from './pages/TravelPage';
+import ProtectedRoute from './components/auth/ProtectedRoute';
 import { useEffect } from 'react';
 import { supabase } from './lib/supabase';
 
@@ -34,14 +35,16 @@ function App() {
           <Route path="/paywall" element={<PaywallPage />} />
 
           {/* App Routes - Protected */}
-          <Route path="/app" element={<MainLayout />}>
-            <Route index element={<OutfitPage />} />
-            <Route path="planning" element={<PlanningPage />} />
-            <Route path="wardrobe" element={<WardrobePage />} />
-            <Route path="history" element={<HistoryPage />} />
-            <Route path="analysis" element={<AnalysisPage />} />
-            <Route path="profile" element={<ProfilePage />} />
-            <Route path="travel" element={<TravelPage />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path="/app" element={<MainLayout />}>
+              <Route index element={<OutfitPage />} />
+              <Route path="planning" element={<PlanningPage />} />
+              <Route path="wardrobe" element={<WardrobePage />} />
+              <Route path="history" element={<HistoryPage />} />
+              <Route path="analysis" element={<AnalysisPage />} />
+              <Route path="profile" element={<ProfilePage />} />
+              <Route path="travel" element={<TravelPage />} />
+            </Route>
           </Route>
         </Routes>
       </BrowserRouter>

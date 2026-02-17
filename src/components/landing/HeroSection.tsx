@@ -38,7 +38,7 @@ export default function HeroSection() {
             <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
                 <div className="h-56 w-full bg-gray-100 sm:h-72 md:h-96 lg:w-full lg:h-full flex items-center justify-center">
                     {/* Placeholder for Hero Image */}
-                    <span className="text-gray-400 font-medium">Hero Image (Mockup)</span>
+                    <span className="text-gray-400 font-medium">{t('hero_image_mockup')}</span>
                 </div>
             </div>
         </section>

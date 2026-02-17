@@ -17,6 +17,7 @@
         "hero_title": "Sastrería inteligente. Tu outfit perfecto en 30 segundos.",
         "hero_subtitle": "SARTORIA analiza tu armario, el clima y tu agenda para vestirte impecable cada día. Sin pensar.",
         "cta": "Prueba 15 días gratis",
+        "hero_image_mockup": "Imagen Hero (Mockup)",
         "how_it_works": {
             "title": "Cómo funciona",
             "step1_title": "Cataloga tu armario",
@@ -81,7 +82,35 @@
         "login": "Iniciar sesión",
         "signup": "Crear cuenta",
         "email": "Email",
-        "password": "Contraseña"
+        "password": "Contraseña",
+        "email_placeholder": "Tu dirección de email",
+        "password_placeholder": "Tu contraseña",
+        "or": "— o —",
+        "login_link": "Inicia sesión",
+        "login": {
+            "title": "Bienvenido de nuevo",
+            "subtitle": "Inicia sesión en tu cuenta",
+            "google": "Continuar con Google",
+            "button": "Iniciar sesión",
+            "forgot_password": "¿Olvidaste tu contraseña?",
+            "no_account": "¿No tienes cuenta?",
+            "signup_link": "Regístrate"
+        },
+        "signup": {
+            "title": "Crea tu cuenta",
+            "subtitle": "Empieza tu viaje con SARTORIA",
+            "google": "Regístrate con Google",
+            "button": "Crear cuenta",
+            "has_account": "¿Ya tienes una cuenta?"
+        },
+        "errors": {
+            "google_login": "Error ejecutando login con Google",
+            "anonymous_disabled": "El registro está deshabilitado temporalmente. Contacta con soporte.",
+            "weak_password": "La contraseña debe tener al menos 6 caracteres.",
+            "invalid_email": "Por favor introduce un email válido.",
+            "invalid_credentials": "Email o contraseña incorrectos.",
+            "login_error": "Error al iniciar sesión"
+        }
     },
     "nav": {
         "outfit": "Outfit",

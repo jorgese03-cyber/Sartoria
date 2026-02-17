@@ -3,9 +3,10 @@ import { supabase } from '../lib/supabase';
 import { useNavigate, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { Mail, Lock, Loader2, ArrowRight } from 'lucide-react';
+import LanguageSwitcher from '../components/common/LanguageSwitcher';
 
 export default function LoginPage() {
-    const { t } = useTranslation('auth'); // Assuming 'auth' namespace exists or will exist
+    const { t } = useTranslation(['auth', 'common']);
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -22,7 +23,7 @@ export default function LoginPage() {
             });
             if (error) throw error;
         } catch (err: any) {
-            setError(err.message || 'Error executing Google login');
+            setError(t('auth.errors.google_login', 'Error executing Google login') + ': ' + (err.message || ''));
         }
     };
 
@@ -42,14 +43,26 @@ export default function LoginPage() {
 
             navigate('/app');
         } catch (err: any) {
-            setError(err.message || 'Error executing login');
+            // Translate common error messages
+            let errorMessage = err.message;
+            if (errorMessage === 'Invalid login credentials') {
+                errorMessage = t('auth.errors.invalid_credentials', 'Invalid email or password.');
+            } else if (errorMessage.includes('valid email')) {
+                errorMessage = t('auth.errors.invalid_email', 'Please enter a valid email address.');
+            }
+
+            setError(errorMessage);
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4 py-12 sm:px-6 lg:px-8">
+        <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4 py-12 sm:px-6 lg:px-8 relative">
+            <div className="absolute top-4 right-4">
+                <LanguageSwitcher />
+            </div>
+
             <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-xl shadow-lg border border-gray-100">
                 <div className="text-center">
                     <h2 className="mt-2 text-3xl font-extrabold text-gray-900">
@@ -95,7 +108,7 @@ export default function LoginPage() {
                         </div>
                         <div className="relative flex justify-center text-sm">
                             <span className="px-2 bg-white text-gray-500">
-                                {t('login.or', '— or —')}
+                                {t('auth.or', '— or —')}
                             </span>
                         </div>
                     </div>
@@ -105,7 +118,7 @@ export default function LoginPage() {
                     <div className="rounded-md shadow-sm space-y-4">
                         <div>
                             <label htmlFor="email-address" className="sr-only">
-                                {t('email', 'Email address')}
+                                {t('auth.email', 'Email address')}
                             </label>
                             <div className="relative">
                                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -118,7 +131,7 @@ export default function LoginPage() {
                                     autoComplete="email"
                                     required
                                     className="appearance-none rounded-lg relative block w-full pl-10 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                    placeholder={t('email_placeholder', 'Email address')}
+                                    placeholder={t('auth.email_placeholder', 'Email address')}
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                 />
@@ -126,7 +139,7 @@ export default function LoginPage() {
                         </div>
                         <div>
                             <label htmlFor="password" className="sr-only">
-                                {t('password', 'Password')}
+                                {t('auth.password', 'Password')}
                             </label>
                             <div className="relative">
                                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -139,7 +152,7 @@ export default function LoginPage() {
                                     autoComplete="current-password"
                                     required
                                     className="appearance-none rounded-lg relative block w-full pl-10 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                    placeholder={t('password_placeholder', 'Password')}
+                                    placeholder={t('auth.password_placeholder', 'Password')}
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
@@ -150,7 +163,7 @@ export default function LoginPage() {
                     <div className="flex items-center justify-between">
                         <div className="text-sm">
                             <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                                {t('forgot_password', 'Forgot your password?')}
+                                {t('login.forgot_password', 'Forgot your password?')}
                             </a>
                         </div>
                     </div>
@@ -181,9 +194,9 @@ export default function LoginPage() {
 
                 <div className="text-center mt-4">
                     <p className="text-sm text-gray-600">
-                        {t('no_account', "Don't have an account?")}{' '}
+                        {t('login.no_account', "Don't have an account?")}{' '}
                         <Link to="/register" className="font-medium text-indigo-600 hover:text-indigo-500">
-                            {t('signup_link', 'Sign up')}
+                            {t('login.signup_link', 'Sign up')}
                         </Link>
                     </p>
                 </div>
