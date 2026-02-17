@@ -44,12 +44,22 @@ export const useSubscription = () => {
             }
 
             if (!data) {
+                // Check for trial based on user.created_at
+                // user.created_at is a string ISO date
+                const createdAt = new Date(user.created_at);
+                const trialDurationDays = 15;
+                const trialEnd = new Date(createdAt.getTime() + trialDurationDays * 24 * 60 * 60 * 1000);
+                const now = new Date();
+
+                const isTrial = now < trialEnd;
+                const daysRemaining = isTrial ? Math.ceil((trialEnd.getTime() - now.getTime()) / (1000 * 60 * 60 * 24)) : 0;
+
                 setSubscription({
-                    isActive: false,
-                    isTrial: false,
+                    isActive: isTrial,
+                    isTrial: isTrial,
                     isPaid: false,
-                    status: 'none',
-                    daysRemaining: 0,
+                    status: isTrial ? 'trialing' : 'expired',
+                    daysRemaining: daysRemaining,
                     plan: 'none',
                     loading: false,
                 });
