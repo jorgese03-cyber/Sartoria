@@ -5,11 +5,27 @@ import PricingSection from '../components/landing/PricingSection';
 import FAQSection from '../components/landing/FAQSection';
 import Footer from '../components/landing/Footer';
 import StickyCTA from '../components/landing/StickyCTA';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { useAuth } from '../context/AuthContext';
+import { Loader2 } from 'lucide-react';
 
 export default function LandingPage() {
     const { i18n } = useTranslation();
+    const { user, loading } = useAuth();
+
+    // Redirect if logged in
+    if (!loading && user) {
+        return <Navigate to="/app" replace />;
+    }
+
+    if (loading) {
+        return (
+            <div className="min-h-screen flex items-center justify-center bg-white">
+                <Loader2 className="animate-spin h-8 w-8 text-indigo-600" />
+            </div>
+        );
+    }
 
     // Simple header for landing page
     const LandingHeader = () => (
@@ -27,10 +43,15 @@ export default function LandingPage() {
                     >
                         {i18n.language === 'en' ? 'ES' : 'EN'}
                     </button>
-                    <Link to="/app" className="text-sm font-medium text-indigo-600 hover:text-indigo-500">
-                        {/* Temporary link to app */}
-                        Login
-                    </Link>
+                    {user ? (
+                        <Link to="/app" className="text-sm font-medium text-indigo-600 hover:text-indigo-500">
+                            Dashboard
+                        </Link>
+                    ) : (
+                        <Link to="/login" className="text-sm font-medium text-indigo-600 hover:text-indigo-500">
+                            Login
+                        </Link>
+                    )}
                 </div>
             </div>
         </header>

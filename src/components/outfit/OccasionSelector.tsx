@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { Shirt, Glasses, Briefcase, Award, Star } from 'lucide-react';
 
 interface OccasionSelectorProps {
     value: string;
@@ -11,11 +12,11 @@ export const OccasionSelector: React.FC<OccasionSelectorProps> = ({ value, onCha
     const { t } = useTranslation('outfit');
 
     const occasions = [
-        { id: 'Casual', label: t('casual'), icon: '🟢', color: 'bg-green-100 text-green-800' },
-        { id: 'Smart Casual', label: t('smart_casual'), icon: '🔵', color: 'bg-blue-100 text-blue-800' },
-        { id: 'Business Casual', label: t('business_casual'), icon: '🟠', color: 'bg-orange-100 text-orange-800' },
-        { id: 'Formal', label: t('formal'), icon: '🔴', color: 'bg-red-100 text-red-800' },
-        { id: 'Special', label: t('special_event'), icon: '🟣', color: 'bg-purple-100 text-purple-800' },
+        { id: 'Casual', label: t('casual'), Icon: Shirt, color: 'bg-green-100 text-green-800' },
+        { id: 'Smart Casual', label: t('smart_casual'), Icon: Glasses, color: 'bg-blue-100 text-blue-800' },
+        { id: 'Business Casual', label: t('business_casual'), Icon: Briefcase, color: 'bg-orange-100 text-orange-800' },
+        { id: 'Formal', label: t('formal'), Icon: Award, color: 'bg-red-100 text-red-800' },
+        { id: 'Special', label: t('special_event'), Icon: Star, color: 'bg-purple-100 text-purple-800' },
     ];
 
     return (
@@ -38,7 +39,9 @@ export const OccasionSelector: React.FC<OccasionSelectorProps> = ({ value, onCha
               ${loading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
             `}
                     >
-                        <span className="text-2xl mb-1">{occasion.icon}</span>
+                        <div className={`p-2 rounded-full mb-2 ${occasion.color.split(' ')[0]}`}>
+                            <occasion.Icon className={`w-6 h-6 ${occasion.color.split(' ')[1]}`} />
+                        </div>
                         <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${occasion.color}`}>
                             {occasion.label}
                         </span>
