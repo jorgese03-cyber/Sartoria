@@ -9,9 +9,11 @@ interface UpsellModalProps {
     isOpen: boolean
     onClose: () => void
     featureName?: string
+    title?: string
+    description?: string
 }
 
-export default function UpsellModal({ isOpen, onClose, featureName }: UpsellModalProps) {
+export default function UpsellModal({ isOpen, onClose, featureName, title, description }: UpsellModalProps) {
     const { t } = useTranslation(['wardrobe', 'common']);
     const { user } = useAuth();
     const [loading, setLoading] = useState(false);
@@ -94,11 +96,11 @@ export default function UpsellModal({ isOpen, onClose, featureName }: UpsellModa
                                     </div>
                                     <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
                                         <Dialog.Title as="h3" className="text-base font-semibold leading-6 text-gray-900">
-                                            {t('upsell.title', 'Has alcanzado el límite de prueba')}
+                                            {title || t('upsell.title', 'Has alcanzado el límite de prueba')}
                                         </Dialog.Title>
                                         <div className="mt-2">
                                             <p className="text-sm text-gray-500">
-                                                {t('upsell.description', {
+                                                {description || t('upsell.description', {
                                                     category: featureName || 'items',
                                                     defaultValue: 'En la prueba gratuita puedes tener hasta 5 prendas por categoría. Suscríbete para desbloquear armario ilimitado y todas las funciones.'
                                                 })}

@@ -1,0 +1,9 @@
+{
+    "functions": {
+        "generate-weekly-plan": {
+            "excluded_files": [
+                "**/*.test.ts"
+            ]
+        }
+    }
+}
