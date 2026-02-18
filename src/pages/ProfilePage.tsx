@@ -69,7 +69,7 @@ export default function ProfilePage() {
             // Optionally show success feedback
         } catch (err) {
             console.error('Error updating profile:', err);
-            alert('Failed to update profile');
+            alert('Error al actualizar el perfil');
         } finally {
             setUpdating(false);
         }
@@ -132,7 +132,7 @@ export default function ProfilePage() {
             }
         } catch (err: any) {
             console.error('Error opening portal:', err);
-            alert('Could not open subscription portal');
+            alert('No se pudo abrir el portal de suscripción');
         } finally {
             setLoadingPortal(false);
         }
@@ -152,29 +152,28 @@ export default function ProfilePage() {
     }
 
     const handleDeleteAccount = async () => {
-        if (confirm(t('common:confirm_delete_account_msg', { defaultValue: 'Are you sure you want to delete your account? This action cannot be undone.' }))) {
-            // In a real app, call an Edge Function to clean up Stripe + Auth + Data
-            alert('Please contact support to delete your account completely. We will sign you out now.');
+        if (confirm(t('common:confirm_delete_account_msg', { defaultValue: '¿Estás seguro de que quieres eliminar tu cuenta? Esta acción no se puede deshacer.' }))) {
+            alert('Por favor contacta con soporte para eliminar tu cuenta. Cerraremos tu sesión ahora.');
             await signOut();
             window.location.href = '/';
         }
     }
 
-    if (!user) return <div className="p-8 text-center text-gray-500">Please log in to view your profile.</div>;
+    if (!user) return <div className="p-8 text-center text-[#4b5563]">Inicia sesión para ver tu perfil.</div>;
 
     return (
-        <div className="min-h-screen bg-[#F9F9F9] pb-24">
-            <div className="max-w-4xl mx-auto px-6 py-12 space-y-8 animate-fade-in">
-                <header className="mb-8">
-                    <h1 className="text-4xl font-serif font-medium text-gray-900 tracking-tight">
-                        {t('profile:title').split(' ')[0]} <span className="italic text-[#d4af37]">{t('profile:title').split(' ').slice(1).join(' ')}</span>
+        <div className="min-h-screen bg-[#f9f9f9] pb-24">
+            <div className="max-w-4xl mx-auto px-6 py-8 space-y-8 animate-fade-in">
+                <header className="mb-4">
+                    <h1 className="text-3xl sm:text-4xl font-serif font-medium text-[#0a0a0a] tracking-tight">
+                        {t('profile:title')}
                     </h1>
                 </header>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {/* Left Column: Photo & Main Info */}
                     <div className="md:col-span-1 space-y-6">
-                        <section className="bg-white p-6 rounded-3xl shadow-premium border border-gray-50 flex flex-col items-center text-center">
+                        <section className="bg-white p-6 rounded-2xl shadow-[0_20px_40px_-4px_rgba(0,0,0,0.08)] border border-gray-50 flex flex-col items-center text-center">
                             <div className="relative group mb-4">
                                 <div className="w-32 h-32 rounded-full bg-gray-50 overflow-hidden border-4 border-white shadow-lg">
                                     {userPhoto ? (
@@ -227,7 +226,7 @@ export default function ProfilePage() {
                     {/* Right Column: Settings */}
                     <div className="md:col-span-2 space-y-6">
                         {/* Personal Info */}
-                        <section className="bg-white p-8 rounded-3xl shadow-premium border border-gray-50">
+                        <section className="bg-white p-8 rounded-2xl shadow-[0_20px_40px_-4px_rgba(0,0,0,0.08)] border border-gray-50">
                             <h2 className="text-xl font-serif font-medium text-gray-900 mb-6 flex items-center gap-2">
                                 {t('profile:personal_info')}
                             </h2>
@@ -263,7 +262,7 @@ export default function ProfilePage() {
                         </section>
 
                         {/* Preferences */}
-                        <section className="bg-white p-8 rounded-3xl shadow-premium border border-gray-50">
+                        <section className="bg-white p-8 rounded-2xl shadow-[0_20px_40px_-4px_rgba(0,0,0,0.08)] border border-gray-50">
                             <h2 className="text-xl font-serif font-medium text-gray-900 mb-6">{t('profile:preferences')}</h2>
 
                             <div className="space-y-6">

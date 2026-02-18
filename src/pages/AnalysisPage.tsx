@@ -140,14 +140,14 @@ export default function AnalysisPage() {
     }
 
     return (
-        <div className="pb-24 min-h-screen bg-[#F9F9F9]">
-            <div className="max-w-6xl mx-auto px-6 py-12 space-y-10 animate-fade-in">
+        <div className="pb-24 min-h-screen bg-[#f9f9f9]">
+            <div className="max-w-6xl mx-auto px-6 py-8 space-y-8 animate-fade-in">
                 <header className="flex flex-col md:flex-row md:items-end justify-between gap-6">
                     <div className="space-y-2">
-                        <h1 className="text-4xl font-serif font-medium text-gray-900 tracking-tight">
-                            {t('analysis:title').split(' ')[0]} <span className="italic text-[#d4af37]">{t('analysis:title').split(' ').slice(1).join(' ')}</span>
+                        <h1 className="text-3xl sm:text-4xl font-serif font-medium text-[#0a0a0a] tracking-tight">
+                            {t('analysis:title')}
                         </h1>
-                        <p className="text-gray-600 font-light max-w-lg">
+                        <p className="text-[#4b5563] font-light max-w-lg">
                             {t('analysis:subtitle')}
                         </p>
                     </div>
@@ -156,8 +156,8 @@ export default function AnalysisPage() {
                         disabled={analyzing}
                         className={`flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-all shadow-md active:scale-95
                              ${analyzing
-                                ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
-                                : 'bg-black text-white hover:bg-gray-900 hover:shadow-lg'}`}
+                                ? 'bg-gray-200 text-[#4b5563] cursor-not-allowed'
+                                : 'bg-[#0a0a0a] text-white hover:bg-gray-900 hover:shadow-lg'}`}
                     >
                         {analyzing ? <Loader2 className="animate-spin h-5 w-5" /> : <RefreshCw className="h-5 w-5" />}
                         <span>{analyzing ? t('analysis:analyzing') : t('analysis:analyze_button')}</span>
@@ -180,7 +180,7 @@ export default function AnalysisPage() {
                         {/* Stats Grid */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                             {/* Category Distribution */}
-                            <div className="bg-white p-8 rounded-3xl shadow-premium border border-gray-50">
+                            <div className="bg-white p-8 rounded-2xl shadow-[0_20px_40px_-4px_rgba(0,0,0,0.08)] border border-gray-50">
                                 <div className="flex items-center justify-between mb-8">
                                     <h3 className="text-xl font-serif font-medium text-gray-900">{t('analysis:composition')}</h3>
                                     <div className="p-2 bg-gray-50 rounded-full">
@@ -206,7 +206,7 @@ export default function AnalysisPage() {
                             </div>
 
                             {/* Top Colors */}
-                            <div className="bg-white p-8 rounded-3xl shadow-premium border border-gray-50">
+                            <div className="bg-white p-8 rounded-2xl shadow-[0_20px_40px_-4px_rgba(0,0,0,0.08)] border border-gray-50">
                                 <div className="flex items-center justify-between mb-8">
                                     <h3 className="text-xl font-serif font-medium text-gray-900">{t('analysis:palette')}</h3>
                                     <div className="p-2 bg-gray-50 rounded-full">
@@ -236,7 +236,7 @@ export default function AnalysisPage() {
                         </div>
 
                         {/* Recommendations */}
-                        <div className="bg-white p-8 rounded-3xl shadow-premium border border-gray-50">
+                        <div className="bg-white p-8 rounded-2xl shadow-[0_20px_40px_-4px_rgba(0,0,0,0.08)] border border-gray-50">
                             <div className="flex items-center gap-3 mb-8">
                                 <div className="p-2 bg-black text-white rounded-full">
                                     <ShoppingBag className="w-5 h-5" />

@@ -90,13 +90,13 @@ export default function WardrobePage() {
     const getCountByCategory = (cat: string) => garments.filter(g => g.categoria === cat && g.activa).length;
 
     return (
-        <div className="pb-24 bg-[#F9F9F9] min-h-screen">
+        <div className="pb-24 bg-[#f9f9f9] min-h-screen">
             {/* Header */}
             <div className="bg-white/80 backdrop-blur-md sticky top-0 md:top-16 z-30 border-b border-gray-100">
                 <div className="px-6 py-4 flex justify-between items-center max-w-7xl mx-auto">
                     <div>
-                        <h1 className="text-3xl font-serif font-medium text-gray-900">{t('title')}</h1>
-                        <p className="text-xs text-gray-600 mt-1 uppercase tracking-widest font-medium">
+                        <h1 className="text-3xl font-serif font-medium text-[#0a0a0a]">{t('title')}</h1>
+                        <p className="text-xs text-[#4b5563] mt-1 uppercase tracking-widest font-medium">
                             {garments.length} {t('items', 'prendas')}
                         </p>
                     </div>
@@ -117,8 +117,8 @@ export default function WardrobePage() {
                                     className={clsx(
                                         "px-4 py-2 rounded-full text-sm font-medium transition-all whitespace-nowrap flex items-center gap-2",
                                         isSelected
-                                            ? "bg-black text-white shadow-md"
-                                            : "bg-white text-gray-700 border border-gray-200 hover:border-gray-400 hover:text-gray-900"
+                                            ? "bg-[#0a0a0a] text-white shadow-md"
+                                            : "bg-white text-[#0a0a0a] border border-gray-200 hover:border-gray-400"
                                     )}
                                 >
                                     <span>{cat}</span>
@@ -152,7 +152,7 @@ export default function WardrobePage() {
                                 garment={garment}
                                 onEdit={() => { }} // TODO: Implement edit
                                 onDelete={async (id) => {
-                                    if (confirm(t('confirm_delete', 'Are you sure you want to delete this item?'))) {
+                                    if (confirm(t('confirm_delete', '¿Estás seguro de que quieres eliminar esta prenda?'))) {
                                         await supabase.from('garments').delete().eq('id', id);
                                         fetchGarments();
                                     }
@@ -166,8 +166,8 @@ export default function WardrobePage() {
             {/* Floating Action Button */}
             <button
                 onClick={handleAddClick}
-                className="fixed bottom-24 right-6 bg-black text-white p-5 rounded-full shadow-2xl hover:scale-105 hover:bg-gray-900 transition-all z-40 group"
-                aria-label="Add garment"
+                className="fixed bottom-24 right-6 bg-[#0a0a0a] text-white p-5 rounded-full shadow-2xl hover:scale-105 hover:bg-gray-900 transition-all z-40 group"
+                aria-label="Añadir prenda"
             >
                 <Plus size={24} className="group-hover:rotate-90 transition-transform duration-300" />
             </button>

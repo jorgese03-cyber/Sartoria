@@ -124,15 +124,15 @@ export default function HistoryPage() {
     }
 
     return (
-        <div className="pb-24 min-h-screen bg-[#F9F9F9]">
-            <div className="max-w-7xl mx-auto px-6 py-12 space-y-8 animate-fade-in">
+        <div className="pb-24 min-h-screen bg-[#f9f9f9]">
+            <div className="max-w-7xl mx-auto px-6 py-8 space-y-8 animate-fade-in">
                 {/* Header */}
                 <header className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-gray-200 pb-8">
                     <div className="space-y-2">
-                        <h1 className="text-4xl font-serif font-medium text-gray-900 tracking-tight">
-                            {t('history:title').split(' ')[0]} <span className="italic text-[#d4af37]">{t('history:title').split(' ').slice(1).join(' ')}</span>
+                        <h1 className="text-3xl sm:text-4xl font-serif font-medium text-[#0a0a0a] tracking-tight">
+                            {t('history:title')}
                         </h1>
-                        <p className="text-gray-600 font-light">{t('history:subtitle')}</p>
+                        <p className="text-[#4b5563] font-light">{t('history:subtitle')}</p>
                     </div>
 
                     {/* Filters */}
@@ -182,7 +182,7 @@ export default function HistoryPage() {
                             <Star className="w-8 h-8 text-gray-300" />
                         </div>
                         <h3 className="text-xl font-serif font-medium text-gray-900 mb-2">{t('history:empty')}</h3>
-                        <p className="text-gray-600 font-light max-w-sm mx-auto">Start creating your daily looks or plan your week to see your history here.</p>
+                        <p className="text-[#4b5563] font-light max-w-sm mx-auto">Empieza creando tus looks diarios o planifica tu semana para ver tu historial aquí.</p>
                     </div>
                 ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

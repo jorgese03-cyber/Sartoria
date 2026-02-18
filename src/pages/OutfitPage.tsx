@@ -5,6 +5,7 @@ import { WeatherBanner } from '../components/common/WeatherBanner';
 import { OutfitCard } from '../components/outfit/OutfitCard';
 import { OccasionSelector } from '../components/outfit/OccasionSelector';
 import { useAuth } from '../context/AuthContext';
+import { Sparkles } from 'lucide-react';
 
 // Types
 interface WeatherData {
@@ -27,6 +28,7 @@ interface Garment {
 export default function OutfitPage() {
     const { t } = useTranslation('outfit');
     const { user } = useAuth();
+    const [userName, setUserName] = useState<string>('');
 
     const [loading, setLoading] = useState(false);
     const [garments, setGarments] = useState<Garment[]>([]);
@@ -35,7 +37,7 @@ export default function OutfitPage() {
     const [outfits, setOutfits] = useState<any[]>([]);
     const [error, setError] = useState<string | null>(null);
 
-    // Load garments on mount
+    // Load garments and user name on mount
     useEffect(() => {
         if (!user) return;
 
@@ -50,7 +52,23 @@ export default function OutfitPage() {
             else setGarments(data || []);
         };
 
+        // Get user name from profile or metadata
+        const fetchUserName = async () => {
+            const name = user.user_metadata?.full_name || '';
+            if (name) {
+                setUserName(name.split(' ')[0]); // First name only
+            } else {
+                const { data } = await supabase
+                    .from('profiles')
+                    .select('full_name')
+                    .eq('id', user.id)
+                    .single();
+                if (data?.full_name) setUserName(data.full_name.split(' ')[0]);
+            }
+        };
+
         fetchGarments();
+        fetchUserName();
     }, [user]);
 
     const handleGenerateValues = async () => {
@@ -116,25 +134,23 @@ export default function OutfitPage() {
     };
 
     return (
-        <div className="min-h-screen bg-[#F9F9F9] pb-24">
-            <div className="max-w-4xl mx-auto px-6 py-12 space-y-10 animate-fade-in">
-                {/* Header */}
-                <header className="flex flex-col gap-3 text-center sm:text-left">
-                    <h1 className="text-4xl font-serif font-medium text-gray-900 tracking-tight">
-                        {t('title').split(' ').map((word, i, arr) =>
-                            i === arr.length - 1 ? <span key={i} className="italic text-[#d4af37]">{word}</span> : word + ' '
-                        )}
-                    </h1>
-                    <p className="text-gray-700 font-light text-lg max-w-2xl">
-                        {t('landing.hero_subtitle', "SARTORIA analiza tu armario, el clima y tu agenda para vestirte impecable cada día.")}
+        <div className="min-h-screen bg-[#f9f9f9] pb-24">
+            <div className="max-w-4xl mx-auto px-6 py-8 space-y-8 animate-fade-in">
+                {/* Greeting Header */}
+                <header className="flex flex-col gap-2">
+                    <p className="text-sm font-medium text-[#4b5563] tracking-wide uppercase">
+                        {t('title')}
                     </p>
+                    <h1 className="text-3xl sm:text-4xl font-serif font-medium text-[#0a0a0a] tracking-tight">
+                        {userName ? `Hola, ${userName}` : 'Hola'} <Sparkles className="inline w-6 h-6 text-[#d4af37] ml-1" />
+                    </h1>
                 </header>
 
                 {/* Weather Section */}
                 <WeatherBanner weather={weather} loading={loading && !weather} />
 
                 {/* Controls */}
-                <div className="bg-white p-8 rounded-3xl shadow-premium border border-gray-50 space-y-8">
+                <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-[0_20px_40px_-4px_rgba(0,0,0,0.08)] border border-gray-50 space-y-8">
                     <OccasionSelector value={occasion} onChange={setOccasion} loading={loading} />
 
                     <div className="pt-4">
@@ -180,10 +196,10 @@ export default function OutfitPage() {
                 {outfits.length > 0 && (
                     <div className="space-y-6">
                         <div className="flex items-center gap-4">
-                            <h2 className="text-2xl font-serif text-gray-900">Your Recommendations</h2>
+                            <h2 className="text-2xl font-serif text-[#0a0a0a]">Tus Recomendaciones</h2>
                             <div className="h-px bg-gray-200 flex-1"></div>
                         </div>
-                        <div className="grid md:grid-cols-2 gap-8 animate-fade-in-up">
+                        <div className="grid md:grid-cols-2 gap-6 animate-fade-in-up">
                             {outfits.map((outfit, index) => (
                                 <div key={index} className="h-full">
                                     <OutfitCard
