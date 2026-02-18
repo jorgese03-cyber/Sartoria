@@ -12,24 +12,30 @@ body,
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: #0a0a0a;
+  background-color: #ffffff;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  /* Premium Palette */
-  --color-black: #0a0a0a;
-  --color-charcoal: #1a1a1a;
-  --color-gold: #d4af37;
-  --color-gold-light: #f3e5ab;
-  --color-gold-dark: #aa8c2c;
-  --color-off-white: #f9f9f9;
-  --color-gray-soft: #f3f4f6;
+  /* Premium Palette - SARTORIA */
+  --color-primary: #0a0a0a;
+  /* Black Premium */
+  --color-secondary: #1a1a1a;
+  /* Charcoal */
+  --color-accent: #d4af37;
+  /* Royal Gold */
+  --color-accent-light: #f3e5ab;
+  /* Champagne */
+  --color-text-main: #0a0a0a;
+  --color-text-secondary: #4b5563;
+  /* Gray-600 */
+  --color-bg-light: #ffffff;
+  --color-bg-soft: #f9f9f9;
 
-  --shadow-soft: 0 10px 40px -10px rgba(0, 0, 0, 0.08);
+  --shadow-premium: 0 20px 40px -4px rgba(0, 0, 0, 0.08);
 }
 
 a {

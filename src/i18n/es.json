@@ -119,11 +119,12 @@
         }
     },
     "nav": {
-        "outfit": "Outfit",
+        "start": "Inicio",
         "planning": "Planificar",
         "wardrobe": "Armario",
         "history": "Historial",
-        "analysis": "Análisis"
+        "analysis": "Análisis",
+        "profile": "Perfil"
     },
     "outfit": {
         "title": "Atuendo del Día",

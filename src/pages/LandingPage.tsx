@@ -35,7 +35,7 @@ export default function LandingPage() {
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
                     <div className="flex items-center gap-2">
                         <span className="text-2xl font-serif font-bold tracking-tight whitespace-nowrap text-white">
-                            SARTORIA<span className="text-[#d4af37]">.IA</span>
+                            SARTORIA<span className="text-[#d4af37] italic">.IA</span>
                         </span>
                     </div>
                     <div className="flex items-center space-x-8">
