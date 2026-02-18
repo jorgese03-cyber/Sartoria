@@ -1,92 +1,97 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Check } from 'lucide-react';
 
 export default function PricingSection() {
     const { t } = useTranslation(['pricing', 'landing']);
 
     const features = [
-        t('feature_unlimited_wardrobe', 'Unlimited Wardrobe'),
-        t('feature_daily_outfits', 'Daily AI Outfits'),
-        t('feature_weekly_planning', 'Weekly Planning'),
-        t('feature_ai_image', 'AI Try-On'),
-        t('feature_wardrobe_analysis', 'Wardrobe Analysis'),
-        t('feature_purchase_recommendations', 'Smart Shopping'),
-        t('feature_travel_planner', 'Travel Packer'),
+        t('feature_unlimited_wardrobe', 'Armario ilimitado'),
+        t('feature_daily_outfits', 'Atuendos diarios con IA'),
+        t('feature_weekly_planning', 'Planificación semanal'),
+        t('feature_ai_image', 'Prueba virtual con IA'),
+        t('feature_wardrobe_analysis', 'Análisis de armario'),
+        t('feature_purchase_recommendations', 'Recomendaciones de compra'),
+        t('feature_travel_planner', 'Maleta de viaje'),
     ];
 
     return (
-        <section id="pricing" className="bg-[#0a0a0a] py-24 text-white relative overflow-hidden">
-            {/* Background glow effect */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-7xl pointer-events-none">
-                <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-indigo-900/20 rounded-full blur-3xl opacity-30"></div>
-                <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#d4af37]/10 rounded-full blur-3xl opacity-30"></div>
-            </div>
-
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div className="text-center mb-16">
-                    <h2 className="text-3xl font-serif font-medium text-white sm:text-4xl">
-                        {t('title', 'Simple, Transparent Pricing')}
+        <section id="pricing" className="py-24 bg-white">
+            <div className="max-w-4xl mx-auto px-6 lg:px-8">
+                <div className="text-center mb-20">
+                    <h2
+                        className="text-[12px] tracking-[0.2em] uppercase text-[#6B6B6B] mb-4"
+                        style={{ fontFamily: 'Inter, sans-serif', fontWeight: 400 }}
+                    >
+                        {t('title', 'Precios')}
                     </h2>
-                    <p className="mt-4 text-gray-400 font-light">
-                        Start with a 7-day free trial. Cancel anytime.
+                    <div className="w-8 h-px bg-[#8B7355] mx-auto mb-6" />
+                    <p className="text-[#6B6B6B] font-light text-sm">
+                        7 días de prueba gratuita. Cancela cuando quieras.
                     </p>
                 </div>
 
-                <div className="grid gap-8 lg:grid-cols-2 lg:max-w-4xl lg:mx-auto">
-                    {/* Monthly Plan */}
-                    <div className="border border-gray-800 rounded-2xl p-8 bg-gray-900/50 backdrop-blur-sm flex flex-col hover:border-gray-700 transition-colors">
-                        <div className="mb-6">
-                            <h3 className="text-xl font-medium text-white font-serif">{t('monthly', 'Monthly')}</h3>
-                            <p className="mt-4 flex items-baseline">
-                                <span className="text-4xl font-light text-white tracking-tight">{t('monthly_price', '€9.99')}</span>
-                                <span className="ml-2 text-gray-400">/mo</span>
+                <div className="grid gap-8 lg:grid-cols-2">
+                    {/* Monthly */}
+                    <div className="border border-[#E5E0DB] p-10 flex flex-col">
+                        <div className="mb-8">
+                            <h3
+                                className="text-[11px] tracking-[0.15em] uppercase text-[#6B6B6B] mb-6"
+                                style={{ fontFamily: 'Inter, sans-serif' }}
+                            >
+                                {t('monthly', 'Mensual')}
+                            </h3>
+                            <p className="flex items-baseline gap-2">
+                                <span className="text-4xl font-serif font-normal text-[#1A1A1A]">{t('monthly_price', '€9.99')}</span>
+                                <span className="text-[#6B6B6B] text-sm">/mes</span>
                             </p>
-                            <p className="mt-2 text-sm text-gray-400">{t('trial', '7-day free trial')}</p>
                         </div>
-                        <ul className="space-y-4 mb-8 flex-1">
+                        <ul className="space-y-3 mb-10 flex-1">
                             {features.map((feature) => (
-                                <li key={feature} className="flex items-start">
-                                    <Check className="flex-shrink-0 h-5 w-5 text-gray-400 mt-0.5" aria-hidden="true" />
-                                    <span className="ml-3 text-sm text-gray-300">{feature}</span>
+                                <li key={feature} className="flex items-center gap-3">
+                                    <span className="w-1 h-1 bg-[#8B7355] rounded-full flex-shrink-0" />
+                                    <span className="text-sm text-[#1A1A1A] font-light">{feature}</span>
                                 </li>
                             ))}
                         </ul>
                         <Link
                             to="/register"
-                            className="block w-full bg-gray-800 border border-transparent rounded-xl py-4 text-sm font-medium text-white text-center hover:bg-gray-700 transition-all"
+                            className="btn-secondary text-center w-full"
                         >
-                            {t('start_trial', 'Start Free Trial')}
+                            {t('start_trial', 'Comenzar prueba')}
                         </Link>
                     </div>
 
-                    {/* Yearly Plan */}
-                    <div className="border border-[#d4af37] rounded-2xl p-8 bg-gray-900 relative flex flex-col shadow-2xl shadow-indigo-900/10">
-                        <div className="absolute top-0 right-0 -mt-4 mr-6 px-4 py-1 bg-[#d4af37] text-black rounded-full text-xs font-bold uppercase tracking-widest shadow-lg">
-                            {t('save_badge', 'Best Value')}
-                        </div>
-                        <div className="mb-6">
-                            <h3 className="text-xl font-medium text-white font-serif">{t('yearly', 'Yearly')}</h3>
-                            <p className="mt-4 flex items-baseline">
-                                <span className="text-4xl font-light text-white tracking-tight">{t('yearly_price', '€79.99')}</span>
-                                <span className="ml-2 text-gray-500">/year</span>
+                    {/* Yearly — accent border */}
+                    <div className="border border-[#8B7355] p-10 flex flex-col relative">
+                        <span className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-4 text-[10px] tracking-[0.15em] uppercase text-[#8B7355]">
+                            Mejor valor
+                        </span>
+                        <div className="mb-8">
+                            <h3
+                                className="text-[11px] tracking-[0.15em] uppercase text-[#6B6B6B] mb-6"
+                                style={{ fontFamily: 'Inter, sans-serif' }}
+                            >
+                                {t('yearly', 'Anual')}
+                            </h3>
+                            <p className="flex items-baseline gap-2">
+                                <span className="text-4xl font-serif font-normal text-[#1A1A1A]">{t('yearly_price', '€79.99')}</span>
+                                <span className="text-[#6B6B6B] text-sm">/año</span>
                             </p>
-                            <p className="mt-2 text-sm text-[#d4af37]">{t('yearly_equivalent', 'Just €6.66/mo')}</p>
-                            <p className="mt-1 text-sm text-gray-400">{t('trial', '7-day free trial')}</p>
+                            <p className="mt-2 text-sm text-[#8B7355]">{t('yearly_equivalent', 'Solo €6.66/mes')}</p>
                         </div>
-                        <ul className="space-y-4 mb-8 flex-1">
+                        <ul className="space-y-3 mb-10 flex-1">
                             {features.map((feature) => (
-                                <li key={feature} className="flex items-start">
-                                    <Check className="flex-shrink-0 h-5 w-5 text-[#d4af37] mt-0.5" aria-hidden="true" />
-                                    <span className="ml-3 text-sm text-gray-300">{feature}</span>
+                                <li key={feature} className="flex items-center gap-3">
+                                    <span className="w-1 h-1 bg-[#8B7355] rounded-full flex-shrink-0" />
+                                    <span className="text-sm text-[#1A1A1A] font-light">{feature}</span>
                                 </li>
                             ))}
                         </ul>
                         <Link
                             to="/register"
-                            className="block w-full bg-[#d4af37] border border-transparent rounded-xl py-4 text-sm font-bold text-black text-center hover:bg-[#b5952f] transition-all shadow-lg hover:shadow-[#d4af37]/20"
+                            className="btn-primary text-center w-full"
                         >
-                            {t('start_trial', 'Start Free Trial')}
+                            {t('start_trial', 'Comenzar prueba')}
                         </Link>
                     </div>
                 </div>

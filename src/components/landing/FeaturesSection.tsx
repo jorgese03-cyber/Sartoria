@@ -17,22 +17,28 @@ export default function FeaturesSection() {
     ];
 
     return (
-        <section className="py-24 bg-white border-t border-gray-100">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="text-center mb-16">
-                    <h2 className="text-3xl font-serif font-medium text-gray-900 sm:text-4xl">
-                        {t('features.title')}
+        <section id="features" className="py-24 bg-white">
+            <div className="max-w-5xl mx-auto px-6 lg:px-8">
+                <div className="text-center mb-20">
+                    <h2
+                        className="text-[12px] tracking-[0.2em] uppercase text-[#6B6B6B] mb-4"
+                        style={{ fontFamily: 'Inter, sans-serif', fontWeight: 400 }}
+                    >
+                        {t('features.title', 'Características')}
                     </h2>
-                    <div className="mt-4 w-24 h-1 bg-[#d4af37] mx-auto opacity-50"></div>
+                    <div className="w-8 h-px bg-[#8B7355] mx-auto" />
                 </div>
 
-                <div className="grid grid-cols-2 gap-x-8 gap-y-12 md:grid-cols-3 lg:grid-cols-3">
+                <div className="grid grid-cols-2 gap-x-8 gap-y-14 md:grid-cols-3">
                     {features.map((feature) => (
-                        <div key={feature.name} className="flex flex-col items-center text-center group p-6 rounded-2xl hover:bg-gray-50 transition-colors">
-                            <div className="flex items-center justify-center h-16 w-16 rounded-2xl bg-gray-50 text-gray-900 mb-6 group-hover:bg-white group-hover:shadow-md transition-all border border-gray-100">
-                                <feature.icon className="h-8 w-8" strokeWidth={1} />
-                            </div>
-                            <h3 className="text-lg font-medium text-gray-900 font-serif tracking-wide">{feature.name}</h3>
+                        <div key={feature.name} className="text-center group">
+                            <feature.icon
+                                className="h-5 w-5 mx-auto mb-4 text-[#1A1A1A] opacity-60 group-hover:opacity-100 transition-opacity"
+                                strokeWidth={1}
+                            />
+                            <h3 className="text-sm text-[#1A1A1A] tracking-wide">
+                                {feature.name}
+                            </h3>
                         </div>
                     ))}
                 </div>

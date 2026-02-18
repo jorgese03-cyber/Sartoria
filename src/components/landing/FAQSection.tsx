@@ -1,18 +1,17 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ChevronDown, ChevronUp } from 'lucide-react';
-import clsx from 'clsx';
+import { Plus, Minus } from 'lucide-react';
 
 export default function FAQSection() {
     const { t } = useTranslation('landing');
     const [openIndex, setOpenIndex] = useState<number | null>(null);
 
     const faqs = [
-        { q: t('faq.q1', 'How does the AI Stylist work?'), a: t('faq.a1', 'Our AI analyzes your wardrobe, local weather, and occasion to generate perfect outfit combinations.') },
-        { q: t('faq.q2', 'Do I need to upload photos of my clothes?'), a: t('faq.a2', 'Yes, for the best results. You can also use our database of generic items to get started quickly.') },
-        { q: t('faq.q3', 'Is there a free trial?'), a: t('faq.a3', 'Absolutely. You get 7 days of full access to all premium features.') },
-        { q: t('faq.q4', 'Can I cancel anytime?'), a: t('faq.a4', 'Yes, you can cancel your subscription at any time from your account settings.') },
-        { q: t('faq.q5', 'Does it work for travel packing?'), a: t('faq.a5', 'Yes! Just enter your destination and dates, and we\'ll generate a complete packing list.') },
+        { q: t('faq.q1', '¿Cómo funciona el estilista con IA?'), a: t('faq.a1', 'Nuestra IA analiza tu armario, el clima local y la ocasión para generar combinaciones perfectas.') },
+        { q: t('faq.q2', '¿Necesito subir fotos de mi ropa?'), a: t('faq.a2', 'Sí, para obtener los mejores resultados. También puedes usar prendas genéricas para empezar rápido.') },
+        { q: t('faq.q3', '¿Hay prueba gratuita?'), a: t('faq.a3', 'Sí. Tienes 7 días de acceso completo a todas las funciones premium.') },
+        { q: t('faq.q4', '¿Puedo cancelar en cualquier momento?'), a: t('faq.a4', 'Sí, puedes cancelar tu suscripción en cualquier momento desde tu perfil.') },
+        { q: t('faq.q5', '¿Sirve para hacer la maleta de viaje?'), a: t('faq.a5', 'Sí. Solo introduce tu destino y fechas, y generaremos una lista de equipaje completa.') },
     ];
 
     const toggleFAQ = (index: number) => {
@@ -20,39 +19,46 @@ export default function FAQSection() {
     };
 
     return (
-        <section className="bg-white py-24">
-            <div className="max-w-3xl mx-auto px-6 sm:px-6 lg:px-8">
+        <section className="py-24 bg-[#F5F0EB]">
+            <div className="max-w-3xl mx-auto px-6 lg:px-8">
                 <div className="text-center mb-16">
-                    <h2 className="text-3xl font-serif font-medium text-gray-900 sm:text-4xl">
-                        {t('faq.title', 'Frequently Asked Questions')}
+                    <h2
+                        className="text-[12px] tracking-[0.2em] uppercase text-[#6B6B6B] mb-4"
+                        style={{ fontFamily: 'Inter, sans-serif', fontWeight: 400 }}
+                    >
+                        {t('faq.title', 'Preguntas frecuentes')}
                     </h2>
-                    <div className="mt-4 w-24 h-1 bg-[#d4af37] mx-auto opacity-50"></div>
+                    <div className="w-8 h-px bg-[#8B7355] mx-auto" />
                 </div>
-                <dl className="space-y-4">
+
+                <dl>
                     {faqs.map((faq, index) => (
-                        <div key={index} className="border border-gray-100 rounded-2xl overflow-hidden hover:border-gray-200 transition-colors">
+                        <div
+                            key={index}
+                            className={`border-t border-[#E5E0DB] ${index === faqs.length - 1 ? 'border-b' : ''}`}
+                        >
                             <dt>
                                 <button
                                     onClick={() => toggleFAQ(index)}
-                                    className="w-full flex justify-between items-center px-6 py-5 text-left bg-white hover:bg-gray-50 transition-colors focus:outline-none"
+                                    className="w-full flex justify-between items-center py-6 text-left hover:opacity-70 transition-opacity"
                                 >
-                                    <span className="font-medium text-gray-900 text-lg font-serif">{faq.q}</span>
+                                    <span className="text-[#1A1A1A] text-[15px]">{faq.q}</span>
                                     <span className="ml-6 flex-shrink-0">
                                         {openIndex === index ? (
-                                            <ChevronUp className="h-5 w-5 text-[#d4af37]" />
+                                            <Minus className="h-4 w-4 text-[#6B6B6B]" strokeWidth={1} />
                                         ) : (
-                                            <ChevronDown className="h-5 w-5 text-gray-400" />
+                                            <Plus className="h-4 w-4 text-[#6B6B6B]" strokeWidth={1} />
                                         )}
                                     </span>
                                 </button>
                             </dt>
                             <dd
-                                className={clsx(
-                                    "px-6 transition-all duration-300 ease-in-out text-gray-600 bg-gray-50/30",
-                                    openIndex === index ? "max-h-48 py-5 opacity-100" : "max-h-0 py-0 opacity-0 overflow-hidden"
-                                )}
+                                className={`overflow-hidden transition-all duration-300 ease-in-out ${openIndex === index ? 'max-h-48 pb-6 opacity-100' : 'max-h-0 pb-0 opacity-0'
+                                    }`}
                             >
-                                <p className="leading-relaxed">{faq.a}</p>
+                                <p className="text-[#6B6B6B] font-light text-sm leading-relaxed pr-12">
+                                    {faq.a}
+                                </p>
                             </dd>
                         </div>
                     ))}

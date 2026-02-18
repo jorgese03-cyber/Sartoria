@@ -26,32 +26,33 @@ export default function HowItWorksSection() {
     ];
 
     return (
-        <section id="how-it-works" className="py-24 bg-[#F9F9F9]">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="text-center mb-16">
-                    <h2 className="text-3xl font-serif font-medium text-gray-900 sm:text-4xl">
-                        {t('how_it_works.title')}
+        <section id="how-it-works" className="py-24 bg-[#F5F0EB]">
+            <div className="max-w-5xl mx-auto px-6 lg:px-8">
+                <div className="text-center mb-20">
+                    <h2
+                        className="text-[12px] tracking-[0.2em] uppercase text-[#6B6B6B] mb-4"
+                        style={{ fontFamily: 'Inter, sans-serif', fontWeight: 400 }}
+                    >
+                        {t('how_it_works.title', 'Cómo funciona')}
                     </h2>
-                    <div className="mt-4 w-24 h-1 bg-[#d4af37] mx-auto opacity-50"></div>
+                    <div className="w-8 h-px bg-[#8B7355] mx-auto" />
                 </div>
 
-                <div className="grid grid-cols-1 gap-12 lg:grid-cols-3">
-                    {steps.map((step, index) => (
-                        <div key={step.id} className="relative group">
-                            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-black text-white rounded-full flex items-center justify-center font-serif text-xl border-4 border-[#F9F9F9] z-10 shadow-lg">
-                                {index + 1}
+                <div className="grid grid-cols-1 gap-16 lg:grid-cols-3 lg:gap-12">
+                    {steps.map((step) => (
+                        <div key={step.id} className="text-center">
+                            <div className="mb-6">
+                                <step.icon className="h-6 w-6 mx-auto text-[#1A1A1A]" strokeWidth={1} />
                             </div>
-                            <div className="bg-white rounded-2xl p-10 shadow-premium border border-gray-50 h-full flex flex-col items-center text-center transition-transform duration-300 hover:-translate-y-2">
-                                <div className="mb-6 p-4 bg-gray-50 rounded-full inline-block group-hover:bg-[#f3e5ab] transition-colors rounded-2xl">
-                                    <step.icon className="h-8 w-8 text-gray-900" strokeWidth={1.5} />
-                                </div>
-                                <h3 className="text-xl font-medium text-gray-900 mb-3 font-serif">
-                                    {step.title}
-                                </h3>
-                                <p className="text-gray-600 font-light leading-relaxed">
-                                    {step.desc}
-                                </p>
-                            </div>
+                            <span className="text-[11px] tracking-[0.15em] uppercase text-[#8B7355] mb-3 block">
+                                Paso {step.id}
+                            </span>
+                            <h3 className="font-serif font-normal text-xl text-[#1A1A1A] mb-3 tracking-wide">
+                                {step.title}
+                            </h3>
+                            <p className="text-[#6B6B6B] font-light text-sm leading-relaxed max-w-xs mx-auto">
+                                {step.desc}
+                            </p>
                         </div>
                     ))}
                 </div>

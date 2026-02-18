@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+/* ═══════════════════════════════════════════
+   SARTORIA — Design System Massimo Dutti
+   ═══════════════════════════════════════════ */
+
 html,
 body,
 #root {
@@ -7,127 +11,214 @@ body,
 }
 
 :root {
-  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  /* —— Colores —— */
+  --color-bg: #FFFFFF;
+  --color-bg-cream: #F5F0EB;
+  --color-text: #1A1A1A;
+  --color-text-secondary: #6B6B6B;
+  --color-accent: #8B7355;
+  --color-border: #E5E0DB;
+  --color-error: #C41E3A;
+  --color-success: #2D5A27;
+  --color-inactive: #AAAAAA;
 
-  color-scheme: light dark;
-  color: #0a0a0a;
-  background-color: #ffffff;
+  /* —— Tipografía —— */
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--color-text);
+  background-color: var(--color-bg);
 
+  /* —— Rendering —— */
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  /* Premium Palette - SARTORIA */
-  --color-primary: #0a0a0a;
-  /* Black Premium */
-  --color-secondary: #1a1a1a;
-  /* Charcoal */
-  --color-accent: #d4af37;
-  /* Royal Gold */
-  --color-accent-light: #f3e5ab;
-  /* Champagne */
-  --color-text-main: #0a0a0a;
-  --color-text-secondary: #4b5563;
-  /* Gray-600 */
-  --color-bg-light: #ffffff;
-  --color-bg-soft: #f9f9f9;
-
-  --shadow-premium: 0 20px 40px -4px rgba(0, 0, 0, 0.08);
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-  transition: color 0.2s;
-}
-
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
+/* —— Headings: Playfair Display —— */
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 400;
+  letter-spacing: 0.05em;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* —— Links —— */
+a {
+  color: var(--color-text);
+  text-decoration: none;
+  transition: opacity 0.2s ease;
 }
 
+a:hover {
+  opacity: 0.7;
+}
+
+/* —— Body —— */
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+/* —— Base Button Reset —— */
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  font-size: inherit;
+  font-weight: 400;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background: transparent;
   cursor: pointer;
-  transition: all 0.25s;
+  transition: opacity 0.2s ease;
 }
 
-button:hover {
-  border-color: #646cff;
+/* ═══════════════════════════════════════════
+   Utility Classes
+   ═══════════════════════════════════════════ */
+
+/* Label / Caption style */
+.label-upper {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-secondary);
 }
 
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+/* Primary Button */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 16px 32px;
+  background-color: var(--color-text);
+  color: #FFFFFF;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
 }
 
-/* Utilities */
-.glass-panel {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+.btn-primary:hover {
+  opacity: 0.85;
 }
 
-.shadow-premium {
-  box-shadow: var(--shadow-soft);
+.btn-primary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+/* Secondary Button */
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 32px;
+  background: transparent;
+  color: var(--color-text);
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  border: 1px solid var(--color-text);
+  border-radius: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-text);
+  color: #FFFFFF;
+}
+
+/* Ghost/Link Button */
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0;
+  background: transparent;
+  color: var(--color-text);
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  border: none;
+  border-bottom: 1px solid transparent;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.btn-ghost:hover {
+  border-bottom-color: var(--color-text);
+}
+
+/* Massimo Dutti Input */
+.input-md {
+  width: 100%;
+  padding: 12px 0;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--color-text);
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--color-border);
+  border-radius: 0;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.input-md::placeholder {
+  color: var(--color-inactive);
+  font-weight: 300;
+}
+
+.input-md:focus {
+  border-bottom-color: var(--color-text);
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
   }
 
-  a:hover {
-    color: #747bff;
-  }
-
-  button {
-    background-color: #f9f9f9;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out both;
+}
 
-  a:hover {
-    color: #747bff;
-  }
+/* Hide scrollbar utility */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
 
-  button {
-    background-color: #f9f9f9;
-  }
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }

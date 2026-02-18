@@ -1,50 +1,45 @@
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { ArrowRight } from 'lucide-react';
 
 export default function HeroSection() {
     const { t } = useTranslation('landing');
 
     return (
-        <section className="relative bg-gray-900 overflow-hidden min-h-[90vh] flex items-center">
+        <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+            {/* Full-screen editorial photo */}
             <div className="absolute inset-0 z-0">
-                {/* High-fashion background - Model visible */}
                 <img
-                    src="https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?q=80&w=2600&auto=format&fit=crop"
-                    alt="Fashion Model"
-                    className="w-full h-full object-cover opacity-60 object-top"
+                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=2600&auto=format&fit=crop"
+                    alt="Editorial Fashion"
+                    className="w-full h-full object-cover"
                 />
-                {/* Subtle gradients to ensure text readability without hiding the model */}
-                <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-900/40 to-transparent" />
-                <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent" />
+                {/* Subtle dark overlay for text readability */}
+                <div className="absolute inset-0 bg-black/30" />
             </div>
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-20">
-                <div className="text-center max-w-4xl mx-auto">
-                    <h1 className="text-5xl tracking-tight font-serif font-medium text-white sm:text-7xl md:text-8xl mb-8 animate-fade-in-up drop-shadow-lg">
-                        <span className="block">SARTORIA</span>
-                        <span className="block text-[#d4af37] italic">.IA</span>
-                    </h1>
-                    <p className="mt-6 max-w-2xl mx-auto text-xl text-gray-200 font-light leading-relaxed animate-fade-in-up delay-100 drop-shadow-md">
-                        {t('hero_subtitle', 'Your AI personal stylist. Curated outfits for every occasion, tailored to your unique wardrobe.')}
-                    </p>
-                    <div className="mt-10 max-w-sm mx-auto sm:max-w-none sm:flex sm:justify-center gap-4 animate-fade-in-up delay-200">
-                        <Link
-                            to="/register"
-                            className="w-full flex items-center justify-center px-8 py-4 border border-transparent text-lg font-medium rounded-xl text-black bg-white hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl hover:scale-105"
-                        >
-                            {t('cta', 'Start now')}
-                            <ArrowRight className="ml-2 h-5 w-5" />
-                        </Link>
-                        {/* Secondary CTA */}
-                        <a
-                            href="#how-it-works"
-                            className="w-full flex items-center justify-center px-8 py-4 border border-white/30 text-lg font-medium rounded-xl text-white bg-white/10 backdrop-blur-sm hover:bg-white/20 transition-all"
-                        >
-                            {t('learn_more', 'How it works')}
-                        </a>
-                    </div>
-                </div>
+            {/* Content */}
+            <div className="relative z-10 text-center px-6 max-w-3xl mx-auto animate-fade-in">
+                <h1
+                    className="font-serif font-normal text-white tracking-[0.08em] leading-tight mb-8"
+                    style={{ fontSize: 'clamp(2rem, 6vw, 4rem)' }}
+                >
+                    Tu estilista personal<br />con inteligencia artificial
+                </h1>
+                <p className="text-white/70 text-base font-light max-w-lg mx-auto mb-12 leading-relaxed">
+                    {t('hero_subtitle', 'SARTORIA analiza tu armario, el clima y tu agenda para vestirte impecable cada día.')}
+                </p>
+                <Link
+                    to="/register"
+                    className="inline-block border border-white text-white text-[12px] tracking-[0.12em] uppercase px-12 py-4 hover:bg-white hover:text-[#1A1A1A] transition-all duration-300"
+                >
+                    Descubrir
+                </Link>
+            </div>
+
+            {/* Scroll indicator */}
+            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
+                <div className="w-px h-12 bg-white/30 mx-auto mb-2" />
+                <span className="text-[10px] tracking-[0.15em] uppercase text-white/40">Scroll</span>
             </div>
         </section>
     );
