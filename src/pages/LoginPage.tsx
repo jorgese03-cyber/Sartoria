@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { supabase } from '../lib/supabase';
 import { useNavigate, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Mail, Lock, Loader2 } from 'lucide-react';
-import LanguageSwitcher from '../components/common/LanguageSwitcher';
+import { Loader2 } from 'lucide-react';
 
 export default function LoginPage() {
     const { t } = useTranslation(['auth', 'common']);
@@ -23,10 +22,9 @@ export default function LoginPage() {
             });
             if (error) throw error;
         } catch (err: any) {
-            setError(t('auth.errors.google_login', 'Error executing Google login') + ': ' + (err.message || ''));
+            setError(t('auth.errors.google_login', 'Error ejecutando login con Google') + ': ' + (err.message || ''));
         }
     };
-
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -40,17 +38,14 @@ export default function LoginPage() {
             });
 
             if (error) throw error;
-
             navigate('/app');
         } catch (err: any) {
-            // Translate common error messages
             let errorMessage = err.message;
             if (errorMessage === 'Invalid login credentials') {
-                errorMessage = t('auth.errors.invalid_credentials', 'Invalid email or password.');
+                errorMessage = t('auth.errors.invalid_credentials', 'Email o contraseña incorrectos.');
             } else if (errorMessage.includes('valid email')) {
-                errorMessage = t('auth.errors.invalid_email', 'Please enter a valid email address.');
+                errorMessage = t('auth.errors.invalid_email', 'Por favor introduce un email válido.');
             }
-
             setError(errorMessage);
         } finally {
             setLoading(false);
@@ -58,139 +53,97 @@ export default function LoginPage() {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-[#F9F9F9] px-4 py-12 sm:px-6 lg:px-8 relative">
-            <div className="absolute top-6 right-6">
-                <LanguageSwitcher />
-            </div>
-
-            <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-2xl shadow-premium border border-gray-50">
+        <div className="min-h-screen flex items-center justify-center bg-white px-6 py-12">
+            <div className="max-w-sm w-full space-y-10 animate-fade-in">
+                {/* Logo */}
                 <div className="text-center">
-                    <span className="text-2xl font-serif font-bold tracking-tight text-gray-900">
-                        SARTORIA<span className="text-[#d4af37]">.IA</span>
+                    <span className="font-serif font-normal tracking-[0.15em] text-[#1A1A1A]" style={{ fontSize: '22px' }}>
+                        SARTORIA
                     </span>
-                    <h2 className="mt-6 text-3xl font-serif font-medium text-gray-900">
-                        {t('login.title', 'Welcome back')}
-                    </h2>
-                    <p className="mt-2 text-sm text-gray-500 font-light">
-                        {t('login.subtitle', 'Sign in to your account')}
+                </div>
+
+                {/* Title */}
+                <div className="text-center space-y-2">
+                    <h1 className="text-2xl font-serif font-normal text-[#1A1A1A]">
+                        {t('login.title', 'Iniciar sesión')}
+                    </h1>
+                    <p className="text-sm text-[#6B6B6B] font-light">
+                        {t('login.subtitle', 'Bienvenido de vuelta')}
                     </p>
                 </div>
 
-                <div className="mt-10">
-                    <button
-                        onClick={handleGoogleLogin}
-                        type="button"
-                        className="w-full flex justify-center items-center gap-3 px-4 py-3 border border-gray-200 shadow-sm text-sm font-medium rounded-xl text-gray-700 bg-white hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black transition-all duration-300"
-                    >
-                        <svg className="h-5 w-5" aria-hidden="true" viewBox="0 0 24 24">
-                            <path
-                                d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
-                                fill="#4285F4"
-                            />
-                            <path
-                                d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
-                                fill="#34A853"
-                            />
-                            <path
-                                d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
-                                fill="#FBBC05"
-                            />
-                            <path
-                                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
-                                fill="#EA4335"
-                            />
-                        </svg>
-                        <span className="tracking-wide">{t('login.google', 'Continue with Google')}</span>
-                    </button>
+                {/* Google */}
+                <button
+                    onClick={handleGoogleLogin}
+                    type="button"
+                    className="w-full flex justify-center items-center gap-3 py-4 border border-[#E5E0DB] text-[12px] tracking-[0.1em] uppercase text-[#1A1A1A] hover:border-[#1A1A1A] transition-colors"
+                >
+                    <svg className="h-4 w-4" aria-hidden="true" viewBox="0 0 24 24">
+                        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
+                        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />
+                        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05" />
+                        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335" />
+                    </svg>
+                    {t('login.google', 'Continuar con Google')}
+                </button>
 
-                    <div className="mt-8 relative">
-                        <div className="absolute inset-0 flex items-center">
-                            <div className="w-full border-t border-gray-100" />
-                        </div>
-                        <div className="relative flex justify-center text-xs uppercase tracking-widest text-gray-400">
-                            <span className="px-2 bg-white">
-                                {t('auth.or', 'or')}
-                            </span>
-                        </div>
+                {/* Separator */}
+                <div className="relative">
+                    <div className="absolute inset-0 flex items-center">
+                        <div className="w-full border-t border-[#E5E0DB]" />
+                    </div>
+                    <div className="relative flex justify-center">
+                        <span className="px-4 bg-white text-[11px] tracking-[0.1em] uppercase text-[#AAAAAA]">o</span>
                     </div>
                 </div>
 
-                <form className="mt-8 space-y-6" onSubmit={handleLogin}>
-                    <div className="space-y-5">
-                        <div className="relative group">
-                            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <Mail className="h-5 w-5 text-gray-300 group-focus-within:text-black transition-colors" />
-                            </div>
-                            <input
-                                id="email-address"
-                                name="email"
-                                type="email"
-                                autoComplete="email"
-                                required
-                                className="appearance-none block w-full pl-10 px-3 py-3 border border-gray-200 rounded-xl placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-1 focus:ring-black focus:border-black sm:text-sm transition-all bg-gray-50/50 focus:bg-white"
-                                placeholder={t('auth.email_placeholder', 'Email address')}
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                            />
-                        </div>
-                        <div className="relative group">
-                            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <Lock className="h-5 w-5 text-gray-300 group-focus-within:text-black transition-colors" />
-                            </div>
-                            <input
-                                id="password"
-                                name="password"
-                                type="password"
-                                autoComplete="current-password"
-                                required
-                                className="appearance-none block w-full pl-10 px-3 py-3 border border-gray-200 rounded-xl placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-1 focus:ring-black focus:border-black sm:text-sm transition-all bg-gray-50/50 focus:bg-white"
-                                placeholder={t('auth.password_placeholder', 'Password')}
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                            />
-                        </div>
-                    </div>
-
-                    <div className="flex items-center justify-end">
-                        <div className="text-sm">
-                            <a href="#" className="font-medium text-gray-500 hover:text-black transition-colors">
-                                {t('login.forgot_password', 'Forgot your password?')}
-                            </a>
-                        </div>
+                {/* Form */}
+                <form className="space-y-8" onSubmit={handleLogin}>
+                    <div className="space-y-6">
+                        <input
+                            type="email"
+                            autoComplete="email"
+                            required
+                            className="input-md"
+                            placeholder={t('auth.email_placeholder', 'Email')}
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                        <input
+                            type="password"
+                            autoComplete="current-password"
+                            required
+                            className="input-md"
+                            placeholder={t('auth.password_placeholder', 'Contraseña')}
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
                     </div>
 
                     {error && (
-                        <div className="text-red-600 text-sm text-center bg-red-50 p-3 rounded-lg border border-red-100">
-                            {error}
-                        </div>
+                        <p className="text-[#C41E3A] text-sm text-center">{error}</p>
                     )}
 
-                    <div>
-                        <button
-                            type="submit"
-                            disabled={loading}
-                            className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-xl text-white bg-black hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black disabled:opacity-70 disabled:cursor-not-allowed transition-all duration-300 shadow-lg shadow-gray-200"
-                        >
-                            {loading ? (
-                                <Loader2 className="animate-spin h-5 w-5 text-white" />
-                            ) : (
-                                <span className="flex items-center tracking-wide">
-                                    {t('login.button', 'Sign in')}
-                                    {/* <ArrowRight className="ml-2 h-4 w-4 opacity-70 group-hover:translate-x-1 transition-transform" /> */}
-                                </span>
-                            )}
-                        </button>
-                    </div>
+                    <button
+                        type="submit"
+                        disabled={loading}
+                        className="btn-primary"
+                    >
+                        {loading ? (
+                            <Loader2 className="animate-spin h-4 w-4 text-white" />
+                        ) : (
+                            t('login.button', 'Entrar')
+                        )}
+                    </button>
                 </form>
 
-                <div className="text-center mt-6">
-                    <p className="text-sm text-gray-500">
-                        {t('login.no_account', "Don't have an account?")}{' '}
-                        <Link to="/register" className="font-semibold text-black hover:text-gray-700 transition-colors border-b border-black/20 hover:border-black">
-                            {t('login.signup_link', 'Sign up')}
-                        </Link>
-                    </p>
-                </div>
+                {/* Footer link */}
+                <p className="text-center text-sm text-[#6B6B6B] font-light">
+                    {t('login.no_account', '¿No tienes cuenta?')}{' '}
+                    <Link to="/register" className="text-[#1A1A1A] border-b border-[#1A1A1A] hover:opacity-70 transition-opacity">
+                        {t('login.signup_link', 'Crear cuenta')}
+                    </Link>
+                </p>
             </div>
         </div>
     );
