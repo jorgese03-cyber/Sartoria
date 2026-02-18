@@ -68,7 +68,7 @@ export default function WardrobePage() {
 
                 {/* Category Tabs */}
                 <div className="px-6 pb-4 max-w-7xl mx-auto">
-                    <div className="flex gap-x-5 overflow-x-auto hide-scrollbar pb-1">
+                    <div className="flex flex-wrap gap-x-4 gap-y-2">
                         {CATEGORIES.map(cat => {
                             const count = getCountByCategory(cat);
                             const limit = getMaxItemsPerCategory();
@@ -77,7 +77,7 @@ export default function WardrobePage() {
                                 <button
                                     key={cat}
                                     onClick={() => setSelectedCategory(cat)}
-                                    className={`text-[12px] tracking-[0.1em] uppercase pb-1 whitespace-nowrap transition-all border-b
+                                    className={`text-[11px] tracking-[0.1em] uppercase pb-1 transition-all border-b
                                         ${isSelected
                                             ? 'text-[#1A1A1A] border-[#1A1A1A]'
                                             : 'text-[#AAAAAA] border-transparent hover:text-[#6B6B6B]'
@@ -126,16 +126,16 @@ export default function WardrobePage() {
             {/* FAB */}
             <button
                 onClick={handleAddClick}
-                className="fixed bottom-24 right-6 bg-[#1A1A1A] text-white w-14 h-14 flex items-center justify-center hover:bg-black transition-colors z-40"
+                className="fixed bottom-[80px] right-[24px] bg-[#1A1A1A] text-white w-[48px] h-[48px] rounded-full flex items-center justify-center hover:bg-black transition-colors z-40 shadow-lg"
                 aria-label="Añadir prenda"
             >
-                <Plus size={20} strokeWidth={1.5} />
+                <Plus size={20} strokeWidth={1} />
             </button>
 
             <AddGarmentModal isOpen={isAddModalOpen} onClose={() => setIsAddModalOpen(false)} onSuccess={fetchGarments} />
             <UpsellModal isOpen={isUpsellModalOpen} onClose={() => setIsUpsellModalOpen(false)} featureName={upsellCategory} />
 
-            <style>{`.hide-scrollbar::-webkit-scrollbar{display:none}.hide-scrollbar{-ms-overflow-style:none;scrollbar-width:none}`}</style>
+
         </div>
     );
 }
