@@ -1,6 +1,5 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Shirt, Briefcase, Award, Star, User } from 'lucide-react';
 
 interface OccasionSelectorProps {
     value: string;
@@ -12,40 +11,29 @@ export const OccasionSelector: React.FC<OccasionSelectorProps> = ({ value, onCha
     const { t } = useTranslation('outfit');
 
     const occasions = [
-        { id: 'Casual', label: t('casual'), Icon: Shirt, color: 'bg-green-100 text-green-800' },
-        { id: 'Smart Casual', label: t('smart_casual'), Icon: User, color: 'bg-blue-100 text-blue-800' }, // User mostly for "Person" but close enough if no better option
-        { id: 'Business Casual', label: t('business_casual'), Icon: Briefcase, color: 'bg-orange-100 text-orange-800' },
-        { id: 'Formal', label: t('formal'), Icon: Award, color: 'bg-red-100 text-red-800' }, // Award is closest to "Tie" if Tie doesn't exist. "Tie" is not in basic lucide? Let me check text. Prompt says "corbata o traje". "Award" looks like a medal. Maybe "Ribbon"? Or just "Briefcase" again? I'll use "Award" for now or "Gem"?
-        { id: 'Special', label: t('special_event'), Icon: Star, color: 'bg-purple-100 text-purple-800' },
+        { id: 'Casual', label: t('casual', 'Casual') },
+        { id: 'Smart Casual', label: t('smart_casual', 'Elegante') },
+        { id: 'Business Casual', label: t('business_casual', 'Negocios') },
+        { id: 'Formal', label: t('formal', 'Formal') },
+        { id: 'Special', label: t('special_event', 'Evento') },
     ];
 
     return (
         <div className="w-full">
-            <label className="block text-sm font-medium text-gray-900 mb-2">
-                {t('occasion_label')}
-            </label>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
-                {occasions.map((occasion) => (
+            <div className="flex flex-wrap gap-x-6 gap-y-2">
+                {occasions.map((occ) => (
                     <button
-                        key={occasion.id}
-                        onClick={() => onChange(occasion.id)}
+                        key={occ.id}
+                        onClick={() => onChange(occ.id)}
                         disabled={loading}
-                        className={`
-              flex flex-col items-center justify-center p-4 rounded-xl border transition-all duration-300 group relative overflow-hidden
-              ${value === occasion.id
-                                ? 'border-black bg-black text-white shadow-lg scale-[1.02]'
-                                : 'border-gray-50 bg-gray-50 text-gray-500 hover:border-gray-200 hover:text-gray-900 hover:bg-white'
+                        className={`text-[12px] tracking-[0.1em] uppercase pb-1 transition-all border-b
+                            ${value === occ.id
+                                ? 'text-[#1A1A1A] border-[#1A1A1A]'
+                                : 'text-[#AAAAAA] border-transparent hover:text-[#6B6B6B]'
                             }
-              ${loading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
-            `}
+                            ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
                     >
-                        <occasion.Icon
-                            className={`w-6 h-6 mb-3 transition-colors ${value === occasion.id ? 'text-[#d4af37]' : 'text-gray-400 group-hover:text-gray-900'}`}
-                            strokeWidth={1.5}
-                        />
-                        <span className={`text-xs font-medium tracking-wide ${value === occasion.id ? 'text-white' : 'text-gray-600'}`}>
-                            {occasion.label}
-                        </span>
+                        {occ.label}
                     </button>
                 ))}
             </div>
