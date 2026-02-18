@@ -8,14 +8,15 @@ export default function HeroSection() {
     return (
         <section className="relative bg-gray-900 overflow-hidden min-h-[90vh] flex items-center">
             <div className="absolute inset-0 z-0">
-                {/* High-fashion background */}
+                {/* High-fashion background - Model visible */}
                 <img
-                    src="https://images.unsplash.com/photo-1558618666-fcd25c85f82e?q=80&w=2600&auto=format&fit=crop"
-                    alt="Man adjusting suit cuffs"
-                    className="w-full h-full object-cover opacity-40"
+                    src="https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?q=80&w=2600&auto=format&fit=crop"
+                    alt="Fashion Model"
+                    className="w-full h-full object-cover opacity-60 object-top"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/50 to-transparent" />
-                <div className="absolute inset-0 bg-black/20" />
+                {/* Subtle gradients to ensure text readability without hiding the model */}
+                <div className="absolute inset-0 bg-gradient-to-r from-gray-900 via-gray-900/40 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent" />
             </div>
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-20">
