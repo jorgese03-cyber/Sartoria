@@ -204,168 +204,204 @@ export default function PlanningPage() {
     }
 
     return (
-        <div className="pb-24 px-4 pt-4 max-w-4xl mx-auto">
-            <header className="mb-6">
-                <h1 className="text-2xl font-bold text-gray-900">{t('planning:title')}</h1>
-                <p className="text-gray-500 text-sm mt-1">{weekDays[0].toLocaleDateString()} - {weekDays[4].toLocaleDateString()}</p>
-            </header>
+        <div className="pb-24 min-h-screen bg-[#F9F9F9]">
+            <div className="max-w-4xl mx-auto px-6 py-12 space-y-10 animate-fade-in">
+                {/* Header */}
+                <header className="flex flex-col gap-3 text-center sm:text-left">
+                    <h1 className="text-4xl font-serif font-medium text-gray-900 tracking-tight">
+                        Weekly <span className="italic text-[#d4af37]">Planner</span>
+                    </h1>
+                    <p className="text-gray-500 font-light text-lg max-w-2xl">
+                        Plan your outfits for the upcoming week based on your schedule and weather.
+                    </p>
+                    <p className="text-xs text-gray-400 uppercase tracking-widest font-medium mt-2">
+                        {weekDays[0].toLocaleDateString(undefined, { month: 'long', day: 'numeric' })} - {weekDays[4].toLocaleDateString(undefined, { month: 'long', day: 'numeric' })}
+                    </p>
+                </header>
 
-            {!generatedPlan.length ? (
-                // CONFIGURATION STEP
-                <div className="space-y-6">
-                    {/* Style Mode Selector */}
-                    <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
-                        <div className="flex space-x-4 mb-4">
-                            <button
-                                onClick={() => setCurrentStyleMode('same')}
-                                className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium transition-colors ${currentStyleMode === 'same' ? 'bg-indigo-50 text-indigo-700 border border-indigo-200' : 'bg-gray-50 text-gray-600 hover:bg-gray-100'}`}
-                            >
-                                {t('planning:same_style')}
-                            </button>
-                            <button
-                                onClick={() => setCurrentStyleMode('daily')}
-                                className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium transition-colors ${currentStyleMode === 'daily' ? 'bg-indigo-50 text-indigo-700 border border-indigo-200' : 'bg-gray-50 text-gray-600 hover:bg-gray-100'}`}
-                            >
-                                {t('planning:per_day_style')}
-                            </button>
+                {!generatedPlan.length ? (
+                    // CONFIGURATION STEP
+                    <div className="space-y-8 bg-white p-8 rounded-3xl shadow-premium border border-gray-50">
+                        {/* Style Mode Selector */}
+                        <div className="space-y-4">
+                            <label className="block text-sm font-medium text-gray-900 uppercase tracking-wide">Style Preference</label>
+                            <div className="grid grid-cols-2 gap-4">
+                                <button
+                                    onClick={() => setCurrentStyleMode('same')}
+                                    className={`py-4 px-6 rounded-xl text-sm font-medium transition-all duration-300 border ${currentStyleMode === 'same' ? 'bg-black text-white border-black shadow-lg' : 'bg-white text-gray-500 border-gray-200 hover:border-gray-400 hover:text-gray-900'}`}
+                                >
+                                    {t('planning:same_style', 'Same Style All Week')}
+                                </button>
+                                <button
+                                    onClick={() => setCurrentStyleMode('daily')}
+                                    className={`py-4 px-6 rounded-xl text-sm font-medium transition-all duration-300 border ${currentStyleMode === 'daily' ? 'bg-black text-white border-black shadow-lg' : 'bg-white text-gray-500 border-gray-200 hover:border-gray-400 hover:text-gray-900'}`}
+                                >
+                                    {t('planning:per_day_style', 'Different Style Per Day')}
+                                </button>
+                            </div>
+
+                            {currentStyleMode === 'same' && (
+                                <div className="mt-4 pt-4 border-t border-gray-100 animate-fade-in">
+                                    <OccasionSelector value={globalOccasion} onChange={handleGlobalOccasionChange} />
+                                </div>
+                            )}
                         </div>
 
-                        {currentStyleMode === 'same' && (
-                            <OccasionSelector value={globalOccasion} onChange={handleGlobalOccasionChange} />
-                        )}
-                    </div>
+                        {/* Days List */}
+                        <div className="space-y-4">
+                            <label className="block text-sm font-medium text-gray-900 uppercase tracking-wide">Select Days</label>
+                            <div className="grid gap-3">
+                                {weekDays.map(date => {
+                                    const dateStr = date.toISOString().split('T')[0];
+                                    const isSelected = selectedDays.includes(dateStr);
+                                    const dayName = date.toLocaleDateString(undefined, { weekday: 'long' });
 
-                    {/* Days List */}
-                    <div className="space-y-3">
-                        {weekDays.map(date => {
-                            const dateStr = date.toISOString().split('T')[0];
-                            const isSelected = selectedDays.includes(dateStr);
-                            const dayName = date.toLocaleDateString(undefined, { weekday: 'long' });
+                                    return (
+                                        <div
+                                            key={dateStr}
+                                            onClick={() => toggleDaySelection(dateStr)}
+                                            className={`
+                                                relative p-5 rounded-2xl border transition-all duration-300 cursor-pointer group
+                                                ${isSelected
+                                                    ? 'bg-gray-50 border-gray-200 shadow-sm'
+                                                    : 'bg-white border-gray-100 hover:border-gray-200'
+                                                }
+                                            `}
+                                        >
+                                            <div className="flex items-center justify-between">
+                                                <div className="flex items-center gap-4">
+                                                    <div className={`
+                                                        w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors duration-300
+                                                        ${isSelected ? 'bg-black border-black' : 'border-gray-300 group-hover:border-gray-400'}
+                                                    `}>
+                                                        {isSelected && <Check className="w-3.5 h-3.5 text-white" strokeWidth={3} />}
+                                                    </div>
+                                                    <div>
+                                                        <span className={`block text-lg font-serif font-medium ${isSelected ? 'text-gray-900' : 'text-gray-500'}`}>{dayName}</span>
+                                                        <span className="text-xs text-gray-400 font-light">{date.toLocaleDateString()}</span>
+                                                    </div>
+                                                </div>
 
-                            return (
-                                <div key={dateStr} className={`bg-white p-4 rounded-xl shadow-sm border transaction-colors ${isSelected ? 'border-gray-200' : 'border-transparent opacity-60'}`}>
-                                    <div className="flex items-center justify-between mb-2">
-                                        <div className="flex items-center space-x-3">
-                                            <input
-                                                type="checkbox"
-                                                checked={isSelected}
-                                                onChange={() => toggleDaySelection(dateStr)}
-                                                className="w-5 h-5 text-indigo-600 rounded focus:ring-indigo-500 border-gray-300"
-                                            />
-                                            <span className="font-medium text-gray-900 capitalize">{dayName}</span>
-                                            <span className="text-gray-400 text-sm">{date.toLocaleDateString()}</span>
+                                                {/* Only show selector here if daily mode AND selected */}
+                                                {isSelected && currentStyleMode === 'daily' && (
+                                                    <div className="w-1/2" onClick={(e) => e.stopPropagation()}>
+                                                        <OccasionSelector
+                                                            value={occasions[dateStr] || 'Casual'}
+                                                            onChange={(val) => handleDayOccasionChange(dateStr, val)}
+                                                        />
+                                                    </div>
+                                                )}
+                                            </div>
                                         </div>
-                                    </div>
+                                    )
+                                })}
+                            </div>
+                        </div>
 
-                                    {isSelected && currentStyleMode === 'daily' && (
-                                        <div className="ml-8 mt-2">
-                                            <OccasionSelector
-                                                value={occasions[dateStr] || 'Casual'}
-                                                onChange={(val) => handleDayOccasionChange(dateStr, val)}
-                                            />
-                                        </div>
-                                    )}
-                                </div>
-                            )
-                        })}
+                        <div className="pt-4">
+                            <button
+                                onClick={handleGenerate}
+                                disabled={generating || selectedDays.length === 0}
+                                className={`
+                                    w-full py-5 rounded-full font-serif text-xl tracking-wide transition-all transform active:scale-[0.99]
+                                    flex items-center justify-center gap-3 relative overflow-hidden group
+                                    ${generating
+                                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                                        : 'bg-black text-white shadow-xl hover:shadow-2xl hover:bg-gray-900'
+                                    }
+                                `}
+                            >
+                                {generating ? (
+                                    <span className="flex items-center gap-2">
+                                        <Loader2 className="animate-spin w-5 h-5" />
+                                        <span>Curating your week...</span>
+                                    </span>
+                                ) : (
+                                    <>
+                                        <span>Generate Plan</span>
+                                        <Calendar className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                                    </>
+                                )}
+                            </button>
+                        </div>
                     </div>
-
-                    <button
-                        onClick={handleGenerate}
-                        disabled={generating || selectedDays.length === 0}
-                        className="w-full bg-black text-white py-4 rounded-xl font-bold text-lg shadow-lg hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
-                    >
-                        {generating ? (
-                            <>
-                                <Loader2 className="animate-spin" />
-                                <span>{t('planning:generating')}</span>
-                            </>
-                        ) : (
-                            <>
-                                <Calendar className="w-5 h-5" />
-                                <span>{t('planning:generate_button')}</span>
-                            </>
-                        )}
-                    </button>
-                </div>
-            ) : (
-                // GENERATED PLAN VIEW
-                <div className="space-y-6">
-                    {generatedPlan.map((day, index) => (
-                        <div key={index} className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-                            {/* Header */}
-                            <div className="p-4 bg-gray-50 flex items-center justify-between border-b border-gray-100">
-                                <div>
-                                    <h3 className="font-bold text-gray-900 capitalize">
+                ) : (
+                    // GENERATED PLAN VIEW
+                    <div className="space-y-8">
+                        {generatedPlan.map((day, index) => (
+                            <div key={index} className="bg-white rounded-3xl shadow-premium overflow-hidden border border-gray-100 flex flex-col md:flex-row">
+                                {/* Date Column */}
+                                <div className="md:w-1/4 bg-gray-50 p-8 flex flex-col justify-center border-b md:border-b-0 md:border-r border-gray-100 text-center md:text-left">
+                                    <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">{day.date}</span>
+                                    <h3 className="text-2xl font-serif font-medium text-gray-900 mt-1 capitalize">
                                         {new Date(day.date).toLocaleDateString(undefined, { weekday: 'long' })}
                                     </h3>
-                                    <p className="text-xs text-gray-500">{day.date}</p>
-                                </div>
-                                <div className="flex items-center space-x-2">
-                                    <div className="text-right">
-                                        <div className="text-sm font-medium">{day.weather.temp}°</div>
-                                        <div className="text-xs text-gray-500 capitalize">{day.weather.description}</div>
+                                    <div className="mt-4 flex items-center justify-center md:justify-start gap-2 text-gray-500">
+                                        <span className="text-2xl font-light text-gray-900">{Math.round(day.weather.temp)}°</span>
+                                        <span className="text-sm capitalize font-light border-l border-gray-300 pl-2">{day.weather.description}</span>
                                     </div>
-                                    {/* Weather Icon could go here */}
+                                </div>
+
+                                {/* Content Column */}
+                                <div className="flex-1 p-8">
+                                    <div className="flex flex-col h-full justify-between gap-6">
+                                        <div>
+                                            <div className="flex justify-between items-start mb-4">
+                                                <h4 className="text-xl font-serif font-medium text-gray-900">{day.outfit.nombre_look}</h4>
+                                                <div className="flex -space-x-2">
+                                                    {day.outfit.color_palette?.map((color, i) => (
+                                                        <div key={i} className="w-6 h-6 rounded-full border-2 border-white shadow-sm" style={{ backgroundColor: color }} />
+                                                    ))}
+                                                </div>
+                                            </div>
+                                            <p className="text-gray-600 font-light leading-relaxed border-l-2 border-[#d4af37] pl-4 italic">
+                                                "{day.outfit.explicacion}"
+                                            </p>
+                                        </div>
+
+                                        {/* Actions */}
+                                        <div className="flex items-center gap-4 pt-4 border-t border-gray-50">
+                                            {day.approved ? (
+                                                <div className="flex-1 bg-[#F0FDF4] text-[#166534] py-3 rounded-xl flex items-center justify-center gap-2 border border-[#DCFCE7]">
+                                                    <Check className="w-5 h-5" />
+                                                    <span className="font-medium text-sm tracking-wide">{t('planning:status_approved', 'Approved')}</span>
+                                                </div>
+                                            ) : (
+                                                <button
+                                                    onClick={() => handleApproveDay(day)}
+                                                    className="flex-1 bg-black text-white py-3 rounded-xl font-medium text-sm tracking-wide shadow-lg hover:bg-gray-800 transition-all hover:shadow-xl active:scale-95"
+                                                >
+                                                    {t('planning:approve_day', 'Save & Approve')}
+                                                </button>
+                                            )}
+                                            <button className="p-3 text-gray-400 hover:text-black hover:bg-gray-50 rounded-xl transition-all" title="Regenerate">
+                                                <RefreshCw className="w-5 h-5" />
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                        ))}
 
-                            {/* Outfit Content */}
-                            <div className="p-4">
-                                <div className="flex items-start justify-between">
-                                    <div>
-                                        <h4 className="font-bold text-lg">{day.outfit.nombre_look}</h4>
-                                        <p className="text-gray-600 text-sm mt-1">{day.outfit.explicacion}</p>
-                                    </div>
-                                </div>
-
-                                <div className="mt-4 flex flex-wrap gap-2">
-                                    {/* Color Palette */}
-                                    {day.outfit.color_palette?.map((color, i) => (
-                                        <div key={i} className="w-6 h-6 rounded-full border border-gray-200" style={{ backgroundColor: color }} />
-                                    ))}
-                                </div>
-
-                                {/* Actions */}
-                                <div className="mt-6 flex space-x-3">
-                                    {day.approved ? (
-                                        <div className="flex-1 bg-green-100 text-green-800 py-2 rounded-lg flex items-center justify-center space-x-2 cursor-default">
-                                            <Check className="w-4 h-4" />
-                                            <span className="font-medium">{t('planning:status_approved')}</span>
-                                        </div>
-                                    ) : (
-                                        <button
-                                            onClick={() => handleApproveDay(day)}
-                                            className="flex-1 bg-black text-white py-2 rounded-lg font-medium hover:bg-gray-800"
-                                        >
-                                            {t('planning:approve_day')}
-                                        </button>
-                                    )}
-                                    {/* RegExp/Change logic to be added - simple placeholder */}
-                                    <button className="p-2 text-gray-400 hover:text-gray-600">
-                                        <RefreshCw className="w-5 h-5" />
-                                    </button>
-                                </div>
+                        <div className="sticky bottom-6 z-20 mx-auto max-w-md">
+                            <div className="bg-white/90 backdrop-blur-xl p-2 rounded-full shadow-2xl border border-gray-100 flex gap-2">
+                                <button
+                                    onClick={handleApproveAll}
+                                    className="flex-1 bg-black text-white py-3 px-6 rounded-full font-medium text-sm transition-all hover:bg-gray-800 shadow-md"
+                                >
+                                    {t('planning:approve_all', 'Approve All Days')}
+                                </button>
+                                <button
+                                    onClick={() => setGeneratedPlan([])} // Reset to config
+                                    className="px-6 py-3 bg-gray-100 text-gray-600 font-medium text-sm rounded-full hover:bg-gray-200 transition-colors"
+                                >
+                                    {t('planning:new_plan', 'Start Over')}
+                                </button>
                             </div>
                         </div>
-                    ))}
-
-                    <div className="sticky bottom-20 bg-white/80 backdrop-blur-md p-4 rounded-xl border border-gray-200 shadow-lg flex space-x-3">
-                        <button
-                            onClick={handleApproveAll}
-                            className="flex-1 bg-indigo-600 text-white py-3 rounded-lg font-bold shadow-md hover:bg-indigo-700"
-                        >
-                            {t('planning:approve_all')}
-                        </button>
-                        <button
-                            onClick={() => setGeneratedPlan([])} // Reset to config
-                            className="px-4 py-3 bg-white text-gray-700 font-medium border border-gray-300 rounded-lg hover:bg-gray-50"
-                        >
-                            {t('planning:new_plan')}
-                        </button>
                     </div>
-                </div>
-            )}
+                )}
+            </div>
         </div>
     );
 }

@@ -25,61 +25,63 @@ export default function GarmentCard({ garment, onEdit, onDelete }: GarmentCardPr
     const { t } = useTranslation('wardrobe');
 
     return (
-        <div className="group relative bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow">
-            <div className="aspect-square bg-gray-100 relative overflow-hidden">
+        <div className="group relative bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-premium transition-all duration-300">
+            <div className="aspect-[4/5] bg-[#F9F9F9] relative overflow-hidden">
                 <img
                     src={garment.foto_url}
                     alt={garment.descripcion}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
 
                 {!garment.activa && (
-                    <div className="absolute inset-0 bg-white/60 flex items-center justify-center backdrop-blur-[1px]">
-                        <span className="px-2 py-1 bg-gray-800 text-white text-xs font-medium rounded-full">
+                    <div className="absolute inset-0 bg-white/80 flex items-center justify-center backdrop-blur-[2px]">
+                        <span className="px-3 py-1 bg-gray-900 text-white text-xs font-medium rounded-full tracking-wide">
                             {t('inactive', 'Retirada')}
                         </span>
                     </div>
                 )}
 
                 {/* Actions overlay */}
-                <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col gap-2">
+                <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col gap-2 transform translate-x-2 group-hover:translate-x-0 duration-300">
                     <button
                         onClick={(e) => { e.stopPropagation(); onEdit(garment); }}
-                        className="p-1.5 bg-white rounded-full shadow-sm hover:bg-indigo-50 text-gray-600 hover:text-indigo-600"
+                        className="p-2 bg-white rounded-full shadow-md hover:bg-black hover:text-white text-gray-700 transition-colors"
                         title={t('actions.edit')}
                     >
-                        <Edit2 size={16} />
+                        <Edit2 size={14} />
                     </button>
                     <button
                         onClick={(e) => { e.stopPropagation(); onDelete(garment.id); }}
-                        className="p-1.5 bg-white rounded-full shadow-sm hover:bg-red-50 text-gray-600 hover:text-red-600"
+                        className="p-2 bg-white rounded-full shadow-md hover:bg-red-600 hover:text-white text-gray-700 transition-colors"
                         title={t('actions.delete')}
                     >
-                        <Trash2 size={16} />
+                        <Trash2 size={14} />
                     </button>
                 </div>
 
-                <div className="absolute bottom-2 left-2">
-                    <div className="flex items-center gap-1 bg-white/90 backdrop-blur-sm px-1.5 py-0.5 rounded-md shadow-sm border border-gray-100">
-                        <div
-                            className="w-3 h-3 rounded-full border border-gray-200"
-                            style={{ backgroundColor: garment.color.toLowerCase() === 'blanco' ? '#ffffff' : garment.color }}
-                            title={garment.color}
-                        />
-                        <span className="text-[10px] font-medium text-gray-600 uppercase tracking-tight">
-                            {garment.codigo}
-                        </span>
-                    </div>
+                {/* Color indicator */}
+                <div className="absolute bottom-3 left-3">
+                    <div className="w-5 h-5 rounded-full border border-white/50 shadow-sm"
+                        style={{ backgroundColor: garment.color.toLowerCase() === 'blanco' ? '#ffffff' : garment.color }}
+                        title={garment.color}
+                    />
                 </div>
             </div>
 
-            <div className="p-3">
-                <h3 className="text-sm font-medium text-gray-900 truncate" title={garment.marca}>
-                    {garment.marca === 'NO VISIBLE' || !garment.marca ? '—' : garment.marca}
-                </h3>
-                <p className="text-xs text-gray-500 truncate mt-0.5">
-                    {garment.descripcion}
-                </p>
+            <div className="p-4">
+                <div className="flex justify-between items-start">
+                    <div className="flex-1 min-w-0 pr-2">
+                        <h3 className="text-sm font-bold text-gray-900 truncate tracking-wide" title={garment.marca}>
+                            {garment.marca === 'NO VISIBLE' || !garment.marca ? '—' : garment.marca.toUpperCase()}
+                        </h3>
+                        <p className="text-xs text-gray-500 truncate mt-1 font-light">
+                            {garment.descripcion}
+                        </p>
+                    </div>
+                    <span className="text-[10px] font-medium text-gray-400 uppercase tracking-wider border border-gray-100 px-1.5 py-0.5 rounded">
+                        {garment.talla}
+                    </span>
+                </div>
             </div>
         </div>
     )

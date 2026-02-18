@@ -116,60 +116,85 @@ export default function OutfitPage() {
     };
 
     return (
-        <div className="max-w-4xl mx-auto p-4 pb-20 space-y-6">
-            <header className="flex flex-col gap-2">
-                <h1 className="text-3xl font-serif font-bold text-gray-900">Outfit of the Day</h1>
-                <p className="text-gray-500">Let AI style you for today.</p>
-            </header>
-
-            {/* Weather Section */}
-            <WeatherBanner weather={weather} loading={loading && !weather} />
-
-            {/* Controls */}
-            <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 space-y-6">
-                <OccasionSelector value={occasion} onChange={setOccasion} loading={loading} />
-
-                <button
-                    onClick={handleGenerateValues}
-                    disabled={loading || garments.length < 3}
-                    className={`
-            w-full py-4 rounded-xl font-bold text-lg transition-all transform active:scale-95
-            ${loading
-                            ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                            : 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-lg hover:shadow-indigo-200'
-                        }
-          `}
-                >
-                    {loading ? 'Thinking...' : t('generate_button')}
-                </button>
-
-                {garments.length < 3 && (
-                    <p className="text-center text-red-500 text-sm">
-                        Need at least 3 garments to generate an outfit.
+        <div className="min-h-screen bg-[#F9F9F9] pb-24">
+            <div className="max-w-4xl mx-auto px-6 py-12 space-y-10 animate-fade-in">
+                {/* Header */}
+                <header className="flex flex-col gap-3 text-center sm:text-left">
+                    <h1 className="text-4xl font-serif font-medium text-gray-900 tracking-tight">
+                        Outfit of the <span className="italic text-[#d4af37]">Day</span>
+                    </h1>
+                    <p className="text-gray-500 font-light text-lg max-w-2xl">
+                        Let our AI stylist curate your perfect look based on your wardrobe, weather, and occasion.
                     </p>
-                )}
+                </header>
 
-                {error && (
-                    <div className="p-4 bg-red-50 text-red-700 rounded-xl text-sm">
-                        {error}
+                {/* Weather Section */}
+                <WeatherBanner weather={weather} loading={loading && !weather} />
+
+                {/* Controls */}
+                <div className="bg-white p-8 rounded-3xl shadow-premium border border-gray-50 space-y-8">
+                    <OccasionSelector value={occasion} onChange={setOccasion} loading={loading} />
+
+                    <div className="pt-4">
+                        <button
+                            onClick={handleGenerateValues}
+                            disabled={loading || garments.length < 3}
+                            className={`
+                                w-full py-5 rounded-full font-serif text-xl tracking-wide transition-all transform active:scale-[0.99]
+                                flex items-center justify-center gap-3 relative overflow-hidden group
+                                ${loading
+                                    ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                                    : 'bg-black text-white shadow-xl hover:shadow-2xl hover:bg-gray-900'
+                                }
+                            `}
+                        >
+                            {loading ? (
+                                <span className="flex items-center gap-2">
+                                    <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                                    Curating your look...
+                                </span>
+                            ) : (
+                                <>
+                                    <span>Generate Outfit</span>
+                                    <span className="w-1.5 h-1.5 rounded-full bg-[#d4af37] group-hover:scale-150 transition-transform" />
+                                </>
+                            )}
+                        </button>
+                        {garments.length < 3 && (
+                            <p className="text-center text-red-500 text-sm mt-4 font-medium">
+                                Add at least 3 garments to your wardrobe to start generating outfits.
+                            </p>
+                        )}
+                    </div>
+
+                    {error && (
+                        <div className="p-4 bg-red-50 text-red-700 rounded-xl text-sm border border-red-100 flex items-center gap-2">
+                            <span className="text-xl">⚠️</span> {error}
+                        </div>
+                    )}
+                </div>
+
+                {/* Results */}
+                {outfits.length > 0 && (
+                    <div className="space-y-6">
+                        <div className="flex items-center gap-4">
+                            <h2 className="text-2xl font-serif text-gray-900">Your Recommendations</h2>
+                            <div className="h-px bg-gray-200 flex-1"></div>
+                        </div>
+                        <div className="grid md:grid-cols-2 gap-8 animate-fade-in-up">
+                            {outfits.map((outfit, index) => (
+                                <div key={index} className="h-full">
+                                    <OutfitCard
+                                        outfit={outfit}
+                                        allGarments={garments}
+                                        onSelect={() => handleSelectOutfit(outfit)}
+                                    />
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 )}
             </div>
-
-            {/* Results */}
-            {outfits.length > 0 && (
-                <div className="grid md:grid-cols-2 gap-6 animate-fade-in-up">
-                    {outfits.map((outfit, index) => (
-                        <div key={index} className="h-full">
-                            <OutfitCard
-                                outfit={outfit}
-                                allGarments={garments}
-                                onSelect={() => handleSelectOutfit(outfit)}
-                            />
-                        </div>
-                    ))}
-                </div>
-            )}
         </div>
     );
 }

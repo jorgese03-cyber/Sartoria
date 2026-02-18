@@ -48,61 +48,60 @@ export const OutfitCard: React.FC<OutfitCardProps> = ({ outfit, allGarments, onS
         .filter(g => g.id); // Filter out if not found (shouldn't happen if sync)
 
     return (
-        <div className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 flex flex-col h-full">
-            {/* Header */}
-            <div className="p-5 bg-gradient-to-r from-gray-900 to-gray-800 text-white">
-                <h3 className="text-xl font-bold font-serif">{outfit.nombre_look}</h3>
-                <div className="flex gap-2 mt-2">
-                    {outfit.color_palette?.map((color, i) => (
-                        <div key={i} className="w-6 h-6 rounded-full border border-white/20" style={{ backgroundColor: color }} />
-                    ))}
+        <div className="bg-white rounded-2xl shadow-premium overflow-hidden border border-gray-100 flex flex-col h-full hover:shadow-lg transition-shadow duration-300">
+            {/* Header - Minimalist */}
+            <div className="p-6 pb-4">
+                <div className="flex justify-between items-start mb-4">
+                    <h3 className="text-2xl font-serif font-medium text-gray-900 leading-tight">{outfit.nombre_look}</h3>
+                    <div className="flex -space-x-2">
+                        {outfit.color_palette?.map((color, i) => (
+                            <div key={i} className="w-6 h-6 rounded-full border-2 border-white shadow-sm" style={{ backgroundColor: color }} />
+                        ))}
+                    </div>
                 </div>
+                <p className="text-sm text-gray-500 font-light italic border-l-2 border-[#d4af37] pl-3 py-1">
+                    "{outfit.explicacion}"
+                </p>
             </div>
 
             {/* Content */}
-            <div className="p-5 flex-1 flex flex-col gap-4">
-
-                {/* Explanation */}
-                <div className="text-sm text-gray-600 italic">
-                    "{outfit.explicacion}"
-                </div>
+            <div className="px-6 pb-6 flex-1 flex flex-col gap-6">
 
                 {/* Garments Grid */}
-                <div className="grid grid-cols-3 gap-2 mt-2">
+                <div className="grid grid-cols-2 gap-3">
                     {outfitGarments.map((g, idx) => (
-                        <div key={idx} className="aspect-square bg-gray-50 rounded-lg overflow-hidden relative group border border-gray-100">
+                        <div key={idx} className={`aspect-square bg-[#F9F9F9] rounded-xl overflow-hidden relative group border border-gray-50 ${idx === 0 ? 'col-span-2 row-span-2' : ''}`}>
                             {g.foto_url ? (
-                                <img src={g.foto_url} alt={g.descripcion} className="w-full h-full object-cover" />
+                                <img src={g.foto_url} alt={g.descripcion} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                             ) : (
-                                <div className="w-full h-full flex items-center justify-center text-xs text-center p-1 text-gray-400">
-                                    {g.categoria}
+                                <div className="w-full h-full flex flex-col items-center justify-center p-2 text-gray-400 gap-2">
+                                    <span className="text-xs uppercase tracking-widest opacity-50">{g.categoria}</span>
                                 </div>
                             )}
-                            <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-white text-[10px] p-1 truncate opacity-0 group-hover:opacity-100 transition-opacity">
-                                {g.descripcion}
+                            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
+                                <span className="text-white text-xs font-medium truncate w-full">{g.descripcion}</span>
                             </div>
                         </div>
                     ))}
                 </div>
 
                 {/* Style Notes */}
-                <div className="bg-amber-50 p-3 rounded-lg border border-amber-100 text-sm">
-                    <span className="font-semibold text-amber-800">{t('color_harmony')}</span>
-                    <span className="text-amber-900 ml-1">{outfit.style_notes}</span>
+                <div className="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                    <h4 className="text-xs font-bold text-gray-900 uppercase tracking-widest mb-2 flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#d4af37]"></span>
+                        {t('color_harmony', 'Style Notes')}
+                    </h4>
+                    <p className="text-sm text-gray-600 font-light leading-relaxed">
+                        {outfit.style_notes}
+                    </p>
                 </div>
 
-                {/* "Why it works" - using explicacion again or if separate field exists */}
-                {/* <div className="text-sm">
-             <span className="font-semibold text-gray-900">{t('why_it_works')}</span>
-             <p className="text-gray-600 mt-1">{outfit.explicacion}</p>
-        </div> */}
-
-                <div className="mt-auto pt-4">
+                <div className="mt-auto pt-2">
                     <button
                         onClick={onSelect}
-                        className="w-full bg-gray-900 hover:bg-black text-white py-3 rounded-xl font-medium transition-colors flex items-center justify-center gap-2"
+                        className="w-full bg-black hover:bg-gray-800 text-white py-4 rounded-full font-medium text-sm tracking-wide transition-all shadow-lg hover:shadow-xl active:scale-95"
                     >
-                        {t('choose_button')}
+                        {t('choose_button', 'Select Outfit')}
                     </button>
                 </div>
             </div>

@@ -24,25 +24,26 @@ export const OccasionSelector: React.FC<OccasionSelectorProps> = ({ value, onCha
             <label className="block text-sm font-medium text-gray-700 mb-2">
                 {t('title')}
             </label>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
                 {occasions.map((occasion) => (
                     <button
                         key={occasion.id}
                         onClick={() => onChange(occasion.id)}
                         disabled={loading}
                         className={`
-              flex flex-col items-center justify-center p-3 rounded-xl border-2 transition-all
+              flex flex-col items-center justify-center p-4 rounded-xl border transition-all duration-300 group
               ${value === occasion.id
-                                ? 'border-gray-900 bg-gray-50 shadow-sm'
-                                : 'border-gray-100 bg-white hover:border-gray-300'
+                                ? 'border-black bg-black text-white shadow-lg'
+                                : 'border-gray-100 bg-white text-gray-500 hover:border-gray-300 hover:text-gray-900'
                             }
               ${loading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
             `}
                     >
-                        <div className={`p-2 rounded-full mb-2 ${occasion.color.split(' ')[0]}`}>
-                            <occasion.Icon className={`w-6 h-6 ${occasion.color.split(' ')[1]}`} />
-                        </div>
-                        <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${occasion.color}`}>
+                        <occasion.Icon
+                            className={`w-6 h-6 mb-3 transition-colors ${value === occasion.id ? 'text-[#d4af37]' : 'text-gray-400 group-hover:text-gray-900'}`}
+                            strokeWidth={1.5}
+                        />
+                        <span className={`text-xs font-medium tracking-wide ${value === occasion.id ? 'text-white' : 'text-gray-600'}`}>
                             {occasion.label}
                         </span>
                     </button>

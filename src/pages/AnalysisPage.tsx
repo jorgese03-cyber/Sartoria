@@ -116,11 +116,16 @@ export default function AnalysisPage() {
 
     if (showUpsell) {
         return (
-            <div className="p-4 flex flex-col items-center justify-center h-[50vh]">
-                <Lock className="w-16 h-16 text-gray-300 mb-4" />
-                <h2 className="text-xl font-bold text-gray-900 mb-2">{t('analysis:title')}</h2>
-                <p className="text-gray-500 mb-6 text-center">{t('subscription:trial_limit_feature')}</p>
-                <button className="bg-indigo-600 text-white px-4 py-2 rounded-lg font-medium" onClick={() => setShowUpsell(true)}>
+            <div className="p-4 flex flex-col items-center justify-center h-[70vh] animate-fade-in">
+                <div className="bg-gray-50 p-6 rounded-full mb-6">
+                    <Lock className="w-12 h-12 text-gray-400" strokeWidth={1.5} />
+                </div>
+                <h2 className="text-3xl font-serif font-medium text-gray-900 mb-3">{t('analysis:title')}</h2>
+                <p className="text-gray-500 mb-8 text-center max-w-md font-light text-lg">{t('subscription:trial_limit_feature')}</p>
+                <button
+                    className="bg-black text-white px-8 py-3 rounded-full font-medium shadow-lg hover:shadow-xl hover:bg-gray-900 transition-all transform hover:-translate-y-1"
+                    onClick={() => setShowUpsell(true)}
+                >
                     {t('subscription:reactivate')}
                 </button>
                 <UpsellModal
@@ -135,114 +140,142 @@ export default function AnalysisPage() {
     }
 
     return (
-        <div className="pb-24 px-4 pt-4 max-w-4xl mx-auto">
-            <header className="mb-6 flex justify-between items-center">
-                <h1 className="text-2xl font-bold text-gray-900">{t('analysis:title')}</h1>
-                <button
-                    onClick={handleAnalyze}
-                    disabled={analyzing}
-                    className="flex items-center space-x-2 text-indigo-600 font-medium hover:text-indigo-800 disabled:opacity-50"
-                >
-                    {analyzing ? <Loader2 className="animate-spin h-5 w-5" /> : <RefreshCw className="h-5 w-5" />}
-                    <span>{analyzing ? 'Analyzing...' : t('analysis:analyze_button')}</span>
-                </button>
-            </header>
-
-            {!stats ? (
-                <div className="text-center py-12 bg-gray-50 rounded-xl">
-                    <p className="text-gray-500">{t('analysis:empty')}</p>
-                    <button onClick={handleAnalyze} className="mt-4 bg-black text-white px-6 py-2.5 rounded-lg font-medium">
-                        {t('analysis:analyze_button')}
+        <div className="pb-24 min-h-screen bg-[#F9F9F9]">
+            <div className="max-w-6xl mx-auto px-6 py-12 space-y-10 animate-fade-in">
+                <header className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                    <div className="space-y-2">
+                        <h1 className="text-4xl font-serif font-medium text-gray-900 tracking-tight">
+                            Wardrobe <span className="italic text-[#d4af37]">Analysis</span>
+                        </h1>
+                        <p className="text-gray-500 font-light max-w-lg">
+                            Deep insights into your style, wearing habits, and smart recommendations to upgrade your wardrobe.
+                        </p>
+                    </div>
+                    <button
+                        onClick={handleAnalyze}
+                        disabled={analyzing}
+                        className={`flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-all shadow-md active:scale-95
+                             ${analyzing
+                                ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                                : 'bg-black text-white hover:bg-gray-900 hover:shadow-lg'}`}
+                    >
+                        {analyzing ? <Loader2 className="animate-spin h-5 w-5" /> : <RefreshCw className="h-5 w-5" />}
+                        <span>{analyzing ? 'Analyzing...' : t('analysis:analyze_button')}</span>
                     </button>
-                </div>
-            ) : (
-                <div className="space-y-6">
-                    {/* Charts Section */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        {/* Category Distribution */}
-                        <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                            <h3 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
-                                <PieChart className="w-5 h-5 text-gray-500" />
-                                Distribution
-                            </h3>
-                            <div className="space-y-3">
-                                {stats.categoryDistribution.slice(0, 6).map((item, idx) => (
-                                    <div key={idx}>
-                                        <div className="flex justify-between text-sm mb-1">
-                                            <span className="text-gray-700">{item.category}</span>
-                                            <span className="text-gray-500">{item.count} ({item.percentage}%)</span>
+                </header>
+
+                {!stats ? (
+                    <div className="text-center py-24 bg-white rounded-3xl border border-dashed border-gray-200">
+                        <div className="bg-gray-50 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <PieChart className="w-10 h-10 text-gray-300" strokeWidth={1.5} />
+                        </div>
+                        <h3 className="text-xl font-serif font-medium text-gray-900 mb-2">{t('analysis:empty', 'No analysis yet')}</h3>
+                        <p className="text-gray-500 font-light max-w-sm mx-auto mb-8">Run your first analysis to understand your wardrobe composition and get AI styling advice.</p>
+                        <button onClick={handleAnalyze} className="bg-black text-white px-8 py-3 rounded-full font-medium shadow-lg hover:shadow-xl hover:bg-gray-900 transition-all">
+                            {t('analysis:analyze_button')}
+                        </button>
+                    </div>
+                ) : (
+                    <div className="space-y-8">
+                        {/* Stats Grid */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            {/* Category Distribution */}
+                            <div className="bg-white p-8 rounded-3xl shadow-premium border border-gray-50">
+                                <div className="flex items-center justify-between mb-8">
+                                    <h3 className="text-xl font-serif font-medium text-gray-900">Wardrobe Composition</h3>
+                                    <div className="p-2 bg-gray-50 rounded-full">
+                                        <PieChart className="w-5 h-5 text-gray-400" />
+                                    </div>
+                                </div>
+                                <div className="space-y-5">
+                                    {stats.categoryDistribution.slice(0, 6).map((item, idx) => (
+                                        <div key={idx} className="group">
+                                            <div className="flex justify-between text-sm mb-2 font-medium">
+                                                <span className="text-gray-900 capitalize">{item.category}</span>
+                                                <span className="text-gray-400 group-hover:text-black transition-colors">{item.count} items <span className="text-gray-300">|</span> {item.percentage}%</span>
+                                            </div>
+                                            <div className="w-full bg-gray-100 rounded-full h-1.5 overflow-hidden">
+                                                <div
+                                                    className="bg-black h-full rounded-full transition-all duration-1000 ease-out"
+                                                    style={{ width: `${item.percentage}%` }}
+                                                ></div>
+                                            </div>
                                         </div>
-                                        <div className="w-full bg-gray-100 rounded-full h-2">
+                                    ))}
+                                </div>
+                            </div>
+
+                            {/* Top Colors */}
+                            <div className="bg-white p-8 rounded-3xl shadow-premium border border-gray-50">
+                                <div className="flex items-center justify-between mb-8">
+                                    <h3 className="text-xl font-serif font-medium text-gray-900">Color Palette</h3>
+                                    <div className="p-2 bg-gray-50 rounded-full">
+                                        <BarChart3 className="w-5 h-5 text-gray-400" />
+                                    </div>
+                                </div>
+                                <div className="flex flex-wrap gap-4">
+                                    {stats.topColors.map((item, idx) => (
+                                        <div key={idx} className="flex flex-col items-center gap-2 group cursor-default">
                                             <div
-                                                className="bg-indigo-600 h-2 rounded-full"
-                                                style={{ width: `${item.percentage}%` }}
-                                            ></div>
+                                                className="w-16 h-16 rounded-2xl border border-gray-100 shadow-sm transition-transform group-hover:scale-110 group-hover:rotate-3 duration-300 relative"
+                                                style={{ backgroundColor: item.color }}
+                                            >
+                                                {item.color.toLowerCase() === '#ffffff' || item.color.toLowerCase() === 'white' ? <div className="absolute inset-0 border border-gray-200 rounded-2xl"></div> : null}
+                                            </div>
+                                            <span className="text-xs font-semibold text-gray-900">{item.count}%</span>
+                                            <span className="text-[10px] text-gray-400 uppercase tracking-wider">{item.color}</span>
                                         </div>
-                                    </div>
-                                ))}
+                                    ))}
+                                </div>
+                                <div className="mt-8 pt-8 border-t border-gray-50">
+                                    <p className="text-sm text-gray-500 font-light italic">
+                                        "Your wardrobe leans towards <span className="text-gray-900 font-medium">{stats.topColors[0]?.color}</span> tones. Consider adding accent pieces in contrasting colors."
+                                    </p>
+                                </div>
                             </div>
                         </div>
 
-                        {/* Top Colors */}
-                        <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                            <h3 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
-                                <BarChart3 className="w-5 h-5 text-gray-500" />
-                                Top Colors
-                            </h3>
-                            <div className="flex flex-wrap gap-3">
-                                {stats.topColors.map((item, idx) => (
-                                    <div key={idx} className="flex flex-col items-center">
-                                        <div
-                                            className="w-12 h-12 rounded-full border border-gray-200 shadow-sm"
-                                            style={{ backgroundColor: item.color }}
-                                        />
-                                        <span className="text-xs text-gray-500 mt-1 capitalize">{item.color}</span>
-                                        <span className="text-xs font-bold text-gray-900">{item.count}</span>
-                                    </div>
-                                ))}
+                        {/* Recommendations */}
+                        <div className="bg-white p-8 rounded-3xl shadow-premium border border-gray-50">
+                            <div className="flex items-center gap-3 mb-8">
+                                <div className="p-2 bg-black text-white rounded-full">
+                                    <ShoppingBag className="w-5 h-5" />
+                                </div>
+                                <h3 className="text-2xl font-serif font-medium text-gray-900">
+                                    Smart <span className="italic text-[#d4af37]">Recommendations</span>
+                                </h3>
                             </div>
+
+                            {stats.recommendations.length > 0 ? (
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    {stats.recommendations.map((rec, idx) => (
+                                        <div key={idx} className="border border-gray-100 rounded-2xl p-6 bg-gray-50/50 hover:bg-white hover:shadow-lg transition-all duration-300 group">
+                                            <div className="flex justify-between items-start mb-3">
+                                                <h4 className="font-serif text-lg font-medium text-gray-900 group-hover:text-[#d4af37] transition-colors">{rec.item}</h4>
+                                                <span className={`px-3 py-1 text-[10px] uppercase tracking-wider rounded-full font-bold ${rec.priority === 'High' ? 'bg-black text-white' :
+                                                    rec.priority === 'Medium' ? 'bg-gray-200 text-gray-800' :
+                                                        'bg-gray-100 text-gray-500'
+                                                    }`}>
+                                                    {rec.priority}
+                                                </span>
+                                            </div>
+                                            <p className="text-gray-500 font-light mb-4 line-clamp-2 text-sm">{rec.reason}</p>
+                                            <div className="flex justify-between items-center pt-4 border-t border-gray-100">
+                                                <span className="text-sm font-medium text-gray-900">{rec.price_range}</span>
+                                                <button className="text-sm border-b border-black text-black pb-0.5 hover:opacity-70 transition-opacity">Find Similar &rarr;</button>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            ) : (
+                                <div className="text-center py-12">
+                                    <p className="text-gray-500">Run the analysis to get personalized shopping advice.</p>
+                                </div>
+                            )}
                         </div>
                     </div>
-
-                    {/* Recommendations */}
-                    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                        <h3 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
-                            <ShoppingBag className="w-5 h-5 text-gray-500" />
-                            {t('feature_purchase_recommendations', { defaultValue: 'Recomendaciones de compra' })}
-                        </h3>
-
-                        {stats.recommendations.length > 0 ? (
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                {stats.recommendations.map((rec, idx) => (
-                                    <div key={idx} className="border border-gray-100 rounded-lg p-4 bg-gray-50">
-                                        <div className="flex justify-between items-start mb-2">
-                                            <h4 className="font-bold text-gray-900">{rec.item}</h4>
-                                            <span className={`px-2 py-0.5 text-xs rounded-full font-medium ${rec.priority === 'High' ? 'bg-red-100 text-red-800' :
-                                                rec.priority === 'Medium' ? 'bg-yellow-100 text-yellow-800' :
-                                                    'bg-green-100 text-green-800'
-                                                }`}>
-                                                {rec.priority} Priority
-                                            </span>
-                                        </div>
-                                        <p className="text-sm text-gray-600 mb-3">{rec.reason}</p>
-                                        <div className="flex justify-between items-center text-sm">
-                                            <span className="text-gray-500">{rec.price_range}</span>
-                                            {/* Link would go here */}
-                                            {/* <button className="text-indigo-600 hover:text-indigo-800 font-medium text-xs flex items-center gap-1">
-                                                Find <ExternalLink className="w-3 h-3" />
-                                            </button> */}
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        ) : (
-                            <p className="text-gray-500 text-sm text-center py-4">
-                                Click "Analyze" to see what your wardrobe is missing.
-                            </p>
-                        )}
-                    </div>
-                </div>
-            )}
+                )}
+            </div>
         </div>
     );
 }

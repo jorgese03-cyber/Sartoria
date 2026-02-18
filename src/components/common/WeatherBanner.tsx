@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
+
 
 interface WeatherBannerProps {
     weather: {
@@ -12,7 +12,6 @@ interface WeatherBannerProps {
 }
 
 export const WeatherBanner: React.FC<WeatherBannerProps> = ({ weather, loading }) => {
-    const { t } = useTranslation('outfit');
 
     if (loading) {
         return (
@@ -40,19 +39,25 @@ export const WeatherBanner: React.FC<WeatherBannerProps> = ({ weather, loading }
     };
 
     return (
-        <div className="w-full bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100 p-4 rounded-xl flex items-center gap-4 shadow-sm">
-            <div className="text-4xl">
-                {getWeatherIcon(weather.condition)}
+        <div className="w-full bg-white border border-gray-100 p-6 rounded-2xl flex items-center justify-between shadow-premium">
+            <div className="flex items-center gap-6">
+                <div className="text-5xl filter drop-shadow-sm">
+                    {getWeatherIcon(weather.condition)}
+                </div>
+                <div>
+                    <h3 className="text-2xl font-serif font-medium text-gray-900">
+                        {weather.city}
+                    </h3>
+                    <p className="text-sm text-gray-500 capitalize font-light mt-1">
+                        {weather.description}
+                    </p>
+                </div>
             </div>
-            <div>
-                <h3 className="font-medium text-gray-900">
-                    {t('weather_banner', {
-                        city: weather.city,
-                        temp: weather.temp,
-                        condition: weather.description
-                    })}
-                </h3>
-                <p className="text-sm text-gray-500 capitalize">{weather.description}</p>
+            <div className="text-right">
+                <span className="text-4xl font-light text-gray-900 tracking-tighter">
+                    {Math.round(weather.temp)}°
+                </span>
+                <span className="text-lg text-gray-400 font-light align-top ml-1">C</span>
             </div>
         </div>
     );

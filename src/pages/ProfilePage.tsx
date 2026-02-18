@@ -3,7 +3,7 @@ import { useAuth } from '../context/AuthContext';
 import { useSubscription } from '../hooks/useSubscription';
 import { supabase } from '../lib/supabase';
 import { useTranslation } from 'react-i18next';
-import { Loader2, CreditCard, LogOut, Trash2 } from 'lucide-react';
+import { Loader2, CreditCard, LogOut, Trash2, Plane } from 'lucide-react';
 
 export default function ProfilePage() {
     const { user, signOut } = useAuth();
@@ -160,159 +160,167 @@ export default function ProfilePage() {
         }
     }
 
-    if (!user) return <div className="p-8">Please log in.</div>;
+    if (!user) return <div className="p-8 text-center text-gray-500">Please log in to view your profile.</div>;
 
     return (
-        <div className="max-w-3xl mx-auto px-4 py-8 pb-24">
-            <h1 className="text-2xl font-bold mb-8">{t('profile_title', { defaultValue: 'Account Settings' })}</h1> // Using defaultValue temporarily if key missing
+        <div className="min-h-screen bg-[#F9F9F9] pb-24">
+            <div className="max-w-4xl mx-auto px-6 py-12 space-y-8 animate-fade-in">
+                <header className="mb-8">
+                    <h1 className="text-4xl font-serif font-medium text-gray-900 tracking-tight">
+                        My <span className="italic text-[#d4af37]">Profile</span>
+                    </h1>
+                </header>
 
-            {/* Travel Suitcase Link */}
-            {isActive && (
-                <section className="bg-gradient-to-r from-indigo-500 to-purple-600 p-6 rounded-xl shadow-lg mb-6 text-white cursor-pointer" onClick={() => window.location.href = '/travel'}>
-                    <div className="flex justify-between items-center">
-                        <div>
-                            <h2 className="text-lg font-bold flex items-center gap-2">
-                                <span className="text-2xl">🧳</span>
-                                {t('travel:title', { defaultValue: 'Travel Suitcase' })}
-                            </h2>
-                            <p className="text-indigo-100 mt-1 text-sm">Plan your outfits for your next trip.</p>
-                        </div>
-                        <div className="bg-white/20 p-2 rounded-full">
-                            <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                            </svg>
-                        </div>
-                    </div>
-                </section>
-            )}
-
-            {/* User Info Section */}
-            <section className="bg-white p-6 rounded-lg shadow-sm mb-6 border border-gray-100">
-                <h2 className="text-lg font-semibold mb-4">{t('personal_info', 'Personal Information')}</h2>
-
-                {/* Photo Upload */}
-                <div className="mb-6 flex items-center gap-4">
-                    <div className="w-20 h-20 rounded-full bg-gray-100 overflow-hidden border border-gray-200">
-                        {userPhoto ? (
-                            <img src={userPhoto} alt="User" className="w-full h-full object-cover" />
-                        ) : (
-                            <div className="w-full h-full flex items-center justify-center text-gray-400">
-                                <span className="text-2xl">👤</span>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    {/* Left Column: Photo & Main Info */}
+                    <div className="md:col-span-1 space-y-6">
+                        <section className="bg-white p-6 rounded-3xl shadow-premium border border-gray-50 flex flex-col items-center text-center">
+                            <div className="relative group mb-4">
+                                <div className="w-32 h-32 rounded-full bg-gray-50 overflow-hidden border-4 border-white shadow-lg">
+                                    {userPhoto ? (
+                                        <img src={userPhoto} alt="User" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                                    ) : (
+                                        <div className="w-full h-full flex items-center justify-center text-gray-300">
+                                            <span className="text-4xl">👤</span>
+                                        </div>
+                                    )}
+                                </div>
+                                <label className="absolute bottom-1 right-1 bg-black text-white p-2.5 rounded-full cursor-pointer shadow-md hover:scale-110 transition-transform">
+                                    {uploadingPhoto ? <Loader2 className="animate-spin w-4 h-4" /> : <div className="w-4 h-4"><svg fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" /></svg></div>}
+                                    <input type="file" className="hidden" accept="image/*" onChange={handlePhotoUpload} disabled={uploadingPhoto} />
+                                </label>
                             </div>
-                        )}
-                    </div>
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Reference Photo</label>
-                        <div className="flex items-center gap-2">
-                            <label className="cursor-pointer bg-white border border-gray-300 px-3 py-1.5 rounded-md text-sm font-medium hover:bg-gray-50 flex items-center gap-2 text-gray-700">
-                                {uploadingPhoto ? <Loader2 className="animate-spin w-4 h-4" /> : 'Upload Photo'}
-                                <input type="file" className="hidden" accept="image/*" onChange={handlePhotoUpload} disabled={uploadingPhoto} />
-                            </label>
-                            <span className="text-xs text-gray-500">Full body photo for best results</span>
-                        </div>
-                    </div>
-                </div>
+                            <h2 className="text-xl font-serif font-medium text-gray-900">{profile.nombre || 'Fashionista'}</h2>
+                            <p className="text-gray-500 text-sm">{user.email}</p>
+                            <div className="mt-6 w-full">
+                                <div className={`p-3 rounded-2xl border ${isActive ? 'bg-[#F0FDF4] border-[#DCFCE7] text-[#166534]' : 'bg-gray-50 border-gray-200 text-gray-600'}`}>
+                                    <div className="text-xs font-bold uppercase tracking-wider mb-1">Current Plan</div>
+                                    <div className="font-medium">
+                                        {status === 'trialing' ? `Free Trial (${daysRemaining} days)` :
+                                            status === 'active' ? `${plan} Plan` :
+                                                'Free Plan'}
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
 
-                <div className="space-y-4">
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700">Email</label>
-                        <div className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-gray-50 rounded-md text-gray-500 sm:text-sm">
-                            {user.email}
-                        </div>
-                    </div>
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700">Name</label>
-                        <input
-                            type="text"
-                            value={profile.nombre}
-                            onChange={(e) => setProfile({ ...profile, nombre: e.target.value })}
-                            onBlur={handleUpdateProfile}
-                            className="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                            placeholder="Your name"
-                        />
-                    </div>
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700">City</label>
-                        <div className="flex gap-2">
-                            <input
-                                type="text"
-                                value={profile.ciudad}
-                                onChange={(e) => setProfile({ ...profile, ciudad: e.target.value })}
-                                onBlur={handleUpdateProfile} // Auto-save on blur
-                                className="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                            />
-                            {updating && <span className="text-xs text-gray-400 self-center">Saving...</span>}
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Language Section */}
-            <section className="bg-white p-6 rounded-lg shadow-sm mb-6 border border-gray-100">
-                <h2 className="text-lg font-semibold mb-4">{t('language', 'Language')}</h2>
-                <div className="flex space-x-4">
-                    <button
-                        onClick={() => handleLanguageChange('es')}
-                        className={`px-4 py-2 rounded-md ${i18n.language.startsWith('es') ? 'bg-indigo-600 text-white' : 'bg-gray-100 text-gray-800'}`}>
-                        Español 🇪🇸
-                    </button>
-                    <button
-                        onClick={() => handleLanguageChange('en')}
-                        className={`px-4 py-2 rounded-md ${i18n.language.startsWith('en') ? 'bg-indigo-600 text-white' : 'bg-gray-100 text-gray-800'}`}>
-                        English 🇬🇧
-                    </button>
-                </div>
-            </section>
-
-            {/* Subscription Section */}
-            <section className="bg-white p-6 rounded-lg shadow-sm mb-6 border border-gray-100">
-                <h2 className="text-lg font-semibold mb-4">{t('subscription', 'Subscription')}</h2>
-
-                <div className={`p-4 rounded-md mb-4 ${isActive ? 'bg-green-50 border-green-200' : 'bg-red-50 border-red-200'} border`}>
-                    <div className="flex items-center justify-between">
-                        <div>
-                            <p className="font-medium text-gray-900 capitalize">
-                                {status === 'trialing' ? `Free Trial (${daysRemaining} days left)` :
-                                    status === 'active' ? `${plan} Plan Active` :
-                                        'Subscription Inactive'}
-                            </p>
-                            {!isActive && <p className="text-sm text-red-600 mt-1">Please subscribe to access all features.</p>}
-                        </div>
+                        {/* Travel Link */}
                         {isActive && (
-                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                                Active
-                            </span>
+                            <button
+                                onClick={() => window.location.href = '/travel'}
+                                className="w-full bg-gradient-to-br from-gray-900 to-black text-white p-6 rounded-3xl shadow-lg relative overflow-hidden group text-left"
+                            >
+                                <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity transform group-hover:scale-110 duration-500">
+                                    <Plane className="w-24 h-24 rotate-12" />
+                                </div>
+                                <div className="relative z-10">
+                                    <div className="bg-white/20 w-10 h-10 rounded-full flex items-center justify-center mb-3 backdrop-blur-md">
+                                        <Plane className="w-5 h-5 text-white" />
+                                    </div>
+                                    <h3 className="text-lg font-bold mb-1">Travel Mode</h3>
+                                    <p className="text-gray-400 text-sm">Plan your next trip &rarr;</p>
+                                </div>
+                            </button>
                         )}
                     </div>
+
+                    {/* Right Column: Settings */}
+                    <div className="md:col-span-2 space-y-6">
+                        {/* Personal Info */}
+                        <section className="bg-white p-8 rounded-3xl shadow-premium border border-gray-50">
+                            <h2 className="text-xl font-serif font-medium text-gray-900 mb-6 flex items-center gap-2">
+                                {t('personal_info', 'Personal Information')}
+                            </h2>
+                            <div className="space-y-6">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div>
+                                        <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Name</label>
+                                        <input
+                                            type="text"
+                                            value={profile.nombre}
+                                            onChange={(e) => setProfile({ ...profile, nombre: e.target.value })}
+                                            onBlur={handleUpdateProfile}
+                                            className="block w-full rounded-xl border-gray-200 bg-gray-50 px-4 py-3 text-gray-900 focus:border-black focus:ring-black transition-shadow"
+                                            placeholder="Your Name"
+                                        />
+                                    </div>
+                                    <div>
+                                        <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">City</label>
+                                        <div className="relative">
+                                            <input
+                                                type="text"
+                                                value={profile.ciudad}
+                                                onChange={(e) => setProfile({ ...profile, ciudad: e.target.value })}
+                                                onBlur={handleUpdateProfile}
+                                                className="block w-full rounded-xl border-gray-200 bg-gray-50 px-4 py-3 text-gray-900 focus:border-black focus:ring-black transition-shadow"
+                                                placeholder="e.g. Madrid"
+                                            />
+                                            {updating && <span className="absolute right-3 top-3.5 text-xs text-gray-400 animate-pulse">Saving...</span>}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* Preferences */}
+                        <section className="bg-white p-8 rounded-3xl shadow-premium border border-gray-50">
+                            <h2 className="text-xl font-serif font-medium text-gray-900 mb-6">Preferences</h2>
+
+                            <div className="space-y-6">
+                                <div>
+                                    <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-3">{t('language', 'Language')}</label>
+                                    <div className="flex gap-3">
+                                        <button
+                                            onClick={() => handleLanguageChange('en')}
+                                            className={`flex-1 py-3 px-4 rounded-xl border text-sm font-medium transition-all ${i18n.language.startsWith('en') ? 'bg-black text-white border-black shadow-md' : 'bg-white text-gray-600 border-gray-200 hover:border-gray-300'}`}
+                                        >
+                                            🇬🇧 English
+                                        </button>
+                                        <button
+                                            onClick={() => handleLanguageChange('es')}
+                                            className={`flex-1 py-3 px-4 rounded-xl border text-sm font-medium transition-all ${i18n.language.startsWith('es') ? 'bg-black text-white border-black shadow-md' : 'bg-white text-gray-600 border-gray-200 hover:border-gray-300'}`}
+                                        >
+                                            🇪🇸 Español
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div className="pt-6 border-t border-gray-50">
+                                    <button
+                                        onClick={handleManageSubscription}
+                                        disabled={loadingPortal}
+                                        className="flex items-center text-indigo-600 hover:text-indigo-800 font-medium text-sm transition-colors"
+                                    >
+                                        {loadingPortal ? <Loader2 className="animate-spin w-4 h-4 mr-2" /> : <CreditCard className="h-4 w-4 mr-2" />}
+                                        {t('manage_billing', 'Manage Billing & Subscription')}
+                                    </button>
+                                </div>
+                            </div>
+                        </section>
+
+                        {/* Danger Zone */}
+                        <section className="bg-white p-8 rounded-3xl shadow-sm border border-red-50">
+                            <h2 className="text-red-500 font-serif font-medium mb-6 text-lg">Account Actions</h2>
+                            <div className="space-y-3">
+                                <button
+                                    onClick={handleLogout}
+                                    className="w-full flex items-center justify-between p-4 rounded-xl bg-gray-50 hover:bg-gray-100 text-gray-700 transition-colors text-left group"
+                                >
+                                    <span className="font-medium text-sm">{t('sign_out', 'Sign Out')}</span>
+                                    <LogOut className="w-4 h-4 text-gray-400 group-hover:text-gray-600" />
+                                </button>
+
+                                <button
+                                    onClick={handleDeleteAccount}
+                                    className="w-full flex items-center justify-between p-4 rounded-xl bg-red-50 hover:bg-red-100 text-red-700 transition-colors text-left group"
+                                >
+                                    <span className="font-medium text-sm">{t('delete_account', 'Delete Account')}</span>
+                                    <Trash2 className="w-4 h-4 text-red-400 group-hover:text-red-600" />
+                                </button>
+                            </div>
+                        </section>
+                    </div>
                 </div>
-
-                <button
-                    onClick={handleManageSubscription}
-                    disabled={loadingPortal}
-                    className="flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
-                    {loadingPortal ? <Loader2 className="animate-spin h-4 w-4 mr-2" /> : <CreditCard className="h-4 w-4 mr-2" />}
-                    {t('manage_billing', 'Manage Billing & Subscription')}
-                </button>
-            </section>
-
-            {/* Danger Zone */}
-            <div className="mt-8 border-t pt-8">
-                <button
-                    onClick={handleLogout}
-                    className="flex items-center text-gray-600 hover:text-gray-900 text-sm font-medium mb-4"
-                >
-                    <LogOut className="h-4 w-4 mr-2" />
-                    {t('sign_out', 'Sign Out')}
-                </button>
-
-                <button
-                    onClick={handleDeleteAccount}
-                    className="flex items-center text-red-600 hover:text-red-900 text-sm font-medium"
-                >
-                    <Trash2 className="h-4 w-4 mr-2" />
-                    {t('delete_account', 'Delete Account')}
-                </button>
             </div>
         </div>
     );

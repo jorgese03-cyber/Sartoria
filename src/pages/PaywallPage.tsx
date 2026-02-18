@@ -44,31 +44,39 @@ export default function Paywall() {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+        <div className="min-h-screen bg-[#F9F9F9] flex flex-col justify-center py-12 sm:px-6 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-md">
-                <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+                <div className="text-center mb-8">
+                    <span className="text-2xl font-serif font-bold tracking-tight text-gray-900">
+                        SARTORIA<span className="text-[#d4af37]">.IA</span>
+                    </span>
+                </div>
+                <h2 className="mt-6 text-center text-3xl font-serif font-medium text-gray-900">
                     {t('pricing:title', 'Unlock the full potential of your wardrobe')}
                 </h2>
-                <p className="mt-2 text-center text-sm text-gray-600">
+                <p className="mt-2 text-center text-sm text-gray-500 font-light">
                     {t('subscription:expired', 'Your trial has ended. Subscribe to continue.')}
                 </p>
             </div>
 
-            <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-4xl px-4">
-                <div className="grid gap-6 lg:grid-cols-2">
+            <div className="mt-12 sm:mx-auto sm:w-full sm:max-w-4xl px-4">
+                <div className="grid gap-8 lg:grid-cols-2">
                     {/* Monthly */}
-                    <div className="bg-white overflow-hidden shadow rounded-lg border border-gray-200 p-6 text-center hover:shadow-md transition-shadow flex flex-col">
-                        <h3 className="text-lg font-medium leading-6 text-gray-900">{t('pricing:monthly', 'Monthly')}</h3>
-                        <p className="mt-4 text-4xl font-extrabold text-gray-900">{t('pricing:monthly_price', '€4.99')}</p>
-                        <p className="text-sm text-gray-500 mb-6">{t('pricing:monthly', 'Monthly billing')}</p>
+                    <div className="bg-white rounded-2xl shadow-premium border border-gray-100 p-8 text-center hover:shadow-lg transition-all duration-300 flex flex-col">
+                        <h3 className="text-xl font-medium text-gray-900 font-serif">{t('pricing:monthly', 'Monthly')}</h3>
+                        <p className="mt-6 flex items-baseline justify-center">
+                            <span className="text-5xl font-light text-gray-900 tracking-tight">€4.99</span>
+                            <span className="ml-2 text-gray-500">/mo</span>
+                        </p>
+                        <p className="text-sm text-gray-400 mt-2 mb-8">{t('pricing:monthly', 'Monthly billing')}</p>
 
-                        <ul className="text-left space-y-3 mb-8 flex-1">
+                        <ul className="text-left space-y-4 mb-8 flex-1">
                             {features.map((feature, index) => (
                                 <li key={index} className="flex items-start">
-                                    <svg className="flex-shrink-0 h-5 w-5 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                                    </svg>
-                                    <span className="ml-2 text-sm text-gray-600">{feature}</span>
+                                    <div className="flex-shrink-0 h-5 w-5 rounded-full bg-gray-100 flex items-center justify-center">
+                                        <div className="h-1.5 w-1.5 rounded-full bg-gray-400" />
+                                    </div>
+                                    <span className="ml-3 text-sm text-gray-600">{feature}</span>
                                 </li>
                             ))}
                         </ul>
@@ -76,28 +84,31 @@ export default function Paywall() {
                         <button
                             onClick={() => handleCheckout('monthly')}
                             disabled={loading}
-                            className="w-full inline-flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-indigo-700 bg-indigo-50 hover:bg-indigo-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                            className="w-full inline-flex justify-center py-4 px-6 border border-gray-200 rounded-xl shadow-sm text-sm font-medium text-gray-900 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black transition-all"
                         >
                             {loading ? <Loader2 className="animate-spin h-5 w-5" /> : t('pricing:start_trial', 'Subscribe Monthly')}
                         </button>
                     </div>
 
                     {/* Yearly */}
-                    <div className="bg-white overflow-hidden shadow rounded-lg border-2 border-indigo-500 p-6 text-center relative hover:shadow-md transition-shadow flex flex-col">
-                        <div className="absolute top-0 right-0 -mt-2 mr-2 bg-indigo-500 text-white text-xs font-bold px-2 py-1 rounded uppercase">
+                    <div className="bg-white rounded-2xl shadow-2xl border border-[#d4af37]/30 p-8 text-center relative hover:shadow-[#d4af37]/10 transition-all duration-300 flex flex-col">
+                        <div className="absolute top-0 right-0 -mt-4 mr-6 px-4 py-1.5 bg-[#d4af37] text-white text-xs font-bold uppercase tracking-widest shadow-lg rounded-full">
                             {t('pricing:save_badge', 'Save 25%')}
                         </div>
-                        <h3 className="text-lg font-medium leading-6 text-gray-900">{t('pricing:yearly', 'Yearly')}</h3>
-                        <p className="mt-4 text-4xl font-extrabold text-gray-900">{t('pricing:yearly_price', '€44.99')}</p>
-                        <p className="text-sm text-gray-500 mb-6">{t('pricing:yearly_equivalent', 'Just €3.75/mo')}</p>
+                        <h3 className="text-xl font-medium text-gray-900 font-serif">{t('pricing:yearly', 'Yearly')}</h3>
+                        <p className="mt-6 flex items-baseline justify-center">
+                            <span className="text-5xl font-light text-gray-900 tracking-tight">€44.99</span>
+                            <span className="ml-2 text-gray-500">/year</span>
+                        </p>
+                        <p className="text-sm text-[#d4af37] font-medium mt-2 mb-8">{t('pricing:yearly_equivalent', 'Just €3.75/mo')}</p>
 
-                        <ul className="text-left space-y-3 mb-8 flex-1">
+                        <ul className="text-left space-y-4 mb-8 flex-1">
                             {features.map((feature, index) => (
                                 <li key={index} className="flex items-start">
-                                    <svg className="flex-shrink-0 h-5 w-5 text-green-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                                    </svg>
-                                    <span className="ml-2 text-sm text-gray-600">{feature}</span>
+                                    <div className="flex-shrink-0 h-5 w-5 rounded-full bg-[#d4af37]/10 flex items-center justify-center">
+                                        <div className="h-1.5 w-1.5 rounded-full bg-[#d4af37]" />
+                                    </div>
+                                    <span className="ml-3 text-sm text-gray-900 font-medium">{feature}</span>
                                 </li>
                             ))}
                         </ul>
@@ -105,19 +116,19 @@ export default function Paywall() {
                         <button
                             onClick={() => handleCheckout('yearly')}
                             disabled={loading}
-                            className="w-full inline-flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                            className="w-full inline-flex justify-center py-4 px-6 border border-transparent rounded-xl shadow-lg text-sm font-bold text-white bg-black hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black transition-all hover:shadow-xl"
                         >
-                            {loading ? <Loader2 className="animate-spin h-5 w-5" /> : t('pricing:start_trial', 'Subscribe Yearly')}
+                            {loading ? <Loader2 className="animate-spin h-5 w-5 text-white" /> : t('pricing:start_trial', 'Subscribe Yearly')}
                         </button>
                     </div>
                 </div>
 
-                <div className="mt-8 text-center">
+                <div className="mt-12 text-center">
                     <button
                         onClick={() => signOut()}
-                        className="text-sm font-medium text-gray-500 hover:text-gray-900 flex items-center justify-center mx-auto"
+                        className="group inline-flex items-center text-sm font-medium text-gray-500 hover:text-black transition-colors"
                     >
-                        <LogOut className="h-4 w-4 mr-2" />
+                        <LogOut className="h-4 w-4 mr-2 group-hover:-translate-x-1 transition-transform" />
                         {t('auth:login', 'Back to Login')}
                     </button>
                 </div>

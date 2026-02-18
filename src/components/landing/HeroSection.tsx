@@ -6,39 +6,42 @@ export default function HeroSection() {
     const { t } = useTranslation('landing');
 
     return (
-        <section className="relative bg-white overflow-hidden">
-            <div className="max-w-7xl mx-auto">
-                <div className="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
-                    {/* Mobile menu button placeholder if needed, but we have a separate header logic */}
-
-                    <main className="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
-                        <div className="sm:text-center lg:text-left">
-                            <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
-                                <span className="block xl:inline">SARTORIA</span>
-                                <span className="block text-indigo-600 xl:inline">.IA</span>
-                            </h1>
-                            <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                                {t('hero_subtitle')}
-                            </p>
-                            <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
-                                <div className="rounded-md shadow">
-                                    <Link
-                                        to="/register"
-                                        className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg"
-                                    >
-                                        {t('cta')}
-                                        <ArrowRight className="ml-2 h-5 w-5" />
-                                    </Link>
-                                </div>
-                            </div>
-                        </div>
-                    </main>
-                </div>
+        <section className="relative bg-white overflow-hidden min-h-[90vh] flex items-center">
+            <div className="absolute inset-0 z-0">
+                {/* Placeholder for high-fashion background */}
+                <img
+                    src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?q=80&w=2940&auto=format&fit=crop"
+                    alt="Fashion Background"
+                    className="w-full h-full object-cover opacity-10"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent" />
             </div>
-            <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-                <div className="h-56 w-full bg-gray-100 sm:h-72 md:h-96 lg:w-full lg:h-full flex items-center justify-center">
-                    {/* Placeholder for Hero Image */}
-                    <span className="text-gray-400 font-medium">{t('hero_image_mockup')}</span>
+
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full pt-20">
+                <div className="text-center max-w-4xl mx-auto">
+                    <h1 className="text-5xl tracking-tight font-serif font-medium text-gray-900 sm:text-7xl md:text-8xl mb-8 animate-fade-in-up">
+                        <span className="block">SARTORIA</span>
+                        <span className="block text-[#d4af37] italic">.IA</span>
+                    </h1>
+                    <p className="mt-6 max-w-2xl mx-auto text-xl text-gray-500 font-light leading-relaxed animate-fade-in-up delay-100">
+                        {t('hero_subtitle', 'Your AI personal stylist. Curated outfits for every occasion, tailored to your unique wardrobe.')}
+                    </p>
+                    <div className="mt-10 max-w-sm mx-auto sm:max-w-none sm:flex sm:justify-center gap-4 animate-fade-in-up delay-200">
+                        <Link
+                            to="/register"
+                            className="w-full flex items-center justify-center px-8 py-4 border border-transparent text-base font-medium rounded-full text-white bg-black hover:bg-gray-800 md:text-lg transition-all shadow-lg hover:shadow-xl"
+                        >
+                            {t('cta', 'Start your style journey')}
+                            <ArrowRight className="ml-2 h-5 w-5" />
+                        </Link>
+                        {/* Secondary CTA if needed */}
+                        <a
+                            href="#how-it-works"
+                            className="w-full flex items-center justify-center px-8 py-4 border border-gray-200 text-base font-medium rounded-full text-gray-900 bg-white hover:bg-gray-50 md:text-lg transition-all"
+                        >
+                            {t('learn_more', 'How it works')}
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>

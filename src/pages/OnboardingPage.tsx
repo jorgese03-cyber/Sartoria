@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { supabase } from '../lib/supabase';
 import { useAuth } from '../context/AuthContext';
-import { Loader2, MapPin, Upload, ArrowRight, User, Camera } from 'lucide-react';
+import { Loader2, MapPin, Upload, ArrowRight, Camera } from 'lucide-react';
 
 export default function OnboardingPage() {
     const { t } = useTranslation(['onboarding', 'common', 'wardrobe']);
@@ -51,7 +51,7 @@ export default function OnboardingPage() {
         try {
             // Check if bucket exists? No, assumed created by migration/hook. 
             // Just try upload.
-            const { error: uploadError, data } = await supabase.storage
+            const { error: uploadError } = await supabase.storage
                 .from('user-models')
                 .upload(filePath, file, { upsert: true });
 
@@ -149,27 +149,39 @@ export default function OnboardingPage() {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
-            <div className="max-w-md w-full bg-white rounded-2xl shadow-xl overflow-hidden">
-                {/* Progress Bar */}
-                <div className="flex w-full h-1.5 bg-gray-100">
-                    <div className={`h-full bg-indigo-600 transition-all duration-300 ${step === 1 ? 'w-1/3' : step === 2 ? 'w-2/3' : 'w-full'}`} />
+        <div className="min-h-screen bg-[#F9F9F9] flex items-center justify-center p-4">
+            <div className="max-w-md w-full bg-white rounded-2xl shadow-premium overflow-hidden border border-gray-50">
+                {/* Progress Bar - Minimalist */}
+                <div className="flex w-full h-1 bg-gray-100">
+                    <div
+                        className="h-full bg-black transition-all duration-500 ease-out"
+                        style={{ width: step === 1 ? '33%' : step === 2 ? '66%' : '100%' }}
+                    />
                 </div>
 
-                <div className="p-8">
-                    <div className="text-center mb-8">
-                        <h1 className="text-2xl font-bold text-gray-900 mb-2">{t('onboarding:welcome_title')}</h1>
-                        <p className="text-gray-600">{t('onboarding:welcome_subtitle')}</p>
+                <div className="p-10">
+                    <div className="text-center mb-10">
+                        <span className="text-xs font-bold tracking-widest text-gray-400 uppercase mb-2 block">Step {step} of 3</span>
+                        <h1 className="text-3xl font-serif font-medium text-gray-900 mb-3">
+                            {step === 1 && t('onboarding:welcome_title', 'Welcome')}
+                            {step === 2 && 'Your Style Profile'}
+                            {step === 3 && 'Build Your Wardrobe'}
+                        </h1>
+                        <p className="text-gray-500 font-light text-sm">
+                            {step === 1 && t('onboarding:welcome_subtitle', 'Let\'s get started')}
+                            {step === 2 && 'Upload a photo to see yourself in new outfits.'}
+                            {step === 3 && 'Add a few items to get your first recommendation.'}
+                        </p>
                     </div>
 
                     {step === 1 && (
-                        <div className="space-y-6">
-                            <div className="bg-indigo-50 p-4 rounded-xl flex justify-center">
-                                <MapPin className="w-12 h-12 text-indigo-600" />
+                        <div className="space-y-8 animate-fade-in">
+                            <div className="bg-gray-50 p-6 rounded-2xl flex justify-center border border-gray-100">
+                                <MapPin className="w-10 h-10 text-gray-900" strokeWidth={1.5} />
                             </div>
                             <div className="text-center">
-                                <h2 className="text-xl font-bold mb-2">{t('onboarding:step_city_title')}</h2>
-                                <p className="text-sm text-gray-500">{t('onboarding:step_city_desc')}</p>
+                                <h2 className="text-lg font-medium text-gray-900 mb-2">{t('onboarding:step_city_title', 'Where are you based?')}</h2>
+                                <p className="text-xs text-gray-500">{t('onboarding:step_city_desc', 'For accurate weather-based recommendations')}</p>
                             </div>
 
                             <div>
@@ -177,8 +189,8 @@ export default function OnboardingPage() {
                                     type="text"
                                     value={city}
                                     onChange={(e) => setCity(e.target.value)}
-                                    placeholder={t('onboarding:city_placeholder')}
-                                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all"
+                                    placeholder={t('onboarding:city_placeholder', 'e.g. Madrid, ES')}
+                                    className="w-full px-4 py-4 rounded-xl border border-gray-200 bg-gray-50/50 focus:bg-white focus:ring-1 focus:ring-black focus:border-black outline-none transition-all placeholder-gray-400 text-center text-lg"
                                     autoFocus
                                 />
                             </div>
@@ -186,11 +198,11 @@ export default function OnboardingPage() {
                             <button
                                 onClick={handleUpdateCity}
                                 disabled={!city || loading}
-                                className="w-full bg-black text-white py-3.5 rounded-xl font-bold shadow-lg hover:bg-gray-800 disabled:opacity-50 flex items-center justify-center group"
+                                className="w-full bg-black text-white py-4 rounded-xl font-bold text-sm tracking-wide shadow-lg hover:bg-gray-800 disabled:opacity-50 flex items-center justify-center group transition-all"
                             >
                                 {loading ? <Loader2 className="animate-spin" /> : (
                                     <>
-                                        {t('onboarding:next')}
+                                        {t('onboarding:next', 'Continue')}
                                         <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                                     </>
                                 )}
@@ -199,83 +211,90 @@ export default function OnboardingPage() {
                     )}
 
                     {step === 2 && (
-                        <div className="space-y-6">
-                            <div className="bg-indigo-50 p-4 rounded-xl flex justify-center">
-                                <User className="w-12 h-12 text-indigo-600" />
-                            </div>
-                            <div className="text-center">
-                                <h2 className="text-xl font-bold mb-2">Sube tu foto</h2>
-                                <p className="text-sm text-gray-500">
-                                    Sube una foto de cuerpo entero para que puedas verte con los outfits que te sugerimos.
-                                </p>
-                            </div>
+                        <div className="space-y-8 animate-fade-in">
+                            {/* <div className="bg-gray-50 p-6 rounded-2xl flex justify-center border border-gray-100">
+                                <User className="w-10 h-10 text-gray-900" strokeWidth={1.5} />
+                            </div> */}
 
-                            <label className="block w-full border-2 border-dashed border-gray-300 rounded-xl p-8 text-center hover:border-indigo-500 hover:bg-indigo-50 transition-colors cursor-pointer group">
-                                <input type="file" accept="image/*" onChange={handleModelPhotoUpload} className="hidden" disabled={modelUploading} />
-                                {modelUploading ? (
-                                    <Loader2 className="w-8 h-8 mx-auto text-indigo-500 animate-spin" />
-                                ) : (
-                                    <div className="space-y-2">
-                                        <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mx-auto group-hover:bg-white">
-                                            <Camera className="w-6 h-6 text-gray-600" />
+                            <div className="relative group cursor-pointer">
+                                <input type="file" accept="image/*" onChange={handleModelPhotoUpload} className="hidden" id="model-upload" disabled={modelUploading} />
+                                <label htmlFor="model-upload" className="block w-full border-2 border-dashed border-gray-200 rounded-2xl p-10 text-center hover:border-black hover:bg-gray-50 transition-all cursor-pointer">
+                                    {modelUploading ? (
+                                        <Loader2 className="w-8 h-8 mx-auto text-black animate-spin" />
+                                    ) : (
+                                        <div className="space-y-3">
+                                            <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto group-hover:bg-white border border-gray-200 group-hover:border-gray-300 transition-all">
+                                                <Camera className="w-6 h-6 text-gray-600" strokeWidth={1.5} />
+                                            </div>
+                                            <p className="text-sm font-medium text-gray-900">Upload full body photo</p>
+                                            <p className="text-xs text-gray-400">JPG, PNG up to 5MB</p>
                                         </div>
-                                        <p className="text-sm font-medium text-gray-700">Subir mi foto</p>
-                                    </div>
-                                )}
-                            </label>
+                                    )}
+                                </label>
+                            </div>
 
-                            <button
-                                onClick={handleUseDefaultModel}
-                                disabled={loading || modelUploading}
-                                className="w-full text-indigo-600 font-medium text-sm hover:text-indigo-800"
-                            >
-                                Usar modelo genérico
-                            </button>
+                            <div className="space-y-4">
+                                <button
+                                    className="w-full bg-black text-white py-4 rounded-xl font-bold text-sm tracking-wide shadow-lg hover:bg-gray-800 disabled:opacity-50 flex items-center justify-center group transition-all"
+                                    onClick={() => document.getElementById('model-upload')?.click()}
+                                >
+                                    Select Photo
+                                </button>
+                                <button
+                                    onClick={handleUseDefaultModel}
+                                    disabled={loading || modelUploading}
+                                    className="w-full text-gray-500 font-medium text-sm hover:text-black transition-colors"
+                                >
+                                    Skip & use default model
+                                </button>
+                            </div>
                         </div>
                     )}
 
                     {step === 3 && (
-                        <div className="space-y-6">
-                            <div className="bg-indigo-50 p-4 rounded-xl flex justify-center">
-                                <Upload className="w-12 h-12 text-indigo-600" />
-                            </div>
+                        <div className="space-y-8 animate-fade-in">
                             <div className="text-center">
-                                <h2 className="text-xl font-bold mb-2">{t('onboarding:step_clothes_title')}</h2>
-                                <p className="text-sm text-gray-500">{t('onboarding:step_clothes_desc')}</p>
+                                <div className="inline-block p-4 rounded-full bg-gray-50 mb-4 border border-gray-100">
+                                    <Upload className="w-8 h-8 text-gray-900" strokeWidth={1.5} />
+                                </div>
+                                {/* <h2 className="text-lg font-medium text-gray-900 mb-2">{t('onboarding:step_clothes_title', 'Upload Garments')}</h2>
+                                <p className="text-xs text-gray-500">{t('onboarding:step_clothes_desc', 'Take photos of your clothes')}</p> */}
                             </div>
 
-                            <label className="block w-full border-2 border-dashed border-gray-300 rounded-xl p-8 text-center hover:border-indigo-500 hover:bg-indigo-50 transition-colors cursor-pointer group">
+                            <label className="block w-full border-2 border-dashed border-gray-200 rounded-2xl p-8 text-center hover:border-black hover:bg-gray-50 transition-colors cursor-pointer group">
                                 <input type="file" multiple accept="image/*" onChange={handleFileUpload} className="hidden" disabled={uploading} />
                                 {uploading ? (
-                                    <Loader2 className="w-8 h-8 mx-auto text-indigo-500 animate-spin" />
+                                    <Loader2 className="w-8 h-8 mx-auto text-black animate-spin" />
                                 ) : (
                                     <div className="space-y-2">
-                                        <div className="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center mx-auto group-hover:bg-white">
+                                        <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto group-hover:bg-white transition-all border border-gray-200">
                                             <span className="text-xl">📸</span>
                                         </div>
-                                        <p className="text-sm font-medium text-gray-700">{t('onboarding:upload_button')}</p>
+                                        <p className="text-sm font-medium text-gray-900">{t('onboarding:upload_button', 'Add Photos')}</p>
+                                        <p className="text-xs text-gray-400">Multiple selection allowed</p>
                                     </div>
                                 )}
                             </label>
 
                             {uploadedCount > 0 && (
-                                <p className="text-center text-sm text-green-600 font-medium">
+                                <div className="bg-green-50 text-green-700 px-4 py-3 rounded-xl text-center text-sm font-medium border border-green-100 flex items-center justify-center gap-2">
+                                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
                                     {uploadedCount} garments uploaded!
-                                </p>
+                                </div>
                             )}
 
-                            <div className="space-y-3">
+                            <div className="space-y-3 pt-4">
                                 <button
                                     onClick={handleFinish}
-                                    className="w-full bg-black text-white py-3.5 rounded-xl font-bold shadow-lg hover:bg-gray-800 flex items-center justify-center"
+                                    className="w-full bg-black text-white py-4 rounded-xl font-bold text-sm tracking-wide shadow-lg hover:bg-gray-800 flex items-center justify-center transition-all"
                                 >
-                                    {t('onboarding:finish_button')}
+                                    {t('onboarding:finish_button', 'Finish Setup')}
                                 </button>
                                 <button
                                     onClick={handleFinish}
-                                    className="w-full text-gray-500 font-medium text-sm hover:text-gray-900"
+                                    className="w-full text-gray-400 font-medium text-xs hover:text-gray-600 transition-colors uppercase tracking-widest"
                                 >
-                                    {t('onboarding:skip')}
+                                    {t('onboarding:skip', 'Skip for now')}
                                 </button>
                             </div>
                         </div>

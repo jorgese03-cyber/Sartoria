@@ -90,40 +90,43 @@ export default function WardrobePage() {
     const getCountByCategory = (cat: string) => garments.filter(g => g.categoria === cat && g.activa).length;
 
     return (
-        <div className="pb-24 bg-gray-50 min-h-screen">
+        <div className="pb-24 bg-[#F9F9F9] min-h-screen">
             {/* Header */}
-            <div className="bg-white shadow-sm pt-4 pb-2 sticky top-16 z-30">
-                <div className="px-4 flex justify-between items-center mb-4">
-                    <h1 className="text-2xl font-bold text-gray-900">{t('title', 'Mi Armario')}</h1>
-                    <div className="text-sm text-gray-500">
-                        {garments.length} {t('items', 'prendas')}
+            <div className="bg-white/80 backdrop-blur-md sticky top-0 md:top-16 z-30 border-b border-gray-100">
+                <div className="px-6 py-4 flex justify-between items-center max-w-7xl mx-auto">
+                    <div>
+                        <h1 className="text-3xl font-serif font-medium text-gray-900">My Wardrobe</h1>
+                        <p className="text-xs text-gray-400 mt-1 uppercase tracking-widest font-medium">
+                            {garments.length} {t('items', 'items')}
+                        </p>
                     </div>
                 </div>
 
-                {/* Categories Tabs - Grid Layout */}
-                <div className="px-4 pb-2">
-                    <div className="flex flex-wrap gap-2">
+                {/* Categories Tabs - Scrollable Row */}
+                <div className="px-6 pb-4 max-w-7xl mx-auto">
+                    <div className="flex space-x-2 overflow-x-auto hide-scrollbar pb-2">
                         {CATEGORIES.map(cat => {
                             const count = getCountByCategory(cat);
                             const limit = getMaxItemsPerCategory();
+                            const isSelected = selectedCategory === cat;
 
                             return (
                                 <button
                                     key={cat}
                                     onClick={() => setSelectedCategory(cat)}
                                     className={clsx(
-                                        "px-3 py-2 rounded-lg text-sm font-medium transition-all flex items-center justify-between gap-2 border w-[calc(33.333%-0.5rem)] sm:w-[calc(20%-0.6rem)] lg:w-[calc(16.666%-0.6rem)]",
-                                        selectedCategory === cat
-                                            ? "bg-indigo-600 text-white border-indigo-600 shadow-md transform scale-[1.02]"
-                                            : "bg-white text-gray-700 border-gray-200 hover:border-indigo-300 hover:bg-indigo-50"
+                                        "px-4 py-2 rounded-full text-sm font-medium transition-all whitespace-nowrap flex items-center gap-2",
+                                        isSelected
+                                            ? "bg-black text-white shadow-md"
+                                            : "bg-white text-gray-500 border border-gray-100 hover:border-gray-300 hover:text-gray-900"
                                     )}
                                 >
-                                    <span className="truncate">{cat}</span>
-                                    <span className={clsx("text-xs px-1.5 py-0.5 rounded-full ml-auto",
-                                        selectedCategory === cat ? "bg-indigo-500 text-white" : "bg-gray-100 text-gray-500"
-                                    )}>
-                                        {count}{isTrial && cat !== 'Todos' ? `/${limit}` : ''}
-                                    </span>
+                                    <span>{cat}</span>
+                                    {isSelected && (
+                                        <span className="text-[10px] bg-white/20 px-1.5 rounded-full">
+                                            {count}{isTrial && cat !== 'Todos' ? `/${limit}` : ''}
+                                        </span>
+                                    )}
                                 </button>
                             );
                         })}
@@ -132,24 +135,24 @@ export default function WardrobePage() {
             </div>
 
             {/* Content */}
-            <div className="p-4">
+            <div className="p-6 max-w-7xl mx-auto">
                 {loading ? (
-                    <div className="flex justify-center py-12">
-                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
+                    <div className="flex justify-center py-20">
+                        <div className="w-10 h-10 border-2 border-gray-200 border-t-black rounded-full animate-spin"></div>
                     </div>
                 ) : filteredGarments.length === 0 ? (
-                    <div className="text-center py-12">
-                        <p className="text-gray-500">{t('no_items', 'No hay prendas en esta categoría.')}</p>
+                    <div className="text-center py-24 bg-white rounded-3xl border border-dashed border-gray-200">
+                        <p className="text-gray-400 font-light text-lg">{t('no_items', 'No garments found in this category.')}</p>
                     </div>
                 ) : (
-                    <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+                    <div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
                         {filteredGarments.map(garment => (
                             <GarmentCard
                                 key={garment.id}
                                 garment={garment}
                                 onEdit={() => { }} // TODO: Implement edit
                                 onDelete={async (id) => {
-                                    if (confirm(t('confirm_delete', '¿Seguro que quieres eliminar esta prenda?'))) {
+                                    if (confirm(t('confirm_delete', 'Are you sure you want to delete this item?'))) {
                                         await supabase.from('garments').delete().eq('id', id);
                                         fetchGarments();
                                     }
@@ -163,10 +166,10 @@ export default function WardrobePage() {
             {/* Floating Action Button */}
             <button
                 onClick={handleAddClick}
-                className="fixed bottom-24 right-4 bg-indigo-600 text-white p-4 rounded-full shadow-lg hover:bg-indigo-700 transition-transform active:scale-95 z-40"
+                className="fixed bottom-24 right-6 bg-black text-white p-5 rounded-full shadow-2xl hover:scale-105 hover:bg-gray-900 transition-all z-40 group"
                 aria-label="Add garment"
             >
-                <Plus size={24} />
+                <Plus size={24} className="group-hover:rotate-90 transition-transform duration-300" />
             </button>
 
             {/* Modals */}

@@ -23,16 +23,16 @@ export default function StickyCTA() {
     if (!isVisible) return null;
 
     return (
-        <div className="fixed bottom-0 left-0 right-0 p-4 bg-white border-t border-gray-200 shadow-lg z-50 md:hidden transition-transform duration-300 transform translate-y-0">
-            <div className="flex items-center justify-between">
-                <span className="text-sm font-medium text-gray-900 pr-2">
-                    {t('sticky_cta.text')}
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 md:hidden w-[90%] max-w-sm transition-all duration-300 transform translate-y-0">
+            <div className="bg-white/90 backdrop-blur-lg border border-gray-200 shadow-2xl rounded-full p-2 pl-4 flex items-center justify-between">
+                <span className="text-sm font-medium text-gray-900">
+                    {t('sticky_cta.text', 'Ready to upgrade?')}
                 </span>
                 <Link
                     to="/register"
-                    className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    className="inline-flex items-center px-6 py-2 border border-transparent text-sm font-medium rounded-full shadow-md text-white bg-black hover:bg-gray-800 transition-colors"
                 >
-                    {t('sticky_cta.button')}
+                    {t('sticky_cta.button', 'Get Started')}
                 </Link>
             </div>
         </div>
