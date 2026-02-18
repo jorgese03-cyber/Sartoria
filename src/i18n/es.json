@@ -16,7 +16,13 @@
     "landing": {
         "hero_title": "Sastrería inteligente. Tu outfit perfecto en 30 segundos.",
         "hero_subtitle": "SARTORIA analiza tu armario, el clima y tu agenda para vestirte impecable cada día. Sin pensar.",
-        "cta": "Prueba 15 días gratis",
+        "cta": "Empezar ahora",
+        "learn_more": "Cómo funciona",
+        "nav": {
+            "app": "Ir a la App",
+            "login": "Acceso",
+            "register": "Prueba gratis"
+        },
         "hero_image_mockup": "Imagen Hero (Mockup)",
         "how_it_works": {
             "title": "Cómo funciona",
@@ -58,7 +64,7 @@
                 "privacy": "Política de privacidad",
                 "contact": "Contacto"
             },
-            "made_with": "Made with precision and AI"
+            "made_with": "Hecho con precisión e IA"
         },
         "sticky_cta": {
             "text": "Prueba SARTORIA gratis durante 15 días",
@@ -79,8 +85,8 @@
         "next": "Siguiente"
     },
     "auth": {
-        "login": "Iniciar sesión",
-        "signup": "Crear cuenta",
+        "login_btn": "Iniciar sesión",
+        "signup_btn": "Crear cuenta",
         "email": "Email",
         "password": "Contraseña",
         "email_placeholder": "Tu dirección de email",
@@ -120,33 +126,38 @@
         "analysis": "Análisis"
     },
     "outfit": {
-        "title": "¿Cómo es el plan de hoy?",
+        "title": "Atuendo del Día",
+        "occasion_label": "¿Para qué ocasión?",
         "casual": "Casual",
-        "smart_casual": "Smart Casual",
-        "business_casual": "Business Casual",
+        "smart_casual": "Casual Elegante",
+        "business_casual": "Informal de Negocios",
         "formal": "Formal / Elegante",
-        "special_event": "Evento especial",
-        "generate_button": "👔 Dame mi outfit",
-        "choose_button": "👔 Me pongo esta",
+        "special_event": "Evento Especial",
+        "generate_button": "Dame mi atuendo",
+        "choose_button": "Me pongo esta",
         "success": "✅ ¡Perfecto! Hoy vas impecable.",
         "weather_banner": "🌤️ {{city}} hoy: {{temp}}°C — {{condition}}",
         "why_it_works": "💡 Por qué funciona:",
         "color_harmony": "🎨 Armonía:",
-        "few_combinations": "⚠️ Quedan pocas combinaciones. ¿Ver recomendaciones de compra?"
+        "few_combinations": "⚠️ Quedan pocas combinaciones. ¿Ver recomendaciones de compra?",
+        "add_garments_warning": "Añade al menos 3 prendas a tu armario para empezar a generar outfits."
     },
     "planning": {
-        "title": "Planifica tu semana",
+        "title": "Planificador Semanal",
+        "subtitle": "Planifica tus atuendos para la próxima semana según tu agenda y el clima.",
+        "style_preference": "Preferencia de Estilo",
+        "select_days": "Seleccionar Días",
         "same_style": "Mismo estilo para todos",
         "per_day_style": "Estilo por día",
-        "generate_button": "🗓️ Generar planificación",
+        "generate_button": "Generar Planificación",
         "generating": "Planificando tu semana...",
-        "approve_day": "✅ Aprobar",
-        "change_day": "🔄 Cambiar",
-        "approve_all": "✅ Aprobar toda la semana",
-        "regenerate_all": "🔄 Regenerar todo",
+        "approve_day": "Guardar y Aprobar",
+        "change_day": "Cambiar",
+        "approve_all": "Aprobar toda la semana",
+        "regenerate_all": "Volver a empezar",
         "success": "✅ ¡Semana planificada! Ya puedes olvidarte de pensar qué ponerte.",
-        "new_plan": "🗓️ Nueva planificación",
-        "status_approved": "Aprobada",
+        "new_plan": "Empezar de nuevo",
+        "status_approved": "Aprobado",
         "status_today": "Hoy",
         "status_completed": "Completado",
         "few_garments_warning": "⚠️ Con tu armario actual, algunos días podrían repetir prendas individuales. Considera añadir más prendas.",
@@ -208,8 +219,18 @@
         }
     },
     "history": {
-        "title": "Historial",
-        "empty": "Aún no has elegido ningún outfit. ¡Ve a Outfit del Día!"
+        "title": "Historial de Estilo",
+        "subtitle": "Tu viaje de moda, curado y recordado.",
+        "empty": "Aún no has elegido ningún atuendo.",
+        "filters": {
+            "all_occasions": "Todas las ocasiones",
+            "all_origins": "Todos los orígenes",
+            "daily": "Atuendo Diario",
+            "weekly": "Planificación Semanal"
+        },
+        "view_details": "Ver detalles",
+        "daily_tag": "Diario",
+        "weekly_tag": "Semanal"
     },
     "analysis": {
         "title": "Análisis",

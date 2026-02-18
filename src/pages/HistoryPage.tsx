@@ -130,9 +130,9 @@ export default function HistoryPage() {
                 <header className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-gray-200 pb-8">
                     <div className="space-y-2">
                         <h1 className="text-4xl font-serif font-medium text-gray-900 tracking-tight">
-                            Style <span className="italic text-[#d4af37]">History</span>
+                            {t('history:title').split(' ')[0]} <span className="italic text-[#d4af37]">{t('history:title').split(' ').slice(1).join(' ')}</span>
                         </h1>
-                        <p className="text-gray-500 font-light">Your fashion journey, curated and remembered.</p>
+                        <p className="text-gray-600 font-light">{t('history:subtitle')}</p>
                     </div>
 
                     {/* Filters */}
@@ -143,12 +143,12 @@ export default function HistoryPage() {
                                 onChange={(e) => setFilterOccasion(e.target.value)}
                                 className="appearance-none bg-white border border-gray-200 text-gray-700 text-sm rounded-full py-2.5 pl-5 pr-10 focus:ring-1 focus:ring-black focus:border-black cursor-pointer shadow-sm hover:border-gray-300 transition-all font-medium"
                             >
-                                <option value="all">All Occasions</option>
-                                <option value="Casual">Casual</option>
-                                <option value="Smart Casual">Smart Casual</option>
-                                <option value="Business Casual">Business Casual</option>
-                                <option value="Formal">Formal</option>
-                                <option value="Special">Special</option>
+                                <option value="all">{t('history:filters.all_occasions')}</option>
+                                <option value="Casual">{t('outfit:casual')}</option>
+                                <option value="Smart Casual">{t('outfit:smart_casual')}</option>
+                                <option value="Business Casual">{t('outfit:business_casual')}</option>
+                                <option value="Formal">{t('outfit:formal')}</option>
+                                <option value="Special">{t('outfit:special_event')}</option>
                             </select>
                             <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-gray-400">
                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -161,9 +161,9 @@ export default function HistoryPage() {
                                 onChange={(e) => setFilterOrigin(e.target.value)}
                                 className="appearance-none bg-white border border-gray-200 text-gray-700 text-sm rounded-full py-2.5 pl-5 pr-10 focus:ring-1 focus:ring-black focus:border-black cursor-pointer shadow-sm hover:border-gray-300 transition-all font-medium"
                             >
-                                <option value="all">All Origins</option>
-                                <option value="diario">Daily Outfit</option>
-                                <option value="planificacion">Weekly Plan</option>
+                                <option value="all">{t('history:filters.all_origins')}</option>
+                                <option value="diario">{t('history:filters.daily')}</option>
+                                <option value="planificacion">{t('history:filters.weekly')}</option>
                             </select>
                             <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-gray-400">
                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -177,12 +177,12 @@ export default function HistoryPage() {
                         <Loader2 className="animate-spin h-10 w-10 text-gray-300" />
                     </div>
                 ) : filteredOutfits.length === 0 ? (
-                    <div className="text-center py-24 bg-white rounded-3xl border border-dashed border-gray-200">
+                    <div className="text-center py-24 bg-white rounded-3xl border border-dashed border-gray-300">
                         <div className="bg-gray-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                             <Star className="w-8 h-8 text-gray-300" />
                         </div>
-                        <h3 className="text-xl font-serif font-medium text-gray-900 mb-2">{t('history:empty', 'No outfits yet')}</h3>
-                        <p className="text-gray-500 font-light max-w-sm mx-auto">Start creating your daily looks or plan your week to see your history here.</p>
+                        <h3 className="text-xl font-serif font-medium text-gray-900 mb-2">{t('history:empty')}</h3>
+                        <p className="text-gray-600 font-light max-w-sm mx-auto">Start creating your daily looks or plan your week to see your history here.</p>
                     </div>
                 ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -206,7 +206,7 @@ export default function HistoryPage() {
                                     <div className="absolute top-3 left-3 flex gap-2">
                                         <span className={`text-[10px] uppercase tracking-wider px-2 py-1 rounded-full font-medium font-serif backdrop-blur-md
                                             ${outfit.origen === 'diario' ? 'bg-white/90 text-gray-900 border border-gray-100' : 'bg-black/80 text-white border border-transparent'}`}>
-                                            {outfit.origen === 'diario' ? 'Daily' : 'Weekly Plan'}
+                                            {outfit.origen === 'diario' ? t('history:daily_tag') : t('history:weekly_tag')}
                                         </span>
                                     </div>
 
@@ -225,7 +225,7 @@ export default function HistoryPage() {
                                     </div>
 
                                     <div className="flex items-center gap-2 mb-4">
-                                        <span className="text-xs font-medium text-gray-500 uppercase tracking-widest">{outfit.ocasion}</span>
+                                        <span className="text-xs font-medium text-gray-600 uppercase tracking-widest">{outfit.ocasion}</span>
                                         <span className="w-1 h-1 rounded-full bg-gray-300"></span>
                                         <div className="flex -space-x-1">
                                             {outfit.color_palette?.slice(0, 3).map((c: string, i: number) => (
@@ -236,7 +236,7 @@ export default function HistoryPage() {
 
                                     <div className="mt-auto pt-4 border-t border-gray-50 flex justify-between items-center">
                                         <span className="text-xs text-gray-400 font-light italic truncate pr-2 max-w-[80%]">"{outfit.nombre_look || 'Modern Ensemble'}"</span>
-                                        <span className="text-xs font-medium text-black group-hover:translate-x-1 transition-transform">View &rarr;</span>
+                                        <span className="text-xs font-medium text-black group-hover:translate-x-1 transition-transform">{t('history:view_details')} &rarr;</span>
                                     </div>
                                 </div>
                             </div>

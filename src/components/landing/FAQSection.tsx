@@ -48,7 +48,7 @@ export default function FAQSection() {
                             </dt>
                             <dd
                                 className={clsx(
-                                    "px-6 transition-all duration-300 ease-in-out text-gray-500 bg-gray-50/30",
+                                    "px-6 transition-all duration-300 ease-in-out text-gray-600 bg-gray-50/30",
                                     openIndex === index ? "max-h-48 py-5 opacity-100" : "max-h-0 py-0 opacity-0 overflow-hidden"
                                 )}
                             >

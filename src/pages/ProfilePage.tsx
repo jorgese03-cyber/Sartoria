@@ -167,7 +167,7 @@ export default function ProfilePage() {
             <div className="max-w-4xl mx-auto px-6 py-12 space-y-8 animate-fade-in">
                 <header className="mb-8">
                     <h1 className="text-4xl font-serif font-medium text-gray-900 tracking-tight">
-                        My <span className="italic text-[#d4af37]">Profile</span>
+                        {t('profile:title').split(' ')[0]} <span className="italic text-[#d4af37]">{t('profile:title').split(' ').slice(1).join(' ')}</span>
                     </h1>
                 </header>
 
@@ -191,14 +191,14 @@ export default function ProfilePage() {
                                 </label>
                             </div>
                             <h2 className="text-xl font-serif font-medium text-gray-900">{profile.nombre || 'Fashionista'}</h2>
-                            <p className="text-gray-500 text-sm">{user.email}</p>
+                            <p className="text-gray-600 text-sm">{user.email}</p>
                             <div className="mt-6 w-full">
-                                <div className={`p-3 rounded-2xl border ${isActive ? 'bg-[#F0FDF4] border-[#DCFCE7] text-[#166534]' : 'bg-gray-50 border-gray-200 text-gray-600'}`}>
-                                    <div className="text-xs font-bold uppercase tracking-wider mb-1">Current Plan</div>
+                                <div className={`p-3 rounded-2xl border ${isActive ? 'bg-[#F0FDF4] border-[#DCFCE7] text-[#166534]' : 'bg-gray-50 border-gray-200 text-gray-700'}`}>
+                                    <div className="text-xs font-bold uppercase tracking-wider mb-1">{t('profile:current_plan')}</div>
                                     <div className="font-medium">
-                                        {status === 'trialing' ? `Free Trial (${daysRemaining} days)` :
+                                        {status === 'trialing' ? `${t('profile:free_trial')} (${daysRemaining} ${t('profile:days_remaining')})` :
                                             status === 'active' ? `${plan} Plan` :
-                                                'Free Plan'}
+                                                t('profile:free_plan')}
                                     </div>
                                 </div>
                             </div>
@@ -217,8 +217,8 @@ export default function ProfilePage() {
                                     <div className="bg-white/20 w-10 h-10 rounded-full flex items-center justify-center mb-3 backdrop-blur-md">
                                         <Plane className="w-5 h-5 text-white" />
                                     </div>
-                                    <h3 className="text-lg font-bold mb-1">Travel Mode</h3>
-                                    <p className="text-gray-400 text-sm">Plan your next trip &rarr;</p>
+                                    <h3 className="text-lg font-bold mb-1">{t('profile:travel_mode')}</h3>
+                                    <p className="text-gray-400 text-sm">{t('profile:travel_hint')} &rarr;</p>
                                 </div>
                             </button>
                         )}
@@ -229,23 +229,23 @@ export default function ProfilePage() {
                         {/* Personal Info */}
                         <section className="bg-white p-8 rounded-3xl shadow-premium border border-gray-50">
                             <h2 className="text-xl font-serif font-medium text-gray-900 mb-6 flex items-center gap-2">
-                                {t('personal_info', 'Personal Information')}
+                                {t('profile:personal_info')}
                             </h2>
                             <div className="space-y-6">
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div>
-                                        <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Name</label>
+                                        <label className="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-2">{t('profile:name')}</label>
                                         <input
                                             type="text"
                                             value={profile.nombre}
                                             onChange={(e) => setProfile({ ...profile, nombre: e.target.value })}
                                             onBlur={handleUpdateProfile}
                                             className="block w-full rounded-xl border-gray-200 bg-gray-50 px-4 py-3 text-gray-900 focus:border-black focus:ring-black transition-shadow"
-                                            placeholder="Your Name"
+                                            placeholder="Tu nombre"
                                         />
                                     </div>
                                     <div>
-                                        <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">City</label>
+                                        <label className="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-2">{t('profile:city')}</label>
                                         <div className="relative">
                                             <input
                                                 type="text"
@@ -253,9 +253,9 @@ export default function ProfilePage() {
                                                 onChange={(e) => setProfile({ ...profile, ciudad: e.target.value })}
                                                 onBlur={handleUpdateProfile}
                                                 className="block w-full rounded-xl border-gray-200 bg-gray-50 px-4 py-3 text-gray-900 focus:border-black focus:ring-black transition-shadow"
-                                                placeholder="e.g. Madrid"
+                                                placeholder="ej. Madrid"
                                             />
-                                            {updating && <span className="absolute right-3 top-3.5 text-xs text-gray-400 animate-pulse">Saving...</span>}
+                                            {updating && <span className="absolute right-3 top-3.5 text-xs text-gray-500 animate-pulse">{t('profile:saving')}</span>}
                                         </div>
                                     </div>
                                 </div>
@@ -264,21 +264,21 @@ export default function ProfilePage() {
 
                         {/* Preferences */}
                         <section className="bg-white p-8 rounded-3xl shadow-premium border border-gray-50">
-                            <h2 className="text-xl font-serif font-medium text-gray-900 mb-6">Preferences</h2>
+                            <h2 className="text-xl font-serif font-medium text-gray-900 mb-6">{t('profile:preferences')}</h2>
 
                             <div className="space-y-6">
                                 <div>
-                                    <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-3">{t('language', 'Language')}</label>
+                                    <label className="block text-xs font-bold text-gray-600 uppercase tracking-wider mb-3">{t('profile:language')}</label>
                                     <div className="flex gap-3">
                                         <button
                                             onClick={() => handleLanguageChange('en')}
-                                            className={`flex-1 py-3 px-4 rounded-xl border text-sm font-medium transition-all ${i18n.language.startsWith('en') ? 'bg-black text-white border-black shadow-md' : 'bg-white text-gray-600 border-gray-200 hover:border-gray-300'}`}
+                                            className={`flex-1 py-3 px-4 rounded-xl border text-sm font-medium transition-all ${i18n.language.startsWith('en') ? 'bg-black text-white border-black shadow-md' : 'bg-white text-gray-700 border-gray-200 hover:border-gray-300'}`}
                                         >
                                             🇬🇧 English
                                         </button>
                                         <button
                                             onClick={() => handleLanguageChange('es')}
-                                            className={`flex-1 py-3 px-4 rounded-xl border text-sm font-medium transition-all ${i18n.language.startsWith('es') ? 'bg-black text-white border-black shadow-md' : 'bg-white text-gray-600 border-gray-200 hover:border-gray-300'}`}
+                                            className={`flex-1 py-3 px-4 rounded-xl border text-sm font-medium transition-all ${i18n.language.startsWith('es') ? 'bg-black text-white border-black shadow-md' : 'bg-white text-gray-700 border-gray-200 hover:border-gray-300'}`}
                                         >
                                             🇪🇸 Español
                                         </button>
@@ -289,10 +289,10 @@ export default function ProfilePage() {
                                     <button
                                         onClick={handleManageSubscription}
                                         disabled={loadingPortal}
-                                        className="flex items-center text-indigo-600 hover:text-indigo-800 font-medium text-sm transition-colors"
+                                        className="flex items-center text-indigo-700 hover:text-indigo-900 font-medium text-sm transition-colors"
                                     >
                                         {loadingPortal ? <Loader2 className="animate-spin w-4 h-4 mr-2" /> : <CreditCard className="h-4 w-4 mr-2" />}
-                                        {t('manage_billing', 'Manage Billing & Subscription')}
+                                        {t('profile:billing')}
                                     </button>
                                 </div>
                             </div>
@@ -300,21 +300,21 @@ export default function ProfilePage() {
 
                         {/* Danger Zone */}
                         <section className="bg-white p-8 rounded-3xl shadow-sm border border-red-50">
-                            <h2 className="text-red-500 font-serif font-medium mb-6 text-lg">Account Actions</h2>
+                            <h2 className="text-red-600 font-serif font-medium mb-6 text-lg">{t('profile:account_actions')}</h2>
                             <div className="space-y-3">
                                 <button
                                     onClick={handleLogout}
-                                    className="w-full flex items-center justify-between p-4 rounded-xl bg-gray-50 hover:bg-gray-100 text-gray-700 transition-colors text-left group"
+                                    className="w-full flex items-center justify-between p-4 rounded-xl bg-gray-50 hover:bg-gray-100 text-gray-800 transition-colors text-left group"
                                 >
-                                    <span className="font-medium text-sm">{t('sign_out', 'Sign Out')}</span>
-                                    <LogOut className="w-4 h-4 text-gray-400 group-hover:text-gray-600" />
+                                    <span className="font-medium text-sm">{t('profile:sign_out')}</span>
+                                    <LogOut className="w-4 h-4 text-gray-500 group-hover:text-gray-700" />
                                 </button>
 
                                 <button
                                     onClick={handleDeleteAccount}
                                     className="w-full flex items-center justify-between p-4 rounded-xl bg-red-50 hover:bg-red-100 text-red-700 transition-colors text-left group"
                                 >
-                                    <span className="font-medium text-sm">{t('delete_account', 'Delete Account')}</span>
+                                    <span className="font-medium text-sm">{t('profile:delete_account')}</span>
                                     <Trash2 className="w-4 h-4 text-red-400 group-hover:text-red-600" />
                                 </button>
                             </div>

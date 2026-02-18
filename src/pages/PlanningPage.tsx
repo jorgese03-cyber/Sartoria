@@ -209,12 +209,12 @@ export default function PlanningPage() {
                 {/* Header */}
                 <header className="flex flex-col gap-3 text-center sm:text-left">
                     <h1 className="text-4xl font-serif font-medium text-gray-900 tracking-tight">
-                        Weekly <span className="italic text-[#d4af37]">Planner</span>
+                        {t('planning:title').split(' ')[0]} <span className="italic text-[#d4af37]">{t('planning:title').split(' ').slice(1).join(' ')}</span>
                     </h1>
-                    <p className="text-gray-500 font-light text-lg max-w-2xl">
-                        Plan your outfits for the upcoming week based on your schedule and weather.
+                    <p className="text-gray-700 font-light text-lg max-w-2xl">
+                        {t('planning:subtitle')}
                     </p>
-                    <p className="text-xs text-gray-400 uppercase tracking-widest font-medium mt-2">
+                    <p className="text-xs text-gray-500 uppercase tracking-widest font-medium mt-2">
                         {weekDays[0].toLocaleDateString(undefined, { month: 'long', day: 'numeric' })} - {weekDays[4].toLocaleDateString(undefined, { month: 'long', day: 'numeric' })}
                     </p>
                 </header>
@@ -224,19 +224,19 @@ export default function PlanningPage() {
                     <div className="space-y-8 bg-white p-8 rounded-3xl shadow-premium border border-gray-50">
                         {/* Style Mode Selector */}
                         <div className="space-y-4">
-                            <label className="block text-sm font-medium text-gray-900 uppercase tracking-wide">Style Preference</label>
+                            <label className="block text-sm font-medium text-gray-900 uppercase tracking-wide">{t('planning:style_preference')}</label>
                             <div className="grid grid-cols-2 gap-4">
                                 <button
                                     onClick={() => setCurrentStyleMode('same')}
-                                    className={`py-4 px-6 rounded-xl text-sm font-medium transition-all duration-300 border ${currentStyleMode === 'same' ? 'bg-black text-white border-black shadow-lg' : 'bg-white text-gray-500 border-gray-200 hover:border-gray-400 hover:text-gray-900'}`}
+                                    className={`py-4 px-6 rounded-xl text-sm font-medium transition-all duration-300 border ${currentStyleMode === 'same' ? 'bg-black text-white border-black shadow-lg' : 'bg-white text-gray-600 border-gray-200 hover:border-gray-400 hover:text-gray-900'}`}
                                 >
-                                    {t('planning:same_style', 'Same Style All Week')}
+                                    {t('planning:same_style')}
                                 </button>
                                 <button
                                     onClick={() => setCurrentStyleMode('daily')}
-                                    className={`py-4 px-6 rounded-xl text-sm font-medium transition-all duration-300 border ${currentStyleMode === 'daily' ? 'bg-black text-white border-black shadow-lg' : 'bg-white text-gray-500 border-gray-200 hover:border-gray-400 hover:text-gray-900'}`}
+                                    className={`py-4 px-6 rounded-xl text-sm font-medium transition-all duration-300 border ${currentStyleMode === 'daily' ? 'bg-black text-white border-black shadow-lg' : 'bg-white text-gray-600 border-gray-200 hover:border-gray-400 hover:text-gray-900'}`}
                                 >
-                                    {t('planning:per_day_style', 'Different Style Per Day')}
+                                    {t('planning:per_day_style')}
                                 </button>
                             </div>
 
@@ -249,7 +249,7 @@ export default function PlanningPage() {
 
                         {/* Days List */}
                         <div className="space-y-4">
-                            <label className="block text-sm font-medium text-gray-900 uppercase tracking-wide">Select Days</label>
+                            <label className="block text-sm font-medium text-gray-900 uppercase tracking-wide">{t('planning:select_days')}</label>
                             <div className="grid gap-3">
                                 {weekDays.map(date => {
                                     const dateStr = date.toISOString().split('T')[0];
@@ -277,8 +277,8 @@ export default function PlanningPage() {
                                                         {isSelected && <Check className="w-3.5 h-3.5 text-white" strokeWidth={3} />}
                                                     </div>
                                                     <div>
-                                                        <span className={`block text-lg font-serif font-medium ${isSelected ? 'text-gray-900' : 'text-gray-500'}`}>{dayName}</span>
-                                                        <span className="text-xs text-gray-400 font-light">{date.toLocaleDateString()}</span>
+                                                        <span className={`block text-lg font-serif font-medium capitalize ${isSelected ? 'text-gray-900' : 'text-gray-600'}`}>{dayName}</span>
+                                                        <span className="text-xs text-gray-600 font-light">{date.toLocaleDateString()}</span>
                                                     </div>
                                                 </div>
 
@@ -306,7 +306,7 @@ export default function PlanningPage() {
                                     w-full py-5 rounded-full font-serif text-xl tracking-wide transition-all transform active:scale-[0.99]
                                     flex items-center justify-center gap-3 relative overflow-hidden group
                                     ${generating
-                                        ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                                        ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
                                         : 'bg-black text-white shadow-xl hover:shadow-2xl hover:bg-gray-900'
                                     }
                                 `}
@@ -314,11 +314,11 @@ export default function PlanningPage() {
                                 {generating ? (
                                     <span className="flex items-center gap-2">
                                         <Loader2 className="animate-spin w-5 h-5" />
-                                        <span>Curating your week...</span>
+                                        <span>{t('planning:generating')}</span>
                                     </span>
                                 ) : (
                                     <>
-                                        <span>Generate Plan</span>
+                                        <span>{t('planning:generate_button')}</span>
                                         <Calendar className="w-5 h-5 group-hover:scale-110 transition-transform" />
                                     </>
                                 )}

@@ -48,7 +48,7 @@ export default function HowItWorksSection() {
                                 <h3 className="text-xl font-medium text-gray-900 mb-3 font-serif">
                                     {step.title}
                                 </h3>
-                                <p className="text-gray-500 font-light leading-relaxed">
+                                <p className="text-gray-600 font-light leading-relaxed">
                                     {step.desc}
                                 </p>
                             </div>

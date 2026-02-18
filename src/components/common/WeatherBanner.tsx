@@ -39,7 +39,7 @@ export const WeatherBanner: React.FC<WeatherBannerProps> = ({ weather, loading }
     };
 
     return (
-        <div className="w-full bg-white border border-gray-100 p-6 rounded-2xl flex items-center justify-between shadow-premium">
+        <div className="w-full bg-white/80 backdrop-blur-md border border-gray-100 p-6 rounded-2xl flex items-center justify-between shadow-premium hover:shadow-xl transition-shadow duration-300">
             <div className="flex items-center gap-6">
                 <div className="text-5xl filter drop-shadow-sm">
                     {getWeatherIcon(weather.condition)}

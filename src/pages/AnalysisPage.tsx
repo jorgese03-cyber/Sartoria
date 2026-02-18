@@ -145,10 +145,10 @@ export default function AnalysisPage() {
                 <header className="flex flex-col md:flex-row md:items-end justify-between gap-6">
                     <div className="space-y-2">
                         <h1 className="text-4xl font-serif font-medium text-gray-900 tracking-tight">
-                            Wardrobe <span className="italic text-[#d4af37]">Analysis</span>
+                            {t('analysis:title').split(' ')[0]} <span className="italic text-[#d4af37]">{t('analysis:title').split(' ').slice(1).join(' ')}</span>
                         </h1>
-                        <p className="text-gray-500 font-light max-w-lg">
-                            Deep insights into your style, wearing habits, and smart recommendations to upgrade your wardrobe.
+                        <p className="text-gray-600 font-light max-w-lg">
+                            {t('analysis:subtitle')}
                         </p>
                     </div>
                     <button
@@ -156,21 +156,21 @@ export default function AnalysisPage() {
                         disabled={analyzing}
                         className={`flex items-center gap-2 px-6 py-3 rounded-full font-medium transition-all shadow-md active:scale-95
                              ${analyzing
-                                ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                                ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
                                 : 'bg-black text-white hover:bg-gray-900 hover:shadow-lg'}`}
                     >
                         {analyzing ? <Loader2 className="animate-spin h-5 w-5" /> : <RefreshCw className="h-5 w-5" />}
-                        <span>{analyzing ? 'Analyzing...' : t('analysis:analyze_button')}</span>
+                        <span>{analyzing ? t('analysis:analyzing') : t('analysis:analyze_button')}</span>
                     </button>
                 </header>
 
                 {!stats ? (
-                    <div className="text-center py-24 bg-white rounded-3xl border border-dashed border-gray-200">
+                    <div className="text-center py-24 bg-white rounded-3xl border border-dashed border-gray-300">
                         <div className="bg-gray-50 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
                             <PieChart className="w-10 h-10 text-gray-300" strokeWidth={1.5} />
                         </div>
-                        <h3 className="text-xl font-serif font-medium text-gray-900 mb-2">{t('analysis:empty', 'No analysis yet')}</h3>
-                        <p className="text-gray-500 font-light max-w-sm mx-auto mb-8">Run your first analysis to understand your wardrobe composition and get AI styling advice.</p>
+                        <h3 className="text-xl font-serif font-medium text-gray-900 mb-2">{t('analysis:empty')}</h3>
+                        <p className="text-gray-600 font-light max-w-sm mx-auto mb-8">{t('analysis:run_analysis_hint')}</p>
                         <button onClick={handleAnalyze} className="bg-black text-white px-8 py-3 rounded-full font-medium shadow-lg hover:shadow-xl hover:bg-gray-900 transition-all">
                             {t('analysis:analyze_button')}
                         </button>
@@ -182,7 +182,7 @@ export default function AnalysisPage() {
                             {/* Category Distribution */}
                             <div className="bg-white p-8 rounded-3xl shadow-premium border border-gray-50">
                                 <div className="flex items-center justify-between mb-8">
-                                    <h3 className="text-xl font-serif font-medium text-gray-900">Wardrobe Composition</h3>
+                                    <h3 className="text-xl font-serif font-medium text-gray-900">{t('analysis:composition')}</h3>
                                     <div className="p-2 bg-gray-50 rounded-full">
                                         <PieChart className="w-5 h-5 text-gray-400" />
                                     </div>
@@ -192,7 +192,7 @@ export default function AnalysisPage() {
                                         <div key={idx} className="group">
                                             <div className="flex justify-between text-sm mb-2 font-medium">
                                                 <span className="text-gray-900 capitalize">{item.category}</span>
-                                                <span className="text-gray-400 group-hover:text-black transition-colors">{item.count} items <span className="text-gray-300">|</span> {item.percentage}%</span>
+                                                <span className="text-gray-600 group-hover:text-black transition-colors">{item.count} {t('analysis:items')} <span className="text-gray-300">|</span> {item.percentage}%</span>
                                             </div>
                                             <div className="w-full bg-gray-100 rounded-full h-1.5 overflow-hidden">
                                                 <div
@@ -208,7 +208,7 @@ export default function AnalysisPage() {
                             {/* Top Colors */}
                             <div className="bg-white p-8 rounded-3xl shadow-premium border border-gray-50">
                                 <div className="flex items-center justify-between mb-8">
-                                    <h3 className="text-xl font-serif font-medium text-gray-900">Color Palette</h3>
+                                    <h3 className="text-xl font-serif font-medium text-gray-900">{t('analysis:palette')}</h3>
                                     <div className="p-2 bg-gray-50 rounded-full">
                                         <BarChart3 className="w-5 h-5 text-gray-400" />
                                     </div>
@@ -229,7 +229,7 @@ export default function AnalysisPage() {
                                 </div>
                                 <div className="mt-8 pt-8 border-t border-gray-50">
                                     <p className="text-sm text-gray-500 font-light italic">
-                                        "Your wardrobe leans towards <span className="text-gray-900 font-medium">{stats.topColors[0]?.color}</span> tones. Consider adding accent pieces in contrasting colors."
+                                        {t('analysis:palette_insight', { color: stats.topColors[0]?.color ?? '...' })}
                                     </p>
                                 </div>
                             </div>
@@ -242,7 +242,7 @@ export default function AnalysisPage() {
                                     <ShoppingBag className="w-5 h-5" />
                                 </div>
                                 <h3 className="text-2xl font-serif font-medium text-gray-900">
-                                    Smart <span className="italic text-[#d4af37]">Recommendations</span>
+                                    {t('analysis:recommendations').split(' ')[0]} <span className="italic text-[#d4af37]">{t('analysis:recommendations').split(' ').slice(1).join(' ')}</span>
                                 </h3>
                             </div>
 
@@ -259,17 +259,17 @@ export default function AnalysisPage() {
                                                     {rec.priority}
                                                 </span>
                                             </div>
-                                            <p className="text-gray-500 font-light mb-4 line-clamp-2 text-sm">{rec.reason}</p>
+                                            <p className="text-gray-600 font-light mb-4 line-clamp-2 text-sm">{rec.reason}</p>
                                             <div className="flex justify-between items-center pt-4 border-t border-gray-100">
                                                 <span className="text-sm font-medium text-gray-900">{rec.price_range}</span>
-                                                <button className="text-sm border-b border-black text-black pb-0.5 hover:opacity-70 transition-opacity">Find Similar &rarr;</button>
+                                                <button className="text-sm border-b border-black text-black pb-0.5 hover:opacity-70 transition-opacity">{t('analysis:find_similar')} &rarr;</button>
                                             </div>
                                         </div>
                                     ))}
                                 </div>
                             ) : (
                                 <div className="text-center py-12">
-                                    <p className="text-gray-500">Run the analysis to get personalized shopping advice.</p>
+                                    <p className="text-gray-500">{t('analysis:no_recommendations')}</p>
                                 </div>
                             )}
                         </div>

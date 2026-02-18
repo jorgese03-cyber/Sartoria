@@ -38,6 +38,7 @@ i18n
             },
         },
         fallbackLng: 'es',
+        lng: 'es',
         interpolation: {
             escapeValue: false,
         },

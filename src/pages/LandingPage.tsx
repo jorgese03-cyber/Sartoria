@@ -41,7 +41,7 @@ export default function LandingPage() {
                     <div className="flex items-center space-x-8">
                         <button
                             onClick={() => i18n.changeLanguage(i18n.language === 'en' ? 'es' : 'en')}
-                            className="text-sm font-medium text-gray-500 hover:text-black transition-colors uppercase tracking-widest"
+                            className="text-sm font-medium text-gray-600 hover:text-black transition-colors uppercase tracking-widest"
                         >
                             {i18n.language === 'en' ? 'ES' : 'EN'}
                         </button>
@@ -52,16 +52,16 @@ export default function LandingPage() {
                         ) : (
                             <div className="flex items-center gap-6">
                                 <Link to="/login" className="text-sm font-medium text-gray-900 hover:text-[#d4af37] transition-colors">
-                                    {t('nav.login', 'Log in')}
+                                    {t('landing:nav.login', 'Log in')}
                                 </Link>
                                 <Link to="/register" className="text-sm font-medium text-white bg-black px-6 py-2.5 rounded-full hover:bg-gray-800 transition-all shadow-md hover:shadow-lg">
-                                    {t('nav.register', 'Get Started')}
+                                    {t('landing:nav.register', 'Get Started')}
                                 </Link>
                             </div>
                         )}
                     </div>
                 </div>
-            </header>
+            </header >
         );
     };
 

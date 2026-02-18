@@ -121,10 +121,12 @@ export default function OutfitPage() {
                 {/* Header */}
                 <header className="flex flex-col gap-3 text-center sm:text-left">
                     <h1 className="text-4xl font-serif font-medium text-gray-900 tracking-tight">
-                        Outfit of the <span className="italic text-[#d4af37]">Day</span>
+                        {t('title').split(' ').map((word, i, arr) =>
+                            i === arr.length - 1 ? <span key={i} className="italic text-[#d4af37]">{word}</span> : word + ' '
+                        )}
                     </h1>
-                    <p className="text-gray-500 font-light text-lg max-w-2xl">
-                        Let our AI stylist curate your perfect look based on your wardrobe, weather, and occasion.
+                    <p className="text-gray-700 font-light text-lg max-w-2xl">
+                        {t('landing.hero_subtitle', "SARTORIA analiza tu armario, el clima y tu agenda para vestirte impecable cada día.")}
                     </p>
                 </header>
 
@@ -141,28 +143,28 @@ export default function OutfitPage() {
                             disabled={loading || garments.length < 3}
                             className={`
                                 w-full py-5 rounded-full font-serif text-xl tracking-wide transition-all transform active:scale-[0.99]
-                                flex items-center justify-center gap-3 relative overflow-hidden group
-                                ${loading
-                                    ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                                    : 'bg-black text-white shadow-xl hover:shadow-2xl hover:bg-gray-900'
+                                flex items-center justify-center gap-3 relative overflow-hidden shadow-lg
+                                ${loading || garments.length < 3
+                                    ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
+                                    : 'bg-black text-white hover:bg-gray-900 hover:shadow-2xl'
                                 }
                             `}
                         >
                             {loading ? (
                                 <span className="flex items-center gap-2">
                                     <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                                    Curating your look...
+                                    <span>{t('common.loading')}</span>
                                 </span>
                             ) : (
                                 <>
-                                    <span>Generate Outfit</span>
-                                    <span className="w-1.5 h-1.5 rounded-full bg-[#d4af37] group-hover:scale-150 transition-transform" />
+                                    <span>{t('generate_button')}</span>
+                                    {/* <span className="w-1.5 h-1.5 rounded-full bg-[#d4af37]" /> Removed dot for cleaner look or keep it? User wants visibility. */}
                                 </>
                             )}
                         </button>
                         {garments.length < 3 && (
-                            <p className="text-center text-red-500 text-sm mt-4 font-medium">
-                                Add at least 3 garments to your wardrobe to start generating outfits.
+                            <p className="text-center text-red-600 text-base mt-4 font-medium bg-red-50 p-3 rounded-lg border border-red-100">
+                                {t('add_garments_warning')}
                             </p>
                         )}
                     </div>

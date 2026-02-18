@@ -161,11 +161,11 @@ export default function TravelPage() {
                             </svg>
                         </button>
                         <h1 className="text-4xl font-serif font-medium text-gray-900 tracking-tight">
-                            Smart <span className="italic text-[#d4af37]">Packing</span>
+                            {t('travel:title').split(' ')[0]} <span className="italic text-[#d4af37]">{t('travel:title').split(' ').slice(1).join(' ')}</span>
                         </h1>
                     </div>
-                    <p className="text-gray-500 font-light text-lg max-w-2xl sm:ml-10">
-                        Generate a complete packing list and outfits for your next trip based on weather and destination.
+                    <p className="text-gray-600 font-light text-lg max-w-2xl sm:ml-10">
+                        {t('travel:subtitle')}
                     </p>
                 </header>
 
@@ -173,7 +173,7 @@ export default function TravelPage() {
                     <div className="bg-white p-8 rounded-3xl shadow-premium border border-gray-50 space-y-8">
                         <div>
                             <label className="block text-sm font-medium text-gray-900 uppercase tracking-wide mb-3">
-                                {t('travel:destination_label', 'Where are you going?')}
+                                {t('travel:destination_label')}
                             </label>
                             <div className="relative group">
                                 <div className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-gray-50 rounded-full flex items-center justify-center text-gray-400 group-focus-within:text-black group-focus-within:bg-gray-100 transition-colors">
@@ -183,7 +183,7 @@ export default function TravelPage() {
                                     type="text"
                                     value={destination}
                                     onChange={(e) => setDestination(e.target.value)}
-                                    placeholder={t('travel:destination_placeholder', 'e.g. Paris, Tokyo, New York')}
+                                    placeholder={t('travel:destination_placeholder')}
                                     className="block w-full rounded-2xl border-gray-100 bg-gray-50/50 pl-16 pr-4 py-4 text-lg placeholder-gray-400 focus:border-black focus:ring-black transition-all shadow-sm"
                                 />
                             </div>
@@ -191,7 +191,7 @@ export default function TravelPage() {
 
                         <div>
                             <label className="block text-sm font-medium text-gray-900 uppercase tracking-wide mb-3">
-                                {t('travel:start_date_label', 'When does the trip start?')}
+                                {t('travel:start_date_label')}
                             </label>
                             <div className="relative group">
                                 <div className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-gray-50 rounded-full flex items-center justify-center text-gray-400 group-focus-within:text-black group-focus-within:bg-gray-100 transition-colors">
@@ -214,7 +214,7 @@ export default function TravelPage() {
                                 w-full py-5 rounded-full font-serif text-xl tracking-wide transition-all transform active:scale-[0.99]
                                 flex items-center justify-center gap-3 relative overflow-hidden group
                                 ${generating || !destination
-                                    ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                                    ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
                                     : 'bg-black text-white shadow-xl hover:shadow-2xl hover:bg-gray-900'
                                 }
                             `}
@@ -222,11 +222,11 @@ export default function TravelPage() {
                             {generating ? (
                                 <span className="flex items-center gap-2">
                                     <Loader2 className="animate-spin w-5 h-5" />
-                                    <span>{t('travel:generating', 'Curating Trip...')}</span>
+                                    <span>{t('travel:generating')}</span>
                                 </span>
                             ) : (
                                 <>
-                                    <span>{t('travel:generate_button', 'Generate Packing List')}</span>
+                                    <span>{t('travel:generate_button')}</span>
                                     <Plane className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                                 </>
                             )}
@@ -241,15 +241,15 @@ export default function TravelPage() {
                                 </div>
                                 <div>
                                     <h2 className="text-2xl font-serif font-medium text-gray-900">{destination}</h2>
-                                    <span className="text-sm text-gray-500 font-light">5 Days Trip</span>
+                                    <span className="text-sm text-gray-600 font-light">{t('travel:days_trip')}</span>
                                 </div>
                             </div>
 
                             <button
                                 onClick={() => setGeneratedPlan([])}
-                                className="px-6 py-2.5 rounded-full border border-gray-200 text-sm font-medium hover:bg-gray-50 transition-colors text-gray-600"
+                                className="px-6 py-2.5 rounded-full border border-gray-200 text-sm font-medium hover:bg-gray-50 transition-colors text-gray-700"
                             >
-                                {t('planning:new_plan', 'Plan New Trip')}
+                                {t('travel:new_trip')}
                             </button>
                         </div>
 
@@ -258,13 +258,13 @@ export default function TravelPage() {
                                 <div key={index} className="bg-white rounded-3xl shadow-premium overflow-hidden border border-gray-100 flex flex-col md:flex-row transition-transform hover:scale-[1.01] duration-300">
                                     {/* Date Column */}
                                     <div className="md:w-32 bg-gray-50 p-6 flex flex-col justify-center items-center border-b md:border-b-0 md:border-r border-gray-100 text-center">
-                                        <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">{day.date}</span>
+                                        <span className="text-xs font-bold text-gray-600 uppercase tracking-widest">{day.date}</span>
                                         <h3 className="text-lg font-serif font-medium text-gray-900 mt-1 capitalize leading-tight">
                                             {new Date(day.date).toLocaleDateString(undefined, { weekday: 'short' })}
                                         </h3>
                                         <div className="mt-3 flex flex-col items-center gap-1">
                                             <span className="text-2xl font-light text-gray-900">{Math.round(day.weather.temp)}°</span>
-                                            <span className="text-[10px] uppercase tracking-wide text-gray-500 font-medium">{day.weather.condition}</span>
+                                            <span className="text-[10px] uppercase tracking-wide text-gray-600 font-medium">{day.weather.condition}</span>
                                         </div>
                                     </div>
 
@@ -272,7 +272,7 @@ export default function TravelPage() {
                                         <div className="flex justify-between items-start mb-4">
                                             <div>
                                                 <h4 className="text-xl font-serif font-medium text-gray-900">{day.outfit.nombre_look}</h4>
-                                                <p className="text-gray-500 font-light text-sm mt-1 mb-4 italic">
+                                                <p className="text-gray-600 font-light text-sm mt-1 mb-4 italic">
                                                     "{day.outfit.explicacion}"
                                                 </p>
                                             </div>
@@ -286,14 +286,14 @@ export default function TravelPage() {
                                         <div className="flex items-center justify-end pt-4 border-t border-gray-50">
                                             {day.approved ? (
                                                 <span className="bg-[#F0FDF4] text-[#166534] px-4 py-2 rounded-full font-medium flex items-center text-xs tracking-wide shadow-sm border border-[#DCFCE7]">
-                                                    <Check className="w-3.5 h-3.5 mr-1.5" strokeWidth={3} /> PACKED
+                                                    <Check className="w-3.5 h-3.5 mr-1.5" strokeWidth={3} /> {t('travel:packed')}
                                                 </span>
                                             ) : (
                                                 <button
                                                     onClick={() => handleApproveDay(day)}
                                                     className="bg-black text-white px-6 py-2.5 rounded-full text-xs font-medium uppercase tracking-wider hover:bg-gray-800 transition-all shadow-md active:scale-95"
                                                 >
-                                                    Confirm & Pack
+                                                    {t('travel:pack_button')}
                                                 </button>
                                             )}
                                         </div>

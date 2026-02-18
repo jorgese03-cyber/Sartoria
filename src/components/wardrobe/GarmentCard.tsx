@@ -25,7 +25,7 @@ export default function GarmentCard({ garment, onEdit, onDelete }: GarmentCardPr
     const { t } = useTranslation('wardrobe');
 
     return (
-        <div className="group relative bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-premium transition-all duration-300">
+        <div className="group relative bg-white rounded-xl overflow-hidden shadow-none hover:shadow-premium transition-all duration-300">
             <div className="aspect-[4/5] bg-[#F9F9F9] relative overflow-hidden">
                 <img
                     src={garment.foto_url}
@@ -74,11 +74,11 @@ export default function GarmentCard({ garment, onEdit, onDelete }: GarmentCardPr
                         <h3 className="text-sm font-bold text-gray-900 truncate tracking-wide" title={garment.marca}>
                             {garment.marca === 'NO VISIBLE' || !garment.marca ? '—' : garment.marca.toUpperCase()}
                         </h3>
-                        <p className="text-xs text-gray-500 truncate mt-1 font-light">
+                        <p className="text-xs text-gray-600 truncate mt-1 font-light">
                             {garment.descripcion}
                         </p>
                     </div>
-                    <span className="text-[10px] font-medium text-gray-400 uppercase tracking-wider border border-gray-100 px-1.5 py-0.5 rounded">
+                    <span className="text-[10px] font-medium text-gray-500 uppercase tracking-wider border border-gray-100 px-1.5 py-0.5 rounded">
                         {garment.talla}
                     </span>
                 </div>

@@ -21,8 +21,8 @@ export const OccasionSelector: React.FC<OccasionSelectorProps> = ({ value, onCha
 
     return (
         <div className="w-full">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-                {t('title')}
+            <label className="block text-sm font-medium text-gray-900 mb-2">
+                {t('occasion_label')}
             </label>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
                 {occasions.map((occasion) => (
@@ -31,10 +31,10 @@ export const OccasionSelector: React.FC<OccasionSelectorProps> = ({ value, onCha
                         onClick={() => onChange(occasion.id)}
                         disabled={loading}
                         className={`
-              flex flex-col items-center justify-center p-4 rounded-xl border transition-all duration-300 group
+              flex flex-col items-center justify-center p-4 rounded-xl border transition-all duration-300 group relative overflow-hidden
               ${value === occasion.id
-                                ? 'border-black bg-black text-white shadow-lg'
-                                : 'border-gray-100 bg-white text-gray-500 hover:border-gray-300 hover:text-gray-900'
+                                ? 'border-black bg-black text-white shadow-lg scale-[1.02]'
+                                : 'border-gray-50 bg-gray-50 text-gray-500 hover:border-gray-200 hover:text-gray-900 hover:bg-white'
                             }
               ${loading ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
             `}

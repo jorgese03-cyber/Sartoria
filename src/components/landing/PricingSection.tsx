@@ -40,14 +40,14 @@ export default function PricingSection() {
                             <h3 className="text-xl font-medium text-white font-serif">{t('monthly', 'Monthly')}</h3>
                             <p className="mt-4 flex items-baseline">
                                 <span className="text-4xl font-light text-white tracking-tight">{t('monthly_price', '€9.99')}</span>
-                                <span className="ml-2 text-gray-500">/mo</span>
+                                <span className="ml-2 text-gray-400">/mo</span>
                             </p>
                             <p className="mt-2 text-sm text-gray-400">{t('trial', '7-day free trial')}</p>
                         </div>
                         <ul className="space-y-4 mb-8 flex-1">
                             {features.map((feature) => (
                                 <li key={feature} className="flex items-start">
-                                    <Check className="flex-shrink-0 h-5 w-5 text-gray-500 mt-0.5" aria-hidden="true" />
+                                    <Check className="flex-shrink-0 h-5 w-5 text-gray-400 mt-0.5" aria-hidden="true" />
                                     <span className="ml-3 text-sm text-gray-300">{feature}</span>
                                 </li>
                             ))}

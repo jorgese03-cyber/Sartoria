@@ -95,9 +95,9 @@ export default function WardrobePage() {
             <div className="bg-white/80 backdrop-blur-md sticky top-0 md:top-16 z-30 border-b border-gray-100">
                 <div className="px-6 py-4 flex justify-between items-center max-w-7xl mx-auto">
                     <div>
-                        <h1 className="text-3xl font-serif font-medium text-gray-900">My Wardrobe</h1>
-                        <p className="text-xs text-gray-400 mt-1 uppercase tracking-widest font-medium">
-                            {garments.length} {t('items', 'items')}
+                        <h1 className="text-3xl font-serif font-medium text-gray-900">{t('title')}</h1>
+                        <p className="text-xs text-gray-600 mt-1 uppercase tracking-widest font-medium">
+                            {garments.length} {t('items', 'prendas')}
                         </p>
                     </div>
                 </div>
@@ -118,7 +118,7 @@ export default function WardrobePage() {
                                         "px-4 py-2 rounded-full text-sm font-medium transition-all whitespace-nowrap flex items-center gap-2",
                                         isSelected
                                             ? "bg-black text-white shadow-md"
-                                            : "bg-white text-gray-500 border border-gray-100 hover:border-gray-300 hover:text-gray-900"
+                                            : "bg-white text-gray-700 border border-gray-200 hover:border-gray-400 hover:text-gray-900"
                                     )}
                                 >
                                     <span>{cat}</span>
@@ -141,8 +141,8 @@ export default function WardrobePage() {
                         <div className="w-10 h-10 border-2 border-gray-200 border-t-black rounded-full animate-spin"></div>
                     </div>
                 ) : filteredGarments.length === 0 ? (
-                    <div className="text-center py-24 bg-white rounded-3xl border border-dashed border-gray-200">
-                        <p className="text-gray-400 font-light text-lg">{t('no_items', 'No garments found in this category.')}</p>
+                    <div className="text-center py-24 bg-white rounded-3xl border border-dashed border-gray-300">
+                        <p className="text-gray-600 font-light text-lg">{t('no_items', 'No hay prendas en esta categoría.')}</p>
                     </div>
                 ) : (
                     <div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
