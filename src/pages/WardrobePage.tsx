@@ -123,13 +123,13 @@ export default function WardrobePage() {
                 )}
             </div>
 
-            {/* FAB */}
+            {/* FAB - Añadir prenda */}
             <button
                 onClick={handleAddClick}
-                className="fixed bottom-[80px] right-[24px] bg-[#1A1A1A] text-white w-[48px] h-[48px] rounded-full flex items-center justify-center hover:bg-black transition-colors z-40 shadow-lg"
+                className="fixed bottom-24 right-6 z-50 w-14 h-14 bg-[#1A1A1A] rounded-full flex items-center justify-center shadow-lg hover:bg-[#333] transition-colors"
                 aria-label="Añadir prenda"
             >
-                <Plus size={20} strokeWidth={1} />
+                <Plus className="w-6 h-6 text-white" strokeWidth={1.5} />
             </button>
 
             <AddGarmentModal isOpen={isAddModalOpen} onClose={() => setIsAddModalOpen(false)} onSuccess={fetchGarments} />
